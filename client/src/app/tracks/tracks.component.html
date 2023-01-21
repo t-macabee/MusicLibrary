@@ -1,0 +1,18 @@
+<h2>All tracks</h2>
+
+<table class="table tbl-bordered">
+  <tr>
+    <th>Track name</th>
+    <th>Length</th>
+    <th>Genre</th>
+    <th>Artist</th>
+    <th>About</th>
+  </tr>
+  <tbody *ngFor="let x of result">
+  <td>{{x.trackName}}</td>
+  <td>{{x.length}}</td>
+  <td>{{x.genre}}</td>
+  <td>{{x.artist}}</td>
+  <td>{{x.about}}</td>
+  </tbody>
+</table>

@@ -42,6 +42,13 @@ namespace API.Controllers
             return Ok(users);
         }
 
+        [HttpGet("user-id")]
+        public IActionResult GetUserById(int id)
+        {
+            var result = _mapper.Map<UserDto>(_userRepository.GetUserById(id));
+            return Ok(result);
+        }
+
         [HttpGet("{username}", Name = "GetUser")]
         public async Task<ActionResult<AppUserDto>> GetUsers(string username)
         {

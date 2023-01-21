@@ -1,1 +1,66 @@
-<p>artists works!</p>
+<h3>Search artists</h3>
+<hr>
+<input [(ngModel)]="artistName">
+<br><br>
+<table class="table tbl-bordered">
+  <tr>
+    <th>Artist name</th>
+    <th>Date of birth</th>
+    <th>Gender</th>
+    <th>About</th>
+  </tr>
+  <tbody *ngFor="let x of getArtists()">
+    <td>{{x.artistName}}</td>
+    <td>{{x.dateOfBirth}}</td>
+    <td>{{x.gender}}</td>
+    <td>{{x.about}}</td>
+    <td><button class="text-white bg-dark" (click)="details(x)">Info</button><td>
+    <td><button class="text-white bg-dark" (click)="delete(x)">Delete</button></td>
+  </tbody>
+</table>
+<br>
+
+<button class="form-label" (click)="addNew()">Add new artist</button>
+
+
+<div *ngIf="newArtist!=null" class="modal fade show" tabindex="-1" aria-labelledby="exampleModalLiveLabel" aria-modal="true" role="dialog" style="display: block;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLiveLabel">Modal title</h5>
+        <button type="button" class="btn-close" (click)="newArtist = null" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+        <div class="mb-3">
+          <label class="form-label">Artist name</label>
+          <input class="form-control" [(ngModel)]="newArtist.artistName">
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Date of birth</label>
+          <input class="form-control" [(ngModel)]="newArtist.dateOfBirth">
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Gender</label>
+          <input class="form-control" [(ngModel)]="newArtist.gender">
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">About</label>
+          <input class="form-control" [(ngModel)]="newArtist.about">
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="saveChangesNewArtist()">Save changes</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<app-artists-edit [editArtist] = "selectedArtist"></app-artists-edit>
+

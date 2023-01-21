@@ -17,8 +17,6 @@ namespace API.Entities
         public string AlbumName { get; set; }
         public int AlbumLength { get; set; }
         public DateTime Created { get; set; }
-        public int ArtistId { get; set; }
-        public Artist Artist { get; set; }
         public ICollection<AlbumTrack> AlbumTracks { get; set; }
         public ICollection<PhotoAlbum> AlbumPhotos { get; set; }
     }

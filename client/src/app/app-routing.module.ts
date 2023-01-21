@@ -2,8 +2,6 @@ import {NgModule} from "@angular/core";
 import {Routes, RouterModule} from "@angular/router";
 import {HomeComponent} from "./home/home.component";
 import {MessagesComponent} from "./messages/messages.component";
-import {TrackListComponent} from "./tracks/track-list/track-list.component";
-import {TrackDetailComponent} from "./tracks/track-detail/track-detail.component";
 import {ArtistsComponent} from "./artists/artists.component";
 import {GenresComponent} from "./genres/genres.component";
 import {AlbumsComponent} from "./albums/albums.component";
@@ -16,6 +14,8 @@ import {MemberListComponent} from "./members/member-list/member-list.component";
 import {MemberDetailComponent} from "./members/member-detail/member-detail.component";
 import {MemberEditComponent} from "./members/member-edit/member-edit.component";
 import {PreventUnsavedChangesGuard} from "./_guards/prevent-unsaved-changes.guard";
+import {TracksComponent} from "./tracks/tracks.component";
+import {TrackDetailComponent} from "./tracks/track-detail/track-detail.component";
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -24,7 +24,7 @@ const routes: Routes = [
     runGuardsAndResolvers: 'always',
     canActivate: [AuthGuard],
     children:[
-      {path: 'tracks', component: TrackListComponent},
+      {path: 'tracks', component: TracksComponent},
       {path: 'tracks/:id', component: TrackDetailComponent},
       {path: 'artists', component: ArtistsComponent},
       {path: 'genres', component: GenresComponent},

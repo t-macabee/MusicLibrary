@@ -15,11 +15,11 @@ namespace API.Entities
         public int Id { get; set; }
         [Required]
         public string ArtistName { get; set; }
-        public int ArtistAge { get; set; }
         public DateTime DateOfBirth { get; set; }
         public string Gender { get; set; }
-        public string About { get; set; }
-        public byte[] Image { get; set; }
+        public string About { get; set; }        
+
+        //public byte[] Image { get; set; }
 
         public int GetAge()
         {

@@ -33,15 +33,10 @@ namespace API.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("ArtistId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("Created")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ArtistId");
 
                     b.ToTable("Albums");
                 });
@@ -104,9 +99,6 @@ namespace API.Migrations
                     b.Property<string>("About")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("ArtistAge")
-                        .HasColumnType("int");
-
                     b.Property<string>("ArtistName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -117,12 +109,67 @@ namespace API.Migrations
                     b.Property<string>("Gender")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<byte[]>("Image")
-                        .HasColumnType("varbinary(max)");
-
                     b.HasKey("Id");
 
                     b.ToTable("Artists");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            About = "Fact 1",
+                            ArtistName = "Artist 1",
+                            DateOfBirth = new DateTime(2023, 1, 8, 17, 13, 33, 560, DateTimeKind.Local).AddTicks(4891),
+                            Gender = "M"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            About = "Fact 2",
+                            ArtistName = "Artist 2",
+                            DateOfBirth = new DateTime(2023, 1, 8, 17, 13, 33, 567, DateTimeKind.Local).AddTicks(6336),
+                            Gender = "F"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            About = "Fact 3",
+                            ArtistName = "Artist 3",
+                            DateOfBirth = new DateTime(2023, 1, 8, 17, 13, 33, 567, DateTimeKind.Local).AddTicks(6480),
+                            Gender = "M"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            About = "Fact 4",
+                            ArtistName = "Artist 4",
+                            DateOfBirth = new DateTime(2023, 1, 8, 17, 13, 33, 567, DateTimeKind.Local).AddTicks(6486),
+                            Gender = "F"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            About = "Fact 5",
+                            ArtistName = "Artist 5",
+                            DateOfBirth = new DateTime(2023, 1, 8, 17, 13, 33, 567, DateTimeKind.Local).AddTicks(6490),
+                            Gender = "F"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            About = "Fact 6",
+                            ArtistName = "Artist 6",
+                            DateOfBirth = new DateTime(2023, 1, 8, 17, 13, 33, 567, DateTimeKind.Local).AddTicks(6493),
+                            Gender = "M"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            About = "Fact 7",
+                            ArtistName = "Artist 7",
+                            DateOfBirth = new DateTime(2023, 1, 8, 17, 13, 33, 567, DateTimeKind.Local).AddTicks(6496),
+                            Gender = "M"
+                        });
                 });
 
             modelBuilder.Entity("API.Entities.ExceptionHandlingData", b =>
@@ -160,6 +207,43 @@ namespace API.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Genres");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            GenreName = "Genre 1"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            GenreName = "Genre 2"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            GenreName = "Genre 3"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            GenreName = "Genre 4"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            GenreName = "Genre 5"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            GenreName = "Genre 6"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            GenreName = "Genre 7"
+                        });
                 });
 
             modelBuilder.Entity("API.Entities.PhotoAlbum", b =>
@@ -298,17 +382,6 @@ namespace API.Migrations
                     b.HasIndex("TrackID");
 
                     b.ToTable("TrackGenres");
-                });
-
-            modelBuilder.Entity("API.Entities.Album", b =>
-                {
-                    b.HasOne("API.Entities.Artist", "Artist")
-                        .WithMany()
-                        .HasForeignKey("ArtistId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Artist");
                 });
 
             modelBuilder.Entity("API.Entities.AlbumTrack", b =>

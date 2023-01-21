@@ -14,6 +14,5 @@ namespace API.Entities
         public string PlaylistName { get; set; }
         public DateTime Created { get; set; } = DateTime.Now;
         public ICollection<PlaylistTrack> PlaylistTracks { get; set; }
-
     }
 }

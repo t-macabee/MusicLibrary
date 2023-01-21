@@ -11,13 +11,14 @@ namespace API.Entities
 {
     public class TrackDto
     {
+        public int Id { get; set; }
         [DisplayName("Track name")]
         [Required]
         public string TrackName { get; set; }
         [DisplayName("Track length")]
         public string Length { get; set; }
         public string About { get; set; }
-        public ICollection<TrackGenreDto> Genres { get; set; }
-        public ICollection<TrackArtistDto> Artists { get; set; }
+        public ICollection<TrackGenre> Genres { get; set; }
+        public ICollection<TrackArtist> Artists { get; set; }
     }
 }

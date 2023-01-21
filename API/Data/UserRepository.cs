@@ -29,6 +29,11 @@ namespace API.Data
                 .FindAsync(id);
         }
 
+        public AppUser GetUserById(int id)
+        {
+            return _context.Users.Where(x => x.Id == id).Include(y => y.Photos).FirstOrDefault();
+        }
+
         public async Task<AppUser> GetUserByUsernameAsync(string username)
         {
             return await _context.Users

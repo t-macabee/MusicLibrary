@@ -24,6 +24,12 @@ import {NgxSpinnerModule} from "ngx-spinner";
 import {LoadingInterceptor} from "./_interceptors/loading.interceptor";
 import { TextInputComponent } from './_forms/text-input/text-input.component';
 import { PhotoEditorComponent } from './members/photo-editor/photo-editor.component';
+import {GenresComponent} from "./genres/genres.component";
+import {ArtistsComponent} from "./artists/artists.component";
+import { ArtistsEditComponent } from './artists/artists-edit/artists-edit.component';
+import {AlbumsComponent} from "./albums/albums.component";
+import { TracksComponent } from './tracks/tracks.component';
+import { TrackDetailComponent } from './tracks/track-detail/track-detail.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +45,13 @@ import { PhotoEditorComponent } from './members/photo-editor/photo-editor.compon
     MemberCardComponent,
     MemberEditComponent,
     TextInputComponent,
-    PhotoEditorComponent
+    PhotoEditorComponent,
+    GenresComponent,
+    ArtistsComponent,
+    ArtistsEditComponent,
+    AlbumsComponent,
+    TracksComponent,
+    TrackDetailComponent
   ],
   imports: [
     BrowserModule,

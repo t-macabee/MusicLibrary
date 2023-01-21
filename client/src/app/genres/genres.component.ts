@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {HttpClient} from "@angular/common/http";
+import {environment} from "../../environments/environment";
 
 @Component({
   selector: 'app-genres',
@@ -7,9 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GenresComponent implements OnInit {
 
-  constructor() { }
+  baseUrl = environment.apiUrl;
+  result : any;
 
-  ngOnInit(): void {
+  constructor(private http: HttpClient) { }
+
+  ngOnInit() {
+    this.getGenres();
   }
 
+  getGenres() {
+    return this.http.get(this.baseUrl + 'Genre/GetGenres').subscribe(x => {
+      this.result = x;
+    });
+  }
 }
