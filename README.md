@@ -1,3 +1,3 @@
 # MusicLibrary
 
-Simple music library done as collaboration project
+Music library done as collaboration project
