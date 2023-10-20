@@ -1,6 +1,7 @@
 ﻿using API.Data;
 using API.DTOs;
 using API.Entities;
+using API.Helpers;
 using API.Interfaces;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
@@ -16,6 +17,7 @@ namespace API.Services
         public UserRepository(DataContext context, IMapper mapper)
         {
             this.context = context;
+            this.mapper = mapper;
         }        
 
         public async Task<AppUser> GetUserByIdAsync(int id)
@@ -36,8 +38,29 @@ namespace API.Services
                 .Include(x => x.Photos)
                 .ToListAsync();
         }
+       
+        public async Task<PagedList<MemberDto>> GetMembersAsync(UserParams userParams)
+        {
+            var query = context.Users.AsQueryable();
+                
+            query = query.Where(x => x.UserName != userParams.CurrentUsername);
 
-        //--------------------------------------------------
+            query = query.OrderByDescending(x => x.Created);
+
+            return await PagedList<MemberDto>
+                .CreateAsync(query.ProjectTo<MemberDto>(mapper.ConfigurationProvider)
+                .AsNoTracking(), 
+                userParams.PageNumber,
+                userParams.PageSize);
+        }
+
+        public async Task<MemberDto> GetMemberAsync(string username)
+        {
+            return await context.Users
+                .Where(x => x.UserName == username)
+                .ProjectTo<MemberDto>(mapper.ConfigurationProvider)
+                .SingleOrDefaultAsync();
+        }
 
         public async Task<bool> SaveAllAsync()
         {
@@ -48,6 +71,5 @@ namespace API.Services
         {
             context.Entry(user).State = EntityState.Modified;
         }
-      
     }
 }

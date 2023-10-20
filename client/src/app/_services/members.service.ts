@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
 import {environment} from "../../environments/environment";
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpParams} from "@angular/common/http";
 import {Member} from "../_models/member";
-import {map, of} from "rxjs";
+import {map, of } from "rxjs";
+import {PaginatedResult} from "../_models/pagination";
+import {UserParams} from "../_models/userParams";
 
 @Injectable({
   providedIn: 'root'
@@ -13,14 +15,9 @@ export class MembersService {
 
   constructor(private http: HttpClient) { }
 
-  getMembers() {
-    if(this.members.length > 0) return of(this.members);
-    return this.http.get<Member[]>(this.baseUrl + 'Users').pipe(
-      map(members => {
-        this.members = members;
-        return members;
-      })
-    )
+  getMembers(userParams: UserParams) {
+    let params = this.getPaginationHeaders(userParams.pageNumber, userParams.pageSize);
+    return this.getPaginatedResult<Member[]>(this.baseUrl + 'Users', params);
   }
 
   getMember(username: string) {
@@ -44,5 +41,25 @@ export class MembersService {
 
   deletePhoto(photoId: number) {
     return this.http.delete(this.baseUrl + 'Users/delete-photo/' + photoId);
+  }
+
+  private getPaginationHeaders(pageNumber: number, pageSize: number) {
+    let params = new HttpParams();
+    params = params.append('pageNumber', pageNumber.toString());
+    params = params.append('pageSize', pageSize.toString());
+    return params;
+  }
+
+  private getPaginatedResult<T>(url, params) {
+    const paginatedResult: PaginatedResult<T> = new PaginatedResult<T>();
+    return this.http.get<T>(url, {observe: 'response', params}).pipe(
+      map(response => {
+        paginatedResult.result = response.body;
+        if (response.headers.get('Pagination') !== null) {
+          paginatedResult.pagination = JSON.parse(response.headers.get('Pagination'));
+        }
+        return paginatedResult;
+      })
+    )
   }
 }

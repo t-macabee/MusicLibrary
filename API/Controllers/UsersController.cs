@@ -2,6 +2,7 @@
 using API.DTOs;
 using API.Entities;
 using API.Extensions;
+using API.Helpers;
 using API.Interfaces;
 using API.Services;
 using AutoMapper;
@@ -28,20 +29,24 @@ namespace API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<MemberDto>>> GetUsers() 
+        public async Task<ActionResult<IEnumerable<MemberDto>>> GetUsers([FromQuery]UserParams userParams) 
         {
-            var users = await repository.GetUsersAsync();
+            var user = await repository.GetUserByUsernameAsync(User.GetUsername());
 
-            var usersToReturn = mapper.Map<IEnumerable<MemberDto>>(users);
+            userParams.CurrentUsername = user.UserName;
 
-            return Ok(usersToReturn);
+            var users = await repository.GetMembersAsync(userParams);
+
+            Response.AddPaginationHeader(users.CurrentPage, users.PageSize, users.TotalCount, users.TotalPage);
+
+            return Ok(users);
         }
 
         [HttpGet("{username}", Name = "GetUser")]
         public async Task<ActionResult<MemberDto>> GetUser(string username)
         {
-            var user = await repository.GetUserByUsernameAsync(username);
-            return mapper.Map<MemberDto>(user);            
+            return await repository.GetMemberAsync(username);
+        
         }
 
         [HttpPut]

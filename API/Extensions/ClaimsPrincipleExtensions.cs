@@ -8,5 +8,7 @@ namespace API.Extensions
         {
             return user.FindFirst(ClaimTypes.NameIdentifier)?.Value;
         }
+
+       
     }
 }
