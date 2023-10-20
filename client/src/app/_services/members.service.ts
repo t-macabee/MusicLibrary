@@ -12,17 +12,30 @@ import {UserParams} from "../_models/userParams";
 export class MembersService {
   baseUrl = environment.apiUrl;
   members: Member[] = [];
+  memberCache = new Map();
 
   constructor(private http: HttpClient) { }
 
   getMembers(userParams: UserParams) {
+    let response = this.memberCache.get(Object.values(userParams).join('-'));
+    if(response) {
+      return of(response);
+    }
     let params = this.getPaginationHeaders(userParams.pageNumber, userParams.pageSize);
-    return this.getPaginatedResult<Member[]>(this.baseUrl + 'Users', params);
+    return this.getPaginatedResult<Member[]>(this.baseUrl + 'Users', params)
+      .pipe(map(response => {
+        this.memberCache.set(Object.values(userParams).join('-'), response);
+        return response;
+      }))
   }
 
   getMember(username: string) {
-    const member = this.members.find(x => x.username === username);
-    if(member !== undefined) return of(member);
+    const member = [...this.memberCache.values()]
+      .reduce((array, element) => array.concat(element.result), [])
+      .find((member: Member) => member.username === username);
+    if(member) {
+      return of(member);
+    }
     return this.http.get<Member>(this.baseUrl + 'Users/' + username);
   }
 

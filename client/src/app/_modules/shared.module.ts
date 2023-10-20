@@ -7,7 +7,7 @@ import {NgxGalleryModule} from "@kolkov/ngx-gallery";
 import {FileUploadModule} from "ng2-file-upload";
 import {BsDatepickerModule} from "ngx-bootstrap/datepicker";
 import {PaginationModule} from "ngx-bootstrap/pagination";
-import {ButtonsModule} from "ngx-bootstrap/buttons";
+import {TimeagoModule} from "ngx-timeago";
 
 @NgModule({
   declarations: [],
@@ -21,7 +21,8 @@ import {ButtonsModule} from "ngx-bootstrap/buttons";
     NgxGalleryModule,
     FileUploadModule,
     BsDatepickerModule.forRoot(),
-    PaginationModule.forRoot()
+    PaginationModule.forRoot(),
+    TimeagoModule.forRoot()
   ],
   exports: [
     BsDropdownModule,
@@ -30,7 +31,8 @@ import {ButtonsModule} from "ngx-bootstrap/buttons";
     NgxGalleryModule,
     FileUploadModule,
     BsDatepickerModule,
-    PaginationModule
+    PaginationModule,
+    TimeagoModule
   ]
 })
 export class SharedModule { }
