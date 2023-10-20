@@ -29,14 +29,11 @@ namespace API.Data
                     UserName = "Lisa",
                     PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes("testpass")),
                     PasswordSalt = hmac.Key,
-                    Gender = "Female",
                     DateOfBirth = new DateTime(1956, 7, 22),
                     KnownAs = "Lisa",
                     Created = new DateTime(2020, 6, 24),
                     LastActive = new DateTime(2020, 6, 27),
-                    Introduction = "Sunt esse aliqua ullamco in incididunt consequat commodo...",
                     Interests = "Sit sit incididunt proident velit.",
-                    City = "Greenbush",
                     Country = "Martinique",
                     Photos = new List<Photo>()
                 });

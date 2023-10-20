@@ -24,10 +24,7 @@ namespace API.Data.Migrations
                     KnownAs = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Created = table.Column<DateTime>(type: "datetime2", nullable: false),
                     LastActive = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Gender = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Introduction = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Interests = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    City = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Country = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
@@ -59,8 +56,8 @@ namespace API.Data.Migrations
 
             migrationBuilder.InsertData(
                 table: "Users",
-                columns: new[] { "Id", "City", "Country", "Created", "DateOfBirth", "Gender", "Interests", "Introduction", "KnownAs", "LastActive", "PasswordHash", "PasswordSalt", "UserName" },
-                values: new object[] { 1, "Greenbush", "Martinique", new DateTime(2020, 6, 24, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1956, 7, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), "Female", "Sit sit incididunt proident velit.", "Sunt esse aliqua ullamco in incididunt consequat commodo...", "Lisa", new DateTime(2020, 6, 27, 0, 0, 0, 0, DateTimeKind.Unspecified), new byte[] { 174, 243, 36, 86, 113, 34, 199, 130, 223, 251, 132, 205, 16, 218, 173, 22, 192, 8, 8, 117, 78, 47, 41, 121, 167, 229, 72, 18, 49, 235, 11, 110, 237, 165, 230, 50, 9, 248, 141, 119, 179, 78, 167, 150, 75, 148, 200, 13, 172, 233, 206, 67, 9, 100, 52, 20, 23, 168, 92, 182, 39, 223, 82, 78 }, new byte[] { 156, 88, 34, 45, 26, 49, 20, 8, 148, 78, 223, 91, 221, 93, 83, 92, 231, 176, 74, 103, 7, 194, 206, 152, 149, 137, 46, 211, 162, 251, 213, 184, 36, 6, 26, 35, 33, 14, 94, 208, 72, 189, 111, 91, 225, 58, 102, 211, 118, 246, 24, 241, 32, 248, 58, 46, 98, 140, 84, 77, 155, 105, 223, 167, 78, 17, 217, 221, 73, 11, 251, 90, 124, 96, 94, 101, 204, 31, 55, 112, 92, 14, 159, 63, 209, 8, 240, 97, 71, 251, 26, 183, 93, 145, 25, 172, 177, 66, 163, 37, 158, 119, 165, 218, 205, 90, 63, 237, 217, 174, 42, 204, 3, 13, 91, 9, 100, 217, 7, 79, 9, 52, 133, 153, 75, 230, 72, 247 }, "Lisa" });
+                columns: new[] { "Id", "Country", "Created", "DateOfBirth", "Interests", "KnownAs", "LastActive", "PasswordHash", "PasswordSalt", "UserName" },
+                values: new object[] { 1, "Martinique", new DateTime(2020, 6, 24, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1956, 7, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), "Sit sit incididunt proident velit.", "Lisa", new DateTime(2020, 6, 27, 0, 0, 0, 0, DateTimeKind.Unspecified), new byte[] { 170, 135, 254, 6, 231, 151, 92, 156, 249, 69, 12, 11, 55, 153, 225, 245, 49, 185, 38, 142, 16, 92, 17, 68, 211, 242, 18, 224, 198, 76, 117, 205, 230, 3, 150, 4, 239, 169, 49, 170, 235, 125, 146, 116, 56, 214, 108, 245, 79, 68, 234, 139, 29, 30, 32, 240, 145, 82, 144, 224, 42, 153, 224, 4 }, new byte[] { 201, 231, 132, 167, 137, 153, 232, 159, 205, 242, 146, 232, 77, 174, 166, 123, 86, 57, 147, 253, 218, 247, 129, 1, 45, 231, 148, 154, 192, 211, 37, 52, 149, 77, 220, 43, 134, 116, 64, 199, 215, 78, 226, 121, 87, 19, 75, 163, 163, 209, 86, 55, 224, 195, 108, 222, 190, 73, 115, 71, 91, 94, 18, 87, 87, 193, 36, 239, 241, 195, 32, 156, 237, 56, 114, 238, 184, 160, 13, 94, 129, 130, 181, 38, 61, 172, 140, 17, 96, 230, 210, 178, 70, 180, 13, 233, 120, 47, 216, 247, 82, 174, 26, 27, 37, 52, 124, 126, 195, 114, 69, 26, 73, 187, 62, 150, 46, 62, 208, 248, 175, 231, 114, 147, 173, 176, 174, 66 }, "Lisa" });
 
             migrationBuilder.InsertData(
                 table: "Photos",
