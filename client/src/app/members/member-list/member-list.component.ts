@@ -41,9 +41,4 @@ export class MemberListComponent implements OnInit{
     this.userParams.pageNumber = event.page;
     this.loadMembers();
   }
-
-  resetFilters() {
-    this.userParams = new UserParams(this.user);
-    this.loadMembers();
-  }
 }
