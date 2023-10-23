@@ -1,8 +1,8 @@
-﻿using API.Extensions;
+﻿using Microsoft.AspNetCore.Identity;
 
 namespace API.Entities
 {
-    public class AppUser
+    public class AppUser 
     {
         public int Id { get; set; }
         public string UserName { get; set; }
@@ -14,8 +14,7 @@ namespace API.Entities
         public DateTime LastActive { get; set; } = DateTime.Now;
         public string? Interests { get; set; }
         public string Country { get; set; }
-        public ICollection<Photo> Photos { get; set; }
-        
+        public ICollection<Photo> Photos { get; set; }        
         public ICollection<Message> MessagesSent { get; set; }
         public ICollection<Message> MessagesRecieved { get; set; }
     }

@@ -31,12 +31,14 @@ namespace API.Controllers
 
             var user = mapper.Map<AppUser>(registerDto);
 
+            user.UserName = registerDto.Username.ToLower();
+
             using var hmac = new HMACSHA512();
 
             user.UserName = registerDto.Username.ToLower();
             user.PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(registerDto.Password));
             user.PasswordSalt = hmac.Key;
-            
+
             context.Users.Add(user);
             await context.SaveChangesAsync();
 
