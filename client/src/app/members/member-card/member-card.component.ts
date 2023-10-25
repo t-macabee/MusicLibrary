@@ -1,5 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {Member} from "../../_models/member";
+import {PresenceService} from "../../_services/presence.service";
 
 @Component({
   selector: 'app-member-card',
@@ -9,4 +10,6 @@ import {Member} from "../../_models/member";
 export class MemberCardComponent {
   @Input() member: Member;
 
+  constructor(public presence: PresenceService) {
+  }
 }

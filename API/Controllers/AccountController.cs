@@ -3,6 +3,7 @@ using API.DTO;
 using API.Entities;
 using API.Interfaces;
 using AutoMapper;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Cryptography;
@@ -77,7 +78,7 @@ namespace API.Controllers
                 PhotoUrl = user.Photos.FirstOrDefault(x => x.IsMain)?.Url,
                 KnownAs = user.KnownAs
             };
-        }    
+        }
 
         private async Task<bool> UserExists(string username)
         {
