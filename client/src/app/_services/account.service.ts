@@ -18,6 +18,7 @@ export class AccountService {
   setCurrentUser(user: User) {
     localStorage.setItem('user', JSON.stringify(user));
     this.currentUserSource.next(user);
+    this.presence.createHubConnection(user);
   }
 
   login(model: any) {
@@ -26,7 +27,7 @@ export class AccountService {
         const user = x;
         if(user) {
           this.setCurrentUser(user);
-          this.presence.createHubConnection(user);
+
         }
       })
     );

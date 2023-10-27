@@ -14,7 +14,7 @@ import {User} from "../../_models/user";
   styleUrls: ['./member-list.component.css']
 })
 export class MemberListComponent implements OnInit{
-  members: Member[];
+  members: Member[] = [];
   pagination: Pagination;
   userParams: UserParams;
   user: User;

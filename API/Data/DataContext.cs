@@ -17,6 +17,8 @@ namespace API.Data
 
         public DbSet<AppUser> Users { get; set; }
 
+        public DbSet<Genre> Genres { get; set; }
+
         public DbSet<Message> Messages { get; set; }
 
         public DbSet<Group> Groups { get; set; }

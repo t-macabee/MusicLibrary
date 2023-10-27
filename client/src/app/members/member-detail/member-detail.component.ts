@@ -16,26 +16,32 @@ import {take} from "rxjs";
   styleUrls: ['./member-detail.component.css']
 })
 export class MemberDetailComponent implements OnInit, OnDestroy {
-  @ViewChild('memberTabs', {static: true}) memberTabs: TabsetComponent;
-  member: Member;
-  galleryOptions: NgxGalleryOptions[];
-  galleryImages: NgxGalleryImage[];
-  activeTab: TabDirective;
+  @ViewChild('memberTabs', {static: true}) memberTabs?: TabsetComponent;
+  member: Member = {} as Member;
+  galleryOptions: NgxGalleryOptions[] = [];
+  galleryImages: NgxGalleryImage[] = [];
+  activeTab?: TabDirective;
   messages: Message[] = [];
-  user: User;
+  user?: User;
 
   constructor(public presence: PresenceService, private route: ActivatedRoute, private messageService: MessageService, private accountService: AccountService, private router: Router) {
-    this.accountService.currentUser$.pipe(take(1)).subscribe(user => this.user = user);
+    this.accountService.currentUser$.pipe(take(1)).subscribe({
+      next: user => {
+        if(user) this.user = user;
+      }
+    });
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
   }
 
   ngOnInit() {
-    this.route.data.subscribe(data => {
-      this.member = data.member;
+    this.route.data.subscribe({
+      next: data => this.member = data['member']
     })
 
-    this.route.queryParams.subscribe(params => {
-      params.tab ? this.selectTab(params.tab) : this.selectTab(0);
+    this.route.queryParams.subscribe({
+      next: params => {
+        params['tab'] && this.selectTab(params['tab'])
+      }
     })
 
     this.galleryOptions = [
@@ -51,7 +57,8 @@ export class MemberDetailComponent implements OnInit, OnDestroy {
     this.galleryImages = this.getImages();
   }
 
-  getImages(): NgxGalleryImage[] {
+  getImages() {
+    if(!this.member) return [];
     const imageUrls = [];
     for(const photo of this.member.photos) {
       imageUrls.push({
@@ -71,15 +78,17 @@ export class MemberDetailComponent implements OnInit, OnDestroy {
 
   onTabActivated(data: TabDirective) {
     this.activeTab = data;
-    if(this.activeTab.heading === 'Messages' && this.messages.length === 0) {
+    if(this.activeTab.heading === 'Messages' && this.user) {
       this.messageService.createHubConnection(this.user, this.member.username);
     } else {
       this.messageService.stopHubConnection();
     }
   }
 
-  selectTab(tabId: number) {
-    this.memberTabs.tabs[tabId].active = true;
+  selectTab(heading: string) {
+    if(this.memberTabs) {
+      this.memberTabs.tabs.find(x => x.heading === heading)!.active = true;
+    }
   }
 
   ngOnDestroy() {

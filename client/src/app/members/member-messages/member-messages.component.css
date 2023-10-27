@@ -12,8 +12,13 @@
   margin-bottom: 10px;
   padding-bottom: 10px;
   border-bottom: 1px dotted #B3A9A9;
+  margin-right: 10px;
 }
 
 .rounded-circle {
   max-height: 50px;
+}
+
+ul {
+  list-style: none;
 }

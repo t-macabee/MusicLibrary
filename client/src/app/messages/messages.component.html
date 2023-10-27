@@ -1,46 +1,66 @@
-<div class="row mb-4">
+<div class="d-flex mb-4">
   <div id="buttons" class="btn-group" name="container">
-    <button class="btn btn-success btn-outline-dark text-light" btnRadio="Unread" [(ngModel)]="containter" (click)="loadMessages()">
+    <button
+      class="btn btn-success btn-outline-dark text-light"
+      btnRadio="Unread"
+      [(ngModel)]="containter"
+      (click)="loadMessages()"
+    >
       <i class="fa fa-envelope"></i> Unread
     </button>
-    <button class="btn btn-success btn-outline-dark text-light" btnRadio="Inbox" [(ngModel)]="containter" (click)="loadMessages()">
+    <button
+      class="btn btn-success btn-outline-dark text-light"
+      btnRadio="Inbox"
+      [(ngModel)]="containter"
+      (click)="loadMessages()"
+    >
       <i class="fa fa-envelope-open"></i> Inbox
     </button>
-    <button class="btn btn-success btn-outline-dark text-light" btnRadio="Outbox" [(ngModel)]="containter" (click)="loadMessages()">
+    <button
+      class="btn btn-success btn-outline-dark text-light"
+      btnRadio="Outbox"
+      [(ngModel)]="containter"
+      (click)="loadMessages()">
       <i class="fa fa-paper-plane"></i> Outbox
     </button>
   </div>
 </div>
-<hr>
-<div class="row" *ngIf="messages?.length === 0">
+
+
+<div class="row" *ngIf="!messages || messages?.length === 0">
   <h3>No messages</h3>
 </div>
 
-<div class="row" *ngIf="messages?.length > 0">
+<br>
+<div class="row" *ngIf="messages && messages?.length > 0">
   <table class="table table-hover" style="cursor: pointer">
-    <tr>
-      <th style="width: 40%">Message</th>
-      <th style="width: 25%">From / To</th>
-      <th style="width: 25%">Sent / Recieved</th>
-      <th style="width: 10%"></th>
-    </tr>
-    <br>
-    <tr [hidden]="loading" *ngFor="let message of messages"
+    <thead>
+      <tr>
+        <th style="width: 40%">Message</th>
+        <th style="width: 25%">From / To</th>
+        <th style="width: 25%">Sent / Recieved</th>
+        <th style="width: 10%"></th>
+      </tr>
+    </thead>
+    <tbody >
+      <tr [hidden]="loading" *ngFor="let message of messages"
         routerLink='{{containter === "Outbox"
         ? "/Members/" + message.recipientUsername
-        : "/Members/" + message.senderUsername}}' [queryParams]="{tab: 1}">
+        : "/Members/" + message.senderUsername}}'
+          [queryParams]="{tab: 'Messages'}"
+      >
       <td>{{message.content}}</td>
       <td>
         <div *ngIf="containter === 'Outbox'">
           <img
-            class="img-circle rounded-circle mb-3"
+            class="img-circle rounded-circle me-2"
             src="{{message.recipientPhotoUrl || './assets/user.png'}}"
             alt="{{message.recipientUsername}}">
           <strong>{{message.recipientUsername | titlecase}}</strong>
         </div>
         <div *ngIf="containter !== 'Outbox'">
           <img
-            class="img-circle rounded-circle mb-3"
+            class="img-circle rounded-circle me-2"
             src="{{message.senderPhotoUrl || './assets/user.png'}}"
             alt="{{message.senderUsername}}">
           <strong>{{message.senderUsername | titlecase}}</strong>
@@ -48,21 +68,25 @@
       </td>
       <td>{{message.messageSent | timeago}}</td>
       <td>
-        <button (click)="$event.stopPropagation()" (click)="deleteMessage(message.id)" class="btn btn-danger">Delete</button>
-      </td>
-    </tr>
+        <button (click)="$event.stopPropagation()"
+                (click)="deleteMessage(message.id)"
+                class="btn btn-danger">Delete</button>
+        </td>
+      </tr>
+    </tbody>
   </table>
 </div>
 
 <div class="d-flex justify-content-center" *ngIf="pagination && !loading && messages.length > 5">
-  <pagination [boundaryLinks]="true"
-              [totalItems]="pagination.totalItems"
-              [itemsPerPage]="pagination.itemsPerPage"
-              [(ngModel)]="pagination.currentPage"
-              (pageChanged)="pageChanged($event)"
-              previousText="&lsaquo;"
-              nextText="&rsaquo;"
-              firstText="&laquo;"
-              lastText="&raquo;">
+  <pagination
+    [boundaryLinks]="true"
+    [totalItems]="pagination.totalItems"
+    [itemsPerPage]="pagination.itemsPerPage"
+    [(ngModel)]="pagination.currentPage"
+    (pageChanged)="pageChanged($event)"
+    previousText="&lsaquo;"
+    nextText="&rsaquo;"
+    firstText="&laquo;"
+    lastText="&raquo;">
   </pagination>
 </div>

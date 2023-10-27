@@ -11,7 +11,7 @@ import {NgForm} from "@angular/forms";
   styleUrls: ['./member-messages.component.css']
 })
 export class MemberMessagesComponent implements OnInit{
-  @ViewChild('messageForm') messageForm: NgForm;
+  @ViewChild('messageForm') messageForm?: NgForm;
   @Input() messages: Message[];
   @Input() username: string;
   messageContent: string;

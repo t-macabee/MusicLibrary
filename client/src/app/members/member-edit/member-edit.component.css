@@ -13,3 +13,14 @@
   background-color: #fff;
   border-top: none;
 }
+
+input {
+  width: 35%;
+  border-top: 2px black;
+  border-left: 2px black;
+}
+
+textarea {
+  border-top: 2px black;
+  border-left: 2px black;
+}
