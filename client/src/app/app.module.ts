@@ -25,6 +25,7 @@ import { TextInputComponent } from './_forms/text-input/text-input.component';
 import { DateInputComponent } from './_forms/date-input/date-input.component';
 import {ButtonsModule} from "ngx-bootstrap/buttons";
 import { MemberMessagesComponent } from './members/member-messages/member-messages.component';
+import { GenreComponent } from './genre/genre.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { MemberMessagesComponent } from './members/member-messages/member-messag
     TextInputComponent,
     DateInputComponent,
     MemberMessagesComponent,
+    GenreComponent,
   ],
     imports: [
         BrowserModule,

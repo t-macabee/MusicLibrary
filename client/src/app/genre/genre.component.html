@@ -1,0 +1,19 @@
+<table class="table" style="width: 50%;">
+  <thead>
+  <tr>
+    <th>#</th>
+    <th style="text-align: center">Name</th>
+    <th></th>
+  </tr>
+  </thead>
+  <tbody class="table-success">
+  <tr *ngFor="let x of genres">
+    <th>{{x.id}}</th>
+    <td class="float" style="text-align: center">{{x.genreName}}</td>
+    <td><button (click)="deleteGenre(x.id)" class="btn btn-danger float-end me-4">Delete</button></td>
+  </tr>
+  </tbody>
+</table><br>
+
+<input [(ngModel)]="txtGenre" type="text" style="width: 30%; border: 3px solid black" class="me-5">
+<button (click)="createNewGenre()" class="btn btn-success">Create new genre</button>
