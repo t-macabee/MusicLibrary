@@ -1,4 +1,4 @@
-﻿namespace API.DTOs
+﻿namespace API.DTOs.UpdateDTOs
 {
     public class MemberUpdateDto
     {

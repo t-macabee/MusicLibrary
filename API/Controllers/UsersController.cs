@@ -1,5 +1,6 @@
 ﻿using API.Data;
 using API.DTOs;
+using API.DTOs.UpdateDTOs;
 using API.Entities;
 using API.Extensions;
 using API.Helpers;

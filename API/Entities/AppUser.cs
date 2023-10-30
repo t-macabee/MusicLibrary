@@ -13,6 +13,8 @@ namespace API.Entities
         public DateTime LastActive { get; set; } = DateTime.Now;
         public string? Interests { get; set; }
         public string Country { get; set; }
+
+        public ICollection<Playlist> Playlists { get; set; }
         public ICollection<Photo> Photos { get; set; }
         public ICollection<Message> MessagesSent { get; set; }
         public ICollection<Message> MessagesRecieved { get; set; }

@@ -16,14 +16,19 @@ namespace API.Data
         }
 
         public DbSet<AppUser> Users { get; set; }
+        public DbSet<Playlist> Playlists { get; set; }
+        public DbSet<PlaylistTrack> PlaylistTracks { get; set; }
 
+        public DbSet<Track> Tracks { get; set; }
+        public DbSet<Album> Albums { get; set; }
+        public DbSet<Artist> Artists { get; set; }
         public DbSet<Genre> Genres { get; set; }
 
         public DbSet<Message> Messages { get; set; }
-
         public DbSet<Group> Groups { get; set; }
-
         public DbSet<Connection> Connections { get; set; }
+
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -38,6 +43,17 @@ namespace API.Data
                 .HasOne(u => u.Sender)
                 .WithMany(m => m.MessagesSent)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<PlaylistTrack>()
+                .HasKey(pt => new { pt.PlaylistId, pt.TrackId });
+            modelBuilder.Entity<PlaylistTrack>()
+                .HasOne(pt => pt.Playlist)
+                .WithMany(p => p.PlaylistTracks)
+                .HasForeignKey(pt => pt.PlaylistId);
+            modelBuilder.Entity<PlaylistTrack>()
+                .HasOne(pt => pt.Track)
+                .WithMany(p => p.PlaylistTracks)
+                .HasForeignKey(pt => pt.TrackId);
 
             modelBuilder.ApplyUtcDateTimeConverter();
         }

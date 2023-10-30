@@ -22,6 +22,32 @@ namespace API.Data.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("API.Entities.Album", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("AlbumName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ArtistId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Year")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ArtistId");
+
+                    b.ToTable("Albums");
+                });
+
             modelBuilder.Entity("API.Entities.AppUser", b =>
                 {
                     b.Property<int>("Id")
@@ -65,6 +91,27 @@ namespace API.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("API.Entities.Artist", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ArtistDescription")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ArtistName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Artists");
                 });
 
             modelBuilder.Entity("API.Entities.Connection", b =>
@@ -189,6 +236,92 @@ namespace API.Data.Migrations
                     b.ToTable("Photos");
                 });
 
+            modelBuilder.Entity("API.Entities.Playlist", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("AppUserId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("DateCreated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("PlaylistDescription")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PlaylistName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AppUserId");
+
+                    b.ToTable("Playlists");
+                });
+
+            modelBuilder.Entity("API.Entities.PlaylistTrack", b =>
+                {
+                    b.Property<int>("PlaylistId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TrackId")
+                        .HasColumnType("int");
+
+                    b.HasKey("PlaylistId", "TrackId");
+
+                    b.HasIndex("TrackId");
+
+                    b.ToTable("PlaylistTracks");
+                });
+
+            modelBuilder.Entity("API.Entities.Track", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("AlbumId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("GenreId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("TrackLenght")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TrackName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AlbumId");
+
+                    b.HasIndex("GenreId");
+
+                    b.ToTable("Tracks");
+                });
+
+            modelBuilder.Entity("API.Entities.Album", b =>
+                {
+                    b.HasOne("API.Entities.Artist", "Artist")
+                        .WithMany("Albums")
+                        .HasForeignKey("ArtistId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Artist");
+                });
+
             modelBuilder.Entity("API.Entities.Connection", b =>
                 {
                     b.HasOne("API.Entities.Group", null)
@@ -226,6 +359,60 @@ namespace API.Data.Migrations
                     b.Navigation("AppUser");
                 });
 
+            modelBuilder.Entity("API.Entities.Playlist", b =>
+                {
+                    b.HasOne("API.Entities.AppUser", "AppUser")
+                        .WithMany("Playlists")
+                        .HasForeignKey("AppUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AppUser");
+                });
+
+            modelBuilder.Entity("API.Entities.PlaylistTrack", b =>
+                {
+                    b.HasOne("API.Entities.Playlist", "Playlist")
+                        .WithMany("PlaylistTracks")
+                        .HasForeignKey("PlaylistId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("API.Entities.Track", "Track")
+                        .WithMany("PlaylistTracks")
+                        .HasForeignKey("TrackId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Playlist");
+
+                    b.Navigation("Track");
+                });
+
+            modelBuilder.Entity("API.Entities.Track", b =>
+                {
+                    b.HasOne("API.Entities.Album", "Album")
+                        .WithMany("Tracks")
+                        .HasForeignKey("AlbumId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("API.Entities.Genre", "Genre")
+                        .WithMany("Tracks")
+                        .HasForeignKey("GenreId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Album");
+
+                    b.Navigation("Genre");
+                });
+
+            modelBuilder.Entity("API.Entities.Album", b =>
+                {
+                    b.Navigation("Tracks");
+                });
+
             modelBuilder.Entity("API.Entities.AppUser", b =>
                 {
                     b.Navigation("MessagesRecieved");
@@ -233,11 +420,33 @@ namespace API.Data.Migrations
                     b.Navigation("MessagesSent");
 
                     b.Navigation("Photos");
+
+                    b.Navigation("Playlists");
+                });
+
+            modelBuilder.Entity("API.Entities.Artist", b =>
+                {
+                    b.Navigation("Albums");
+                });
+
+            modelBuilder.Entity("API.Entities.Genre", b =>
+                {
+                    b.Navigation("Tracks");
                 });
 
             modelBuilder.Entity("API.Entities.Group", b =>
                 {
                     b.Navigation("Connections");
+                });
+
+            modelBuilder.Entity("API.Entities.Playlist", b =>
+                {
+                    b.Navigation("PlaylistTracks");
+                });
+
+            modelBuilder.Entity("API.Entities.Track", b =>
+                {
+                    b.Navigation("PlaylistTracks");
                 });
 #pragma warning restore 612, 618
         }
