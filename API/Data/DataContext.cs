@@ -55,6 +55,16 @@ namespace API.Data
                 .WithMany(p => p.PlaylistTracks)
                 .HasForeignKey(pt => pt.TrackId);
 
+            modelBuilder.Entity<Artist>()
+                .HasMany(a => a.Albums)
+                .WithOne(album => album.Artist)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Album>()
+                .HasMany(album => album.Tracks)
+                .WithOne(track => track.Album)
+                .OnDelete(DeleteBehavior.Cascade);
+
             modelBuilder.ApplyUtcDateTimeConverter();
         }
     }

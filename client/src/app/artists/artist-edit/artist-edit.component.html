@@ -1,0 +1,51 @@
+<div class="row" *ngIf="artist">
+  <div class="col-4">
+    <h1>Artist profile</h1>
+  </div>
+  <div class="col-8">
+    <div class="alert alert-info pb-0" *ngIf="editForm.dirty">
+      <strong>Information: </strong> You have made changes. Any unsaved changes will be lost.
+    </div>
+  </div>
+  <div class="col-4">
+    <div class="card">
+      <img src="{{artist.photoUrl || './assets/user.png'}}" alt="{{artist.artistName}}"
+           class="card-img-top img-thumbnail">
+
+      <div class="card-footer">
+        <button [disabled]="!editForm.dirty"
+                form="editForm"
+                type="submit"
+                class="btn btn-success col-12"
+                style="width: 100%;">Save Changes</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-8">
+    <tabset class="member-tabset">
+      <tab heading="About {{artist.artistName}}">
+        <form #editForm="ngForm" id="editForm" (ngSubmit)="updateArtist(artist.id ,artist)">
+          <input type="hidden" name="artistID" [(ngModel)]="artist.id">
+          <br>
+          <h4><strong>Artist name</strong></h4><br>
+          <textarea
+            class="form-control"
+            [(ngModel)]="artist.artistName"
+            name="artistName"
+            ></textarea>
+          <br><br>
+          <h4><strong>About artist</strong></h4><br>
+          <textarea
+            class="form-control"
+            [(ngModel)]="artist.artistDescription"
+            name="artistDescription"
+            rows="7"></textarea>
+        </form>
+      </tab>
+      <tab heading="Edit photos">
+        in progress
+      </tab>
+    </tabset>
+  </div>
+</div>

@@ -23,6 +23,9 @@ namespace API.Helpers
             CreateMap<Genre, GenreDto>();
             CreateMap<GenreUpsertDto, Genre>();
 
+            CreateMap<Artist, ArtistDto>();
+            CreateMap<ArtistUpsertDto, Artist>();
+
             CreateMap<Message, MessageDto>()
                 .ForMember(dest => dest.SenderPhotoUrl, opt => opt.MapFrom(src =>
                     src.Sender.Photos.FirstOrDefault(x => x.IsMain).Url))

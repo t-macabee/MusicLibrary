@@ -1,4 +1,6 @@
-﻿namespace API.Entities
+﻿using System.Text.Json.Serialization;
+
+namespace API.Entities
 {
     public class Playlist
     {
@@ -8,6 +10,7 @@
         public DateTime DateCreated { get; set; } = DateTime.Now;
 
         public int AppUserId { get; set; }
+        [JsonIgnore]
         public AppUser AppUser { get; set; }
 
         public ICollection<PlaylistTrack> PlaylistTracks { get; set; }

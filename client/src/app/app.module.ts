@@ -26,6 +26,9 @@ import { DateInputComponent } from './_forms/date-input/date-input.component';
 import {ButtonsModule} from "ngx-bootstrap/buttons";
 import { MemberMessagesComponent } from './members/member-messages/member-messages.component';
 import { GenreComponent } from './genre/genre.component';
+import { ArtistsComponent } from './artists/artists.component';
+import { ArtistDetailComponent } from './artists/artist-detail/artist-detail.component';
+import { ArtistEditComponent } from './artists/artist-edit/artist-edit.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +49,9 @@ import { GenreComponent } from './genre/genre.component';
     DateInputComponent,
     MemberMessagesComponent,
     GenreComponent,
+    ArtistsComponent,
+    ArtistDetailComponent,
+    ArtistEditComponent
   ],
     imports: [
         BrowserModule,

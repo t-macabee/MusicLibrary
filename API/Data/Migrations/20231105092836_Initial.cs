@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace API.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class NextOne : Migration
+    public partial class Initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -85,6 +85,28 @@ namespace API.Data.Migrations
                     table.PrimaryKey("PK_Albums", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Albums_Artists_ArtistId",
+                        column: x => x.ArtistId,
+                        principalTable: "Artists",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ArtistPhotos",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Url = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IsMain = table.Column<bool>(type: "bit", nullable: false),
+                    PublicId = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ArtistId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ArtistPhotos", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ArtistPhotos_Artists_ArtistId",
                         column: x => x.ArtistId,
                         principalTable: "Artists",
                         principalColumn: "Id",
@@ -244,6 +266,11 @@ namespace API.Data.Migrations
                 column: "ArtistId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_ArtistPhotos_ArtistId",
+                table: "ArtistPhotos",
+                column: "ArtistId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Connections_GroupName",
                 table: "Connections",
                 column: "GroupName");
@@ -287,6 +314,9 @@ namespace API.Data.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "ArtistPhotos");
+
             migrationBuilder.DropTable(
                 name: "Connections");
 

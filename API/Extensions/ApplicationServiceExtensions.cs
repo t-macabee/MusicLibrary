@@ -17,6 +17,7 @@ namespace API.Extensions
             services.AddScoped<LogUserActivity>();
 
             services.AddScoped<IGenreRepository, GenreRepository>();
+            services.AddScoped<IArtistRepository, ArtistRepository>();
 
             services.AddScoped<IPhotoService, PhotoService>();
             services.AddScoped<ITokenService, TokenService>();

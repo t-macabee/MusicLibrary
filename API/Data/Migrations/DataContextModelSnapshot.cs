@@ -114,6 +114,35 @@ namespace API.Data.Migrations
                     b.ToTable("Artists");
                 });
 
+            modelBuilder.Entity("API.Entities.ArtistPhoto", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("ArtistId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsMain")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("PublicId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Url")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ArtistId");
+
+                    b.ToTable("ArtistPhotos");
+                });
+
             modelBuilder.Entity("API.Entities.Connection", b =>
                 {
                     b.Property<string>("ConnectionId")
@@ -322,6 +351,17 @@ namespace API.Data.Migrations
                     b.Navigation("Artist");
                 });
 
+            modelBuilder.Entity("API.Entities.ArtistPhoto", b =>
+                {
+                    b.HasOne("API.Entities.Artist", "Artist")
+                        .WithMany("ArtistPhotos")
+                        .HasForeignKey("ArtistId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Artist");
+                });
+
             modelBuilder.Entity("API.Entities.Connection", b =>
                 {
                     b.HasOne("API.Entities.Group", null)
@@ -427,6 +467,8 @@ namespace API.Data.Migrations
             modelBuilder.Entity("API.Entities.Artist", b =>
                 {
                     b.Navigation("Albums");
+
+                    b.Navigation("ArtistPhotos");
                 });
 
             modelBuilder.Entity("API.Entities.Genre", b =>

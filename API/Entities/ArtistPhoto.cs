@@ -1,10 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.Text.Json.Serialization;
 
 namespace API.Entities
 {
-    [Table("Photos")]
-    public class Photo
+    [Table("ArtistPhotos")]
+    public class ArtistPhoto
     {
         public int Id { get; set; }
         public string Url { get; set; }
@@ -12,7 +11,7 @@ namespace API.Entities
         public string PublicId { get; set; }
 
 
-        public int AppUserId { get; set; }
-        public AppUser AppUser { get; set; }
+        public int ArtistId { get; set; }
+        public Artist Artist { get; set; }
     }
 }

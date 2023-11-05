@@ -24,7 +24,8 @@ export class MemberDetailComponent implements OnInit, OnDestroy {
   messages: Message[] = [];
   user?: User;
 
-  constructor(public presence: PresenceService, private route: ActivatedRoute, private messageService: MessageService, private accountService: AccountService, private router: Router) {
+  constructor(public presence: PresenceService, private route: ActivatedRoute, private messageService: MessageService,
+              private accountService: AccountService, private router: Router) {
     this.accountService.currentUser$.pipe(take(1)).subscribe({
       next: user => {
         if(user) this.user = user;

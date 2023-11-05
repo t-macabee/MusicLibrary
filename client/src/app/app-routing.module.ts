@@ -12,6 +12,9 @@ import {MemberEditComponent} from "./members/member-edit/member-edit.component";
 import {PreventUnsavedChangesGuard} from "./_guards/prevent-unsaved-changes.guard";
 import {MemberDetailedResolver} from "./_resolvers/member-detailed.resolver";
 import {GenreComponent} from "./genre/genre.component";
+import {ArtistsComponent} from "./artists/artists.component";
+import {ArtistDetailComponent} from "./artists/artist-detail/artist-detail.component";
+import {ArtistEditComponent} from "./artists/artist-edit/artist-edit.component";
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -24,7 +27,10 @@ const routes: Routes = [
       {path: 'members/:username', component: MemberDetailComponent, resolve: {member: MemberDetailedResolver}},
       {path: 'member/edit', component: MemberEditComponent, canDeactivate: [PreventUnsavedChangesGuard]},
       {path: 'messages', component: MessagesComponent},
-      {path: 'genres', component: GenreComponent}
+      {path: 'genres', component: GenreComponent},
+      {path: 'artists', component: ArtistsComponent},
+      {path: 'artist-detail/:id', component: ArtistDetailComponent},
+      {path: 'artist-edit/:id', component: ArtistEditComponent}
     ]
   },
   {path: 'errors', component: TestErrorsComponent },
