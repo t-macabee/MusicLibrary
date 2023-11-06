@@ -4,6 +4,6 @@
     {
         public int Id { get; set; }
         public string GenreName { get; set; }
-        public ICollection<Track> Tracks { get; set; }
+        public ICollection<Artist> Artists { get; set; }
     }
 }

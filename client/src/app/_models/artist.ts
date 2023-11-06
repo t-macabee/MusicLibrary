@@ -1,5 +1,4 @@
 import {Album} from "./album";
-import {ArtistPhoto} from "./artistPhoto";
 
 export interface Artist {
   id: number;
@@ -7,5 +6,4 @@ export interface Artist {
   artistDescription: string;
   photoUrl: string;
   albums: Album[];
-  photos: ArtistPhoto[];
 }

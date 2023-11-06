@@ -42,13 +42,24 @@ namespace API.Services
         {
             return await context.Artists
                 .Include(x => x.Albums)
+                .Include(x => x.Genre)
                 .SingleOrDefaultAsync(x => x.ArtistName.ToLower() == name.ToLower());           
+        }
+
+        public async Task<IEnumerable<Artist>> GetArtistsByGenre(string name)
+        {
+            return await context.Artists
+                .Include(x => x.Genre) 
+                .Include(x => x.Albums)
+                .Where(x => x.Genre.GenreName.ToLower() == name.ToLower())
+                .ToListAsync();
         }
 
         public async Task<IEnumerable<Artist>> GetAllArtistsAsync()
         {
             return await context.Artists
                 .Include(x => x.Albums)
+                .Include(x => x.Genre)
                 .ToListAsync();
         }        
     }

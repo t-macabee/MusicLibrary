@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20231105092836_Initial")]
-    partial class Initial
+    [Migration("20231106185907_Inital")]
+    partial class Inital
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -39,6 +39,9 @@ namespace API.Data.Migrations
 
                     b.Property<int>("ArtistId")
                         .HasColumnType("int");
+
+                    b.Property<double>("TotalLength")
+                        .HasColumnType("float");
 
                     b.Property<string>("Year")
                         .IsRequired()
@@ -112,38 +115,14 @@ namespace API.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("GenreId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("GenreId");
 
                     b.ToTable("Artists");
-                });
-
-            modelBuilder.Entity("API.Entities.ArtistPhoto", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("ArtistId")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("IsMain")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("PublicId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Url")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ArtistId");
-
-                    b.ToTable("ArtistPhotos");
                 });
 
             modelBuilder.Entity("API.Entities.Connection", b =>
@@ -323,9 +302,6 @@ namespace API.Data.Migrations
                     b.Property<int>("AlbumId")
                         .HasColumnType("int");
 
-                    b.Property<int>("GenreId")
-                        .HasColumnType("int");
-
                     b.Property<string>("TrackLenght")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -337,8 +313,6 @@ namespace API.Data.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("AlbumId");
-
-                    b.HasIndex("GenreId");
 
                     b.ToTable("Tracks");
                 });
@@ -354,15 +328,15 @@ namespace API.Data.Migrations
                     b.Navigation("Artist");
                 });
 
-            modelBuilder.Entity("API.Entities.ArtistPhoto", b =>
+            modelBuilder.Entity("API.Entities.Artist", b =>
                 {
-                    b.HasOne("API.Entities.Artist", "Artist")
-                        .WithMany("ArtistPhotos")
-                        .HasForeignKey("ArtistId")
+                    b.HasOne("API.Entities.Genre", "Genre")
+                        .WithMany("Artists")
+                        .HasForeignKey("GenreId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Artist");
+                    b.Navigation("Genre");
                 });
 
             modelBuilder.Entity("API.Entities.Connection", b =>
@@ -440,15 +414,7 @@ namespace API.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("API.Entities.Genre", "Genre")
-                        .WithMany("Tracks")
-                        .HasForeignKey("GenreId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("Album");
-
-                    b.Navigation("Genre");
                 });
 
             modelBuilder.Entity("API.Entities.Album", b =>
@@ -470,13 +436,11 @@ namespace API.Data.Migrations
             modelBuilder.Entity("API.Entities.Artist", b =>
                 {
                     b.Navigation("Albums");
-
-                    b.Navigation("ArtistPhotos");
                 });
 
             modelBuilder.Entity("API.Entities.Genre", b =>
                 {
-                    b.Navigation("Tracks");
+                    b.Navigation("Artists");
                 });
 
             modelBuilder.Entity("API.Entities.Group", b =>

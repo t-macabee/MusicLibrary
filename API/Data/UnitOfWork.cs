@@ -19,6 +19,7 @@ namespace API.Data
         public IMessageRepository MessageRepository => new MessageRepository(context, mapper);
         public IGenreRepository GenreRepository => new GenreRepository(context, mapper);
         public IArtistRepository ArtistRepository => new ArtistRepository(context, mapper);
+        public IAlbumRepository AlbumRepository => new AlbumRepository(context, mapper);
 
         public async Task<bool> Complete()
         {

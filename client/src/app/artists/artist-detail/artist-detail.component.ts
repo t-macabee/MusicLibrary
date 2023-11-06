@@ -19,8 +19,6 @@ export class ArtistDetailComponent implements OnInit {
   baseUrl = environment.apiUrl;
   artist: Artist;
   activeTab?: TabDirective;
-  galleryOptions: NgxGalleryOptions[] = [];
-  galleryImages: NgxGalleryImage[] = [];
 
   constructor(private http: HttpClient, private router: ActivatedRoute, private route: Router) {
   }
@@ -30,19 +28,6 @@ export class ArtistDetailComponent implements OnInit {
       this.id = +res["id"];
       this.loadArtist();
     })
-
-    this.galleryOptions = [
-      {
-        width: "500px",
-        height: "500px",
-        imagePercent: 100,
-        thumbnailsColumns: 4,
-        imageAnimation: NgxGalleryAnimation.Slide,
-        preview: false
-      }
-    ]
-    this.galleryImages = this.getImages();
-
   }
 
   loadArtist() {
@@ -51,19 +36,6 @@ export class ArtistDetailComponent implements OnInit {
     }, error => {
       console.log(error);
     })
-  }
-
-  getImages() {
-    if(!this.artist) return [];
-    const imageUrls = [];
-    for(const photo of this.artist.photos) {
-      imageUrls.push({
-        small: photo?.url,
-        medium: photo?.url,
-        big: photo?.url
-      })
-    }
-    return imageUrls;
   }
 
   onTabActivated(data: TabDirective) {
@@ -79,5 +51,4 @@ export class ArtistDetailComponent implements OnInit {
   editArtist(artist: any) {
       this.route.navigate(["artist-edit", artist.id]);
   }
-
 }

@@ -10,6 +10,7 @@ import {Artist} from "../../_models/artist";
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../environments/environment";
 import {ActivatedRoute} from "@angular/router";
+import {ArtistService} from "../../_services/artist.service";
 
 
 @Component({
@@ -29,7 +30,7 @@ export class ArtistEditComponent implements OnInit {
   id: number;
   sub: any;
 
-  constructor(private http: HttpClient, private router: ActivatedRoute, private toastr: ToastrService) {
+  constructor(private http: HttpClient, private router: ActivatedRoute, private toastr: ToastrService, private artistService: ArtistService) {
 
   }
 
@@ -41,19 +42,20 @@ export class ArtistEditComponent implements OnInit {
   }
 
   loadArtist() {
-    this.http.get<Artist>(this.baseUrl + "Artist/id?id=" + this.id).subscribe(response => {
+    this.artistService.getArtist(this.id).subscribe(response => {
       this.artist = response;
     })
   }
 
   updateArtist(artistId: number, artist: Artist) {
-    return this.http.put(this.baseUrl + "Artist/" + artistId, artist).subscribe(
-      response => {
+    this.artistService.updateArtist(artistId, artist).subscribe(
+      () => {
         this.toastr.success("Profile updated successfully");
         this.editForm.reset(this.artist);
       },
       error => {
         console.error("Error updating artist:", error);
+        this.toastr.error('Error updating artist');
       }
     );
   }

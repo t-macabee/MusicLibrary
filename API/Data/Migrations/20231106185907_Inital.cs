@@ -6,25 +6,11 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace API.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class Initial : Migration
+    public partial class Inital : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.CreateTable(
-                name: "Artists",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    ArtistName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ArtistDescription = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Artists", x => x.Id);
-                });
-
             migrationBuilder.CreateTable(
                 name: "Genres",
                 columns: table => new
@@ -71,44 +57,22 @@ namespace API.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Albums",
+                name: "Artists",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    AlbumName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Year = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ArtistId = table.Column<int>(type: "int", nullable: false)
+                    ArtistName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ArtistDescription = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    GenreId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Albums", x => x.Id);
+                    table.PrimaryKey("PK_Artists", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Albums_Artists_ArtistId",
-                        column: x => x.ArtistId,
-                        principalTable: "Artists",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "ArtistPhotos",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Url = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    IsMain = table.Column<bool>(type: "bit", nullable: false),
-                    PublicId = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ArtistId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ArtistPhotos", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_ArtistPhotos_Artists_ArtistId",
-                        column: x => x.ArtistId,
-                        principalTable: "Artists",
+                        name: "FK_Artists_Genres_GenreId",
+                        column: x => x.GenreId,
+                        principalTable: "Genres",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -209,6 +173,28 @@ namespace API.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Albums",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    AlbumName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Year = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    TotalLength = table.Column<double>(type: "float", nullable: false),
+                    ArtistId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Albums", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Albums_Artists_ArtistId",
+                        column: x => x.ArtistId,
+                        principalTable: "Artists",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Tracks",
                 columns: table => new
                 {
@@ -216,7 +202,6 @@ namespace API.Data.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     TrackName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     TrackLenght = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    GenreId = table.Column<int>(type: "int", nullable: false),
                     AlbumId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -226,12 +211,6 @@ namespace API.Data.Migrations
                         name: "FK_Tracks_Albums_AlbumId",
                         column: x => x.AlbumId,
                         principalTable: "Albums",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Tracks_Genres_GenreId",
-                        column: x => x.GenreId,
-                        principalTable: "Genres",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -266,9 +245,9 @@ namespace API.Data.Migrations
                 column: "ArtistId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ArtistPhotos_ArtistId",
-                table: "ArtistPhotos",
-                column: "ArtistId");
+                name: "IX_Artists_GenreId",
+                table: "Artists",
+                column: "GenreId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Connections_GroupName",
@@ -304,19 +283,11 @@ namespace API.Data.Migrations
                 name: "IX_Tracks_AlbumId",
                 table: "Tracks",
                 column: "AlbumId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Tracks_GenreId",
-                table: "Tracks",
-                column: "GenreId");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "ArtistPhotos");
-
             migrationBuilder.DropTable(
                 name: "Connections");
 
@@ -345,10 +316,10 @@ namespace API.Data.Migrations
                 name: "Albums");
 
             migrationBuilder.DropTable(
-                name: "Genres");
+                name: "Artists");
 
             migrationBuilder.DropTable(
-                name: "Artists");
+                name: "Genres");
         }
     }
 }

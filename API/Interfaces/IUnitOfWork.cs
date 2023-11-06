@@ -6,6 +6,7 @@
         IMessageRepository MessageRepository { get; }
         IGenreRepository GenreRepository { get; }
         IArtistRepository ArtistRepository { get; }
+        IAlbumRepository AlbumRepository { get; }
 
         Task<bool> Complete();
         bool HasChanges();

@@ -7,8 +7,8 @@ namespace API.DTOs
         public int Id { get; set; }
         public string ArtistName { get; set; }
         public string ArtistDescription { get; set; }
-        public string PhotoUrl { get; set; }
-        public ICollection<Album> Albums { get; set; }
-        public ICollection<ArtistPhoto> ArtistPhotos { get; set; }
+        public int GenreId { get; set; }
+        public GenreDto Genre { get; set; }  
+        public ICollection<AlbumDto> Albums { get; set; }
     }
 }

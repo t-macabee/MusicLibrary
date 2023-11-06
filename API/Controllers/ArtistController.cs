@@ -16,14 +16,12 @@ namespace API.Controllers
         private DataContext context;
         private IMapper mapper;
         private IUnitOfWork unitOfWork;
-        private IPhotoService photoService;
 
-        public ArtistController(DataContext context, IMapper mapper, IUnitOfWork unitOfWork, IPhotoService photoService)
+        public ArtistController(DataContext context, IMapper mapper, IUnitOfWork unitOfWork)
         {
             this.context = context;
             this.mapper = mapper;
             this.unitOfWork = unitOfWork;
-            this.photoService = photoService;
         }
 
         [HttpGet]
@@ -45,6 +43,13 @@ namespace API.Controllers
         {
             var result = await unitOfWork.ArtistRepository.GetArtistByNameAsync(name);
             return Ok(mapper.Map<ArtistDto>(result));
+        }
+
+        [HttpGet("{genreName}")]
+        public async Task<ActionResult<ArtistDto>> GetArtistByGenre(string genreName)
+        {
+            var result = await unitOfWork.ArtistRepository.GetArtistsByGenre(genreName);
+            return Ok(mapper.Map<IEnumerable<ArtistDto>>(result));
         }
 
         [HttpPost]
@@ -103,39 +108,6 @@ namespace API.Controllers
         {
             return await context.Artists.AnyAsync(x => x.ArtistName.ToLower() == artist.ToLower());
         }
-
-        //------------------------------------------------------------------------------------------
-
-        [HttpPost("add-artist-photo")]
-        public async Task<ActionResult<ArtistPhotoDto>> AddPhoto(int artistId, IFormFile file)
-        {
-            var artist = await unitOfWork.ArtistRepository.GetArtistByIdAsync(artistId);
-
-            var result = await photoService.AddPhotoAsync(file);
-
-            if (result.Error != null)
-                return BadRequest(result.Error.Message);
-
-            var photo = new ArtistPhoto
-            {
-                Url = result.SecureUrl.AbsoluteUri,
-                PublicId = result.PublicId
-            };
-
-            if (artist.ArtistPhotos.Count == 0)
-            {
-                photo.IsMain = true;
-            }
-
-            artist.ArtistPhotos.Add(photo);
-
-            if (await unitOfWork.Complete())
-            {
-                return CreatedAtRoute("GetArtist", new { artistName = artist.ArtistName }, mapper.Map<ArtistPhotoDto>(photo));
-            }
-
-            return BadRequest("Problem adding photo");
-
-        }
+      
     }
 }

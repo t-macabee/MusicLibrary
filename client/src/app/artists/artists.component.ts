@@ -4,6 +4,8 @@ import {HttpClient} from "@angular/common/http";
 import {ToastrService} from "ngx-toastr";
 import {Artist} from "../_models/artist";
 import {Router} from "@angular/router";
+import {ArtistService} from "../_services/artist.service";
+import {error} from "@angular/compiler-cli/src/transformers/util";
 
 @Component({
   selector: 'app-artists',
@@ -14,7 +16,7 @@ export class ArtistsComponent implements OnInit {
   baseUrl = environment.apiUrl;
   artists: Artist[] = [];
 
-  constructor(private http: HttpClient, private toastr: ToastrService, private router: Router) {
+  constructor(private http: HttpClient, private toastr: ToastrService, private router: Router, private artistService: ArtistService) {
   }
 
   ngOnInit() {
@@ -22,29 +24,36 @@ export class ArtistsComponent implements OnInit {
   }
 
   getAllArtists() {
-    this.http.get<Artist[]>(this.baseUrl + 'Artist').subscribe(response => {
+    this.artistService.getArtists().subscribe(response => {
       this.artists = response;
-    })
+    }, error => {
+      console.log(error);
+    });
   }
 
   deleteArtist(id: number) {
-    this.http.delete(this.baseUrl + 'Artist/' + id).subscribe({
-      next: () => this.artists?.splice(this.artists.findIndex(m => m.id === id), 1)
-    })
-    this.toastr.success("Artist deleted!");
+    this.artistService.deleteArtist(id).subscribe(() => {
+      this.toastr.success("Artist deleted!");
+        const index = this.artists.findIndex((x) => x.id === id);
+        if(index !== -1){
+          this.artists.splice(index, 1);
+        }
+      },
+      (error) => {
+        console.error('Error deleting artist:', error);
+      }
+    )
     this.getAllArtists();
   }
 
   createTemplateArtist() {
-    let sending = {
-      artistName: "Artist name template",
-      artistDescription: "Artist description template"
-    };
-    this.http.post(this.baseUrl + 'Artist', sending).subscribe(response => {
+    this.artistService.createTemplateArtist().subscribe(response => {
       if(response) {
         this.toastr.success("New teplate artist added!");
         this.getAllArtists();
       }
+    },(error) => {
+      console.error('Error adding template artist:', error);
     })
   }
 

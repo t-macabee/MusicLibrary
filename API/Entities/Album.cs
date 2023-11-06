@@ -7,8 +7,10 @@ namespace API.Entities
         public int Id { get; set; }
         public string AlbumName { get; set; }
         public string Year { get; set; }
-        public int ArtistId { get; set; }        
-        public Artist Artist { get; set; }
+        public double TotalLength { get; set; }
         public ICollection<Track> Tracks { get; set; }
+
+        public int ArtistId { get; set; }
+        public Artist Artist { get; set; }
     }
 }

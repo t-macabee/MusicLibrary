@@ -1,6 +1,6 @@
 ﻿namespace API.DTOs.UpdateDTOs
 {
-    public class MemberUpdateDto
+    public class MemberUpsertDto
     {
         public string Interests { get; set; }
         public string Country { get; set; }

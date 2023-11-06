@@ -4,5 +4,6 @@
     {
         public string ArtistName { get; set; }
         public string ArtistDescription { get; set; }
+        public int GenreId { get; set; }
     }
 }

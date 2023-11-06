@@ -79,7 +79,6 @@ namespace API.Controllers
             return BadRequest("Problem deleting the genre");
         }   
 
-
         private async Task<bool> GenreExists(string genre)
         {
             return await context.Genres.AnyAsync(x => x.GenreName.ToLower() == genre.ToLower());
