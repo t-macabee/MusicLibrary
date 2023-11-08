@@ -41,7 +41,9 @@ namespace API.Services
 
         public async Task<Album> GetAlbumByIdAsync(int albumId)
         {
-            return await context.Albums.FindAsync(albumId);
+            return await context.Albums
+            .Include(x => x.Tracks)
+            .FirstOrDefaultAsync(a => a.Id == albumId);
         }
 
         public async Task<Album> GetAlbumByNameAsync(string albumName)

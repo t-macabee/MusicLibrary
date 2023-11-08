@@ -22,7 +22,9 @@ namespace API.Services
 
         public async Task<AppUser> GetUserByIdAsync(int id)
         {
-            return await context.Users.FindAsync(id);
+            return await context.Users
+                .Include(x => x.Playlists)
+                .SingleOrDefaultAsync(x => x.Id == id);
         }
 
         public async Task<AppUser> GetUserByUsernameAsync(string username)

@@ -2,6 +2,7 @@
 using API.Entities;
 using API.Interfaces;
 using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 
 namespace API.Services
 {
@@ -18,32 +19,32 @@ namespace API.Services
 
         public void CreateTrack(Track track)
         {
-            throw new NotImplementedException();
+            context.Tracks.Add(track);
         }
 
         public void DeleteTrack(Track track)
         {
-            throw new NotImplementedException();
-        }
-
-        public Task<IEnumerable<Track>> GetAllTracks()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<Track> GetTrackByIdAsync(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<Track> GetTrackByNameAsync(string name)
-        {
-            throw new NotImplementedException();
+            context.Tracks.Remove(track);
         }
 
         public void UpdateTrack(Track track)
         {
-            throw new NotImplementedException();
+            context.Entry(track).State = EntityState.Modified;
         }
+
+        public async Task<IEnumerable<Track>> GetAllTracks()
+        {
+            return await context.Tracks.ToListAsync();
+        }
+
+        public async Task<Track> GetTrackByIdAsync(int id)
+        {
+            return await context.Tracks.FirstOrDefaultAsync(a => a.Id == id); 
+        }
+
+        public async Task<Track> GetTrackByNameAsync(string name)
+        {
+            return await context.Tracks.SingleOrDefaultAsync(x => x.TrackName.ToLower() == name.ToLower());
+        }       
     }
 }

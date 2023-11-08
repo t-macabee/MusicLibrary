@@ -8,9 +8,9 @@ namespace API.Entities
         public string PlaylistName { get; set; }
         public string PlaylistDescription { get; set; }
         public DateTime DateCreated { get; set; } = DateTime.Now;
+        public DateTime? DateModified { get; set; }
 
         public int AppUserId { get; set; }
-        [JsonIgnore]
         public AppUser AppUser { get; set; }
 
         public ICollection<PlaylistTrack> PlaylistTracks { get; set; }

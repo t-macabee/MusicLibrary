@@ -31,10 +31,10 @@ namespace API.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Album>> GetAlbumById(int id)
+        public async Task<ActionResult<AlbumDto>> GetAlbumById(int id)
         {
             var result = await unitOfWork.AlbumRepository.GetAlbumByIdAsync(id);
-            return Ok(result);
+            return Ok(mapper.Map<AlbumDto>(result));
         }
 
         [HttpGet("albumName")]
@@ -83,14 +83,21 @@ namespace API.Controllers
                 return NotFound("Artist not found");
             }
 
-            var albumToUpdate = artist.Albums.FirstOrDefault(a => a.Id == albumId);
+            var albumToUpdate = await unitOfWork.AlbumRepository.GetAlbumByIdAsync(albumId);
 
             if (albumToUpdate == null)
             {
                 return BadRequest("Album not found for the artist");
             }
 
+            if (update == null)
+            {
+                return BadRequest("Update data is missing");
+            }
+
             mapper.Map(update, albumToUpdate);
+
+            albumToUpdate.Artist.ArtistName = artist.ArtistName;
 
             unitOfWork.AlbumRepository.UpdateAlbum(albumToUpdate);
 
