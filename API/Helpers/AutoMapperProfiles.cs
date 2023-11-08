@@ -24,18 +24,36 @@ namespace API.Helpers
             CreateMap<Genre, GenreDto>();
             CreateMap<GenreUpsertDto, Genre>();
 
-            CreateMap<Artist, ArtistDto>();
+            CreateMap<Artist, ArtistDto>()
+                .ForMember(dest => dest.Albums, opt => opt.MapFrom(src => src.Albums))
+                .ForMember(dest => dest.Genre, opt => opt.MapFrom(src => src.Genre));
+
             CreateMap<ArtistUpsertDto, Artist>();
-            
-            CreateMap<Album, AlbumDto>();
+
+            CreateMap<Album, AlbumDto>()
+                .ForMember(dest => dest.ArtistName, opt => opt.MapFrom(src => src.Artist.ArtistName))
+                .ForMember(dest => dest.Tracks, opt => opt.MapFrom(src => src.Tracks));          
+
             CreateMap<AlbumUpsertDto, Album>();
+
+            CreateMap<Track, TrackDto>();
+
+            CreateMap<Track, TrackDto>()
+                .ForMember(dest => dest.AlbumName, opt => opt.MapFrom(src => src.Album.AlbumName))
+                .ForMember(dest => dest.ArtistName, opt => opt.MapFrom(src => src.Album.Artist.ArtistName));
+
+            CreateMap<TrackUpsertDto, Track>()
+                .ForMember(dest => dest.Id, opt => opt.Ignore());
+
+            CreateMap<Playlist, PlaylistDto>()
+                .ForMember(dest => dest.Tracks, opt => opt.MapFrom(src => src.PlaylistTracks.Select(pt => pt.Track)));
+            CreateMap<PlaylistUpsertDto, Playlist>();
 
             CreateMap<Message, MessageDto>()
                 .ForMember(dest => dest.SenderPhotoUrl, opt => opt.MapFrom(src =>
                     src.Sender.Photos.FirstOrDefault(x => x.IsMain).Url))
                 .ForMember(dest => dest.RecipientPhotoUrl, opt => opt.MapFrom(src =>
                     src.Recipient.Photos.FirstOrDefault(x => x.IsMain).Url));
-
         }
     }
 }

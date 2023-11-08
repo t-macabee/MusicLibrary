@@ -6,6 +6,7 @@ using API.Interfaces;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using API.Services;
 
 namespace API.Controllers
 {
@@ -31,10 +32,10 @@ namespace API.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Album>> GetAlbumById(int id)
+        public async Task<ActionResult<AlbumDto>> GetAlbumById(int id)
         {
             var result = await unitOfWork.AlbumRepository.GetAlbumByIdAsync(id);
-            return Ok(result);
+            return Ok(mapper.Map<AlbumDto>(result));
         }
 
         [HttpGet("albumName")]
@@ -42,6 +43,19 @@ namespace API.Controllers
         {
             var result = await unitOfWork.AlbumRepository.GetAlbumByNameAsync(name);
             return Ok(mapper.Map<AlbumDto>(result));
+        }
+
+        [HttpGet("albumsByArtist/{artistId}")]
+        public async Task<ActionResult<IEnumerable<AlbumDto>>> GetAlbumsByArtist(int artistId)
+        {
+            var albums = await unitOfWork.AlbumRepository.GetAlbumByArtist(artistId);
+
+            if (albums == null || !albums.Any())
+            {
+                return NotFound("No albums found for the specified artist.");
+            }
+
+            return Ok(mapper.Map<IEnumerable<AlbumDto>>(albums));
         }
 
         [HttpPost("create/{artistId}")]
@@ -66,7 +80,7 @@ namespace API.Controllers
 
             if (await unitOfWork.Complete())
             {
-                var albumDto = mapper.Map<AlbumDto>(newAlbum); // Use the newly created album for the response
+                var albumDto = mapper.Map<AlbumDto>(newAlbum);
                 return Ok(albumDto);
             }
 
@@ -83,14 +97,21 @@ namespace API.Controllers
                 return NotFound("Artist not found");
             }
 
-            var albumToUpdate = artist.Albums.FirstOrDefault(a => a.Id == albumId);
+            var albumToUpdate = await unitOfWork.AlbumRepository.GetAlbumByIdAsync(albumId);
 
             if (albumToUpdate == null)
             {
                 return BadRequest("Album not found for the artist");
             }
 
+            if (update == null)
+            {
+                return BadRequest("Update data is missing");
+            }
+
             mapper.Map(update, albumToUpdate);
+
+            albumToUpdate.Artist.ArtistName = artist.ArtistName;
 
             unitOfWork.AlbumRepository.UpdateAlbum(albumToUpdate);
 

@@ -21,9 +21,10 @@
     </tab>
     <tab heading="Albums" (selectTab)="onTabActivated($event)">
       <br>
-      Albums will go here
+      <app-albums [artist]="artist"></app-albums>
     </tab>
-    <tab heading="Photos" (selectTab)="onTabActivated($event)"> <br>
+    <tab heading="Photos" (selectTab)="onTabActivated($event)">
+      <br>
       images will go here
     </tab>
   </tabset>

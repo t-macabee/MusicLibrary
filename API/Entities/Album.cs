@@ -10,7 +10,7 @@ namespace API.Entities
         public double TotalLength { get; set; }
         public ICollection<Track> Tracks { get; set; }
 
-        public int ArtistId { get; set; }
+        public int ArtistId { get; set; }        
         public Artist Artist { get; set; }
     }
 }

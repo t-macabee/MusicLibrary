@@ -31,21 +31,21 @@ namespace API.Controllers
             return Ok(mapper.Map<IEnumerable<ArtistDto>>(result));
         }
 
-        [HttpGet("id")]
-        public async Task<ActionResult<Artist>> GetArtistById(int id)
+        [HttpGet("{id}")]
+        public async Task<ActionResult<ArtistDto>> GetArtistById(int id)
         {
             var result = await unitOfWork.ArtistRepository.GetArtistByIdAsync(id);
-            return Ok(result);
+            return Ok(mapper.Map<ArtistDto>(result));
         }
 
-        [HttpGet("artistName", Name = "GetArtist")]
+        [HttpGet("name/artistName")]
         public async Task<ActionResult<ArtistDto>> GetArtistByName(string name)
         {
             var result = await unitOfWork.ArtistRepository.GetArtistByNameAsync(name);
             return Ok(mapper.Map<ArtistDto>(result));
         }
 
-        [HttpGet("{genreName}")]
+        [HttpGet("genre/genreName")]
         public async Task<ActionResult<ArtistDto>> GetArtistByGenre(string genreName)
         {
             var result = await unitOfWork.ArtistRepository.GetArtistsByGenre(genreName);
@@ -59,6 +59,8 @@ namespace API.Controllers
                 return BadRequest("Artist already exists!");
 
             var newArtist = mapper.Map<Artist>(artist);
+
+            newArtist.GenreId = artist.GenreId;
 
             unitOfWork.ArtistRepository.CreateArtist(newArtist);
 

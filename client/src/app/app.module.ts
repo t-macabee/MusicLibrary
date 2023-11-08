@@ -18,17 +18,23 @@ import { ErrorInterceptor} from "./_interceptor/error.interceptor";
 import { NotFoundComponent } from './errors/not-found/not-found.component';
 import { ServerErrorsComponent } from './errors/server-errors/server-errors.component';
 import { MemberCardComponent } from './members/member-card/member-card.component';
-import {JwtInterceptor} from "./_interceptor/jwt.interceptor";
+import { JwtInterceptor } from "./_interceptor/jwt.interceptor";
 import { MemberEditComponent } from './members/member-edit/member-edit.component';
 import { PhotoEditorComponent } from './members/photo-editor/photo-editor.component';
 import { TextInputComponent } from './_forms/text-input/text-input.component';
 import { DateInputComponent } from './_forms/date-input/date-input.component';
-import {ButtonsModule} from "ngx-bootstrap/buttons";
+import { ButtonsModule } from "ngx-bootstrap/buttons";
 import { MemberMessagesComponent } from './members/member-messages/member-messages.component';
 import { GenreComponent } from './genre/genre.component';
-import { ArtistsComponent } from './artists/artists.component';
 import { ArtistDetailComponent } from './artists/artist-detail/artist-detail.component';
 import { ArtistEditComponent } from './artists/artist-edit/artist-edit.component';
+import { AlbumsComponent } from './albums/albums.component';
+import { ArtistListComponent } from './artists/artist-list/artist-list.component';
+import { ArtistCardComponent } from './artists/artist-card/artist-card.component';
+import { TracksComponent } from './tracks/tracks.component';
+
+import {TabService} from "./_services/tab.service";
+
 
 @NgModule({
   declarations: [
@@ -49,9 +55,12 @@ import { ArtistEditComponent } from './artists/artist-edit/artist-edit.component
     DateInputComponent,
     MemberMessagesComponent,
     GenreComponent,
-    ArtistsComponent,
     ArtistDetailComponent,
-    ArtistEditComponent
+    ArtistEditComponent,
+    AlbumsComponent,
+    ArtistListComponent,
+    ArtistCardComponent,
+    TracksComponent
   ],
     imports: [
         BrowserModule,
@@ -65,7 +74,8 @@ import { ArtistEditComponent } from './artists/artist-edit/artist-edit.component
     ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
-    {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true}
+    {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
+    [TabService]
   ],
   bootstrap: [AppComponent]
 })

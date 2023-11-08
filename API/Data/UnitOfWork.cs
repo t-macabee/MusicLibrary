@@ -20,6 +20,8 @@ namespace API.Data
         public IGenreRepository GenreRepository => new GenreRepository(context, mapper);
         public IArtistRepository ArtistRepository => new ArtistRepository(context, mapper);
         public IAlbumRepository AlbumRepository => new AlbumRepository(context, mapper);
+        public ITrackRepository TrackRepository => new TrackRepository(context, mapper);
+        public IPlaylistRepository PlaylistRepository => new PlaylistRepository(context, mapper);
 
         public async Task<bool> Complete()
         {

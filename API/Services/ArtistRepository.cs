@@ -35,14 +35,19 @@ namespace API.Services
 
         public async Task<Artist> GetArtistByIdAsync(int id)
         {
-            return await context.Artists.FindAsync(id);
+            return await context.Artists
+                .Include(x => x.Genre)
+                .Include(x => x.Albums)
+                    .ThenInclude(a => a.Tracks) 
+                .SingleOrDefaultAsync(x => x.Id == id);
         }
 
         public async Task<Artist> GetArtistByNameAsync(string name)
         {
             return await context.Artists
-                .Include(x => x.Albums)
                 .Include(x => x.Genre)
+                .Include(x => x.Albums)
+                    .ThenInclude(y => y.Tracks)
                 .SingleOrDefaultAsync(x => x.ArtistName.ToLower() == name.ToLower());           
         }
 
@@ -51,7 +56,8 @@ namespace API.Services
             return await context.Artists
                 .Include(x => x.Genre) 
                 .Include(x => x.Albums)
-                .Where(x => x.Genre.GenreName.ToLower() == name.ToLower())
+                .ThenInclude(y => y.Tracks)
+                .Where(x => x.Genre.GenreName.ToLower() == name.ToLower())                
                 .ToListAsync();
         }
 
@@ -59,6 +65,7 @@ namespace API.Services
         {
             return await context.Artists
                 .Include(x => x.Albums)
+                .ThenInclude(y => y.Tracks)
                 .Include(x => x.Genre)
                 .ToListAsync();
         }        

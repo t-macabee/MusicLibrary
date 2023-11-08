@@ -258,6 +258,9 @@ namespace API.Data.Migrations
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("datetime2");
 
+                    b.Property<DateTime?>("DateModified")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("PlaylistDescription")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -299,9 +302,8 @@ namespace API.Data.Migrations
                     b.Property<int>("AlbumId")
                         .HasColumnType("int");
 
-                    b.Property<string>("TrackLenght")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<double>("TrackLenght")
+                        .HasColumnType("float");
 
                     b.Property<string>("TrackName")
                         .IsRequired()

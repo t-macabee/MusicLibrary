@@ -1,10 +1,10 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {ActivatedRoute, Router} from "@angular/router";
 import {environment} from "../../../environments/environment";
 import {Artist} from "../../_models/artist";
-import {NgxGalleryAnimation, NgxGalleryImage, NgxGalleryOptions} from "@kolkov/ngx-gallery";
 import {TabDirective, TabsetComponent} from "ngx-bootstrap/tabs";
+import {TabService} from "../../_services/tab.service";
 
 
 @Component({
@@ -13,15 +13,16 @@ import {TabDirective, TabsetComponent} from "ngx-bootstrap/tabs";
   styleUrls: ['./artist-detail.component.css']
 })
 export class ArtistDetailComponent implements OnInit {
-  @ViewChild('artistTabs', {static: true}) artistTabs?: TabsetComponent;
+  @Input() artist: Artist;
   id: number;
   sub: any;
   baseUrl = environment.apiUrl;
-  artist: Artist;
   activeTab?: TabDirective;
 
-  constructor(private http: HttpClient, private router: ActivatedRoute, private route: Router) {
-  }
+  constructor(private http: HttpClient,
+              private router: ActivatedRoute,
+              private route: Router,
+              private tabsService: TabService) {}
 
   ngOnInit() {
     this.sub = this.router.params.subscribe((res:any) => {
@@ -31,7 +32,7 @@ export class ArtistDetailComponent implements OnInit {
   }
 
   loadArtist() {
-    this.http.get<Artist>(this.baseUrl + 'Artist/id?id=' + this.id).subscribe(results => {
+    this.http.get<Artist>(this.baseUrl + 'Artist/' + this.id).subscribe(results => {
       this.artist = results;
     }, error => {
       console.log(error);
@@ -40,15 +41,16 @@ export class ArtistDetailComponent implements OnInit {
 
   onTabActivated(data: TabDirective) {
     this.activeTab = data;
+    this.tabsService.tabset = data!.tabset;
   }
 
   selectTab(heading: string) {
-    if(this.artistTabs) {
-      this.artistTabs.tabs.find(x => x.heading === heading)!.active = true;
+    if(this.tabsService.tabset) {
+      this.tabsService.tabset.tabs.find(x => x.heading === heading)!.active = true;
     }
   }
 
   editArtist(artist: any) {
-      this.route.navigate(["artist-edit", artist.id]);
+    this.route.navigate(["artist-edit", artist.id]);
   }
 }

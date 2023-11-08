@@ -20,6 +20,7 @@ namespace API.Extensions
             services.AddScoped<IArtistRepository, ArtistRepository>();
             services.AddScoped<ITrackRepository, TrackRepository>();
             services.AddScoped<IAlbumRepository, AlbumRepository>();
+            services.AddScoped<IPlaylistRepository, PlaylistRepository>();
 
             services.AddScoped<IPhotoService, PhotoService>();
             services.AddScoped<ITokenService, TokenService>();

@@ -11,5 +11,6 @@ namespace API.Interfaces
         Task<IEnumerable<Album>> GetAllAlbums();
         Task<Album> GetAlbumByIdAsync(int albumId);
         Task<Album> GetAlbumByNameAsync(string albumName);
+        Task<IEnumerable<Album>> GetAlbumByArtist(int artistId);
     }
 }

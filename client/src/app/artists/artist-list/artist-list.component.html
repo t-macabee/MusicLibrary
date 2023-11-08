@@ -1,0 +1,8 @@
+<button (click)="createTemplateArtist()" class="btn btn-success">Create template artist</button>
+<br><hr><br>
+<div class="row">
+  <div *ngFor="let artist of artists" class="col-2">
+    <app-artist-card [artist]="artist" (artistDeleted)="handleArtistDeleted($event)"></app-artist-card>
+  </div>
+</div>
+

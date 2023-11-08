@@ -1,4 +1,5 @@
-﻿using API.Entities;
+﻿using API.DTOs;
+using API.Entities;
 
 namespace API.Interfaces
 {
@@ -8,8 +9,8 @@ namespace API.Interfaces
         void UpdateTrack(Track track);
         void DeleteTrack(Track track);
 
-        Task<IEnumerable<Track>> GetAllTracks();
+        Task<IEnumerable<TrackDto>> GetAllTracks();
         Task<Track> GetTrackByIdAsync(int id);
-        Task<Track> GetTrackByNameAsync(string name);
+        Task<TrackDto> GetTrackByNameAsync(string name);
     }
 }

@@ -1,0 +1,15 @@
+<div class="card mb-4">
+  <div class="card-img-wrapper">
+    <img src="{{'./assets/user.png'}}" class="card-img-top">
+    <ul class="list-inline member-icons animate text-center">
+      <p>{{artist.artistName}}</p>
+      <li class="list-inline-item">
+        <button routerLink="/artist-detail/{{artist.id}}" class="btn btn-primary">about</button>
+      </li>
+      <li class="list-inline-item">
+        <button (click)="deleteArtist(artist.id)" class="btn btn-danger">delete</button>
+      </li>
+    </ul>
+  </div>
+</div>
+

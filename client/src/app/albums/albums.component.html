@@ -1,0 +1,34 @@
+<table class="table table-hover" style="width: 100%;">
+  <thead>
+  <tr>
+    <th style="text-align: center">Name</th>
+    <th style="text-align: center">Artist</th>
+    <th style="text-align: center">Year</th>
+    <th style="text-align: center">Length</th>
+    <th style="text-align: center">Tracks</th>
+  </tr>
+  </thead>
+  <tbody class="table-success">
+  <tr *ngFor="let x of albums">
+    <td class="float" style="text-align: center">{{x.albumName}}</td>
+    <td class="float" style="text-align: center">{{x.artistName}}</td>
+    <td class="float" style="text-align: center">{{x.year}}</td>
+    <td class="float" style="text-align: center">{{x.totalLength}}</td>
+    <td class="float" style="text-align: center">
+      <!-- Dropdown button -->
+      <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Tracks
+        </button>
+        <!-- Dropdown menu -->
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <!-- Loop through tracks and display them in dropdown -->
+          <a class="dropdown-item" *ngFor="let track of x.tracks" href="#">
+            {{ track.trackName }} - {{ track.trackLength }}
+          </a>
+        </div>
+      </div>
+    </td>
+  </tr>
+  </tbody>
+</table>

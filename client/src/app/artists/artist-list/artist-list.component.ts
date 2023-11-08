@@ -1,18 +1,17 @@
-import {Component, OnInit} from '@angular/core';
-import {environment} from "../../environments/environment";
-import {HttpClient} from "@angular/common/http";
+import { Component } from '@angular/core';
+import {Artist} from "../../_models/artist";
 import {ToastrService} from "ngx-toastr";
-import {Artist} from "../_models/artist";
 import {Router} from "@angular/router";
-import {ArtistService} from "../_services/artist.service";
-import {error} from "@angular/compiler-cli/src/transformers/util";
+import {ArtistService} from "../../_services/artist.service";
+import {environment} from "../../../environments/environment";
+import {HttpClient} from "@angular/common/http";
 
 @Component({
-  selector: 'app-artists',
-  templateUrl: './artists.component.html',
-  styleUrls: ['./artists.component.css']
+  selector: 'app-artist-list',
+  templateUrl: './artist-list.component.html',
+  styleUrls: ['./artist-list.component.css']
 })
-export class ArtistsComponent implements OnInit {
+export class ArtistListComponent {
   baseUrl = environment.apiUrl;
   artists: Artist[] = [];
 
@@ -33,7 +32,7 @@ export class ArtistsComponent implements OnInit {
 
   deleteArtist(id: number) {
     this.artistService.deleteArtist(id).subscribe(() => {
-      this.toastr.success("Artist deleted!");
+        this.toastr.success("Artist deleted!");
         const index = this.artists.findIndex((x) => x.id === id);
         if(index !== -1){
           this.artists.splice(index, 1);
@@ -59,5 +58,10 @@ export class ArtistsComponent implements OnInit {
 
   artistDetails(artist : any){
     this.router.navigate(["artist-detail", artist.id]);
+  }
+
+  handleArtistDeleted(id: number) {
+    this.artists = this.artists.filter((artist) => artist.id !== id);
+    this.toastr.success('Artist deleted!');
   }
 }

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace API.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class Inital : Migration
+    public partial class Initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -159,6 +159,7 @@ namespace API.Data.Migrations
                     PlaylistName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PlaylistDescription = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DateModified = table.Column<DateTime>(type: "datetime2", nullable: true),
                     AppUserId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -201,7 +202,7 @@ namespace API.Data.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     TrackName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    TrackLenght = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    TrackLenght = table.Column<double>(type: "float", nullable: false),
                     AlbumId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
