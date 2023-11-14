@@ -25,8 +25,8 @@ namespace API.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<TrackDto>>> GetAllTracks()
         {
-            var tracks = await unitOfWork.TrackRepository.GetAllTracks();
-            return Ok(tracks);
+            var track = await unitOfWork.TrackRepository.GetAllTracks();
+            return Ok(mapper.Map<IEnumerable<TrackDto>>(track));
         }
 
         [HttpGet("{id}")]
