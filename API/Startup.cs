@@ -36,14 +36,18 @@ namespace API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddApplicationServices(config);
-            services.AddControllers();
+            services.AddControllers()
+                .AddJsonOptions(options =>
+                {
+                    options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;
+                });
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebAPIv5", Version = "v1" });
             });
             services.AddCors();
             services.AddIdentityServices(config);
-            services.AddSignalR();
+            services.AddSignalR();                          
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

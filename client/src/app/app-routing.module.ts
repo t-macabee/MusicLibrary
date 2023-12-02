@@ -14,10 +14,10 @@ import {MemberDetailedResolver} from "./_resolvers/member-detailed.resolver";
 import {GenreComponent} from "./genre/genre.component";
 import {ArtistDetailComponent} from "./artists/artist-detail/artist-detail.component";
 import {ArtistEditComponent} from "./artists/artist-edit/artist-edit.component";
-import {AlbumsComponent} from "./albums/albums.component";
 import {ArtistListComponent} from "./artists/artist-list/artist-list.component";
-import {TracksComponent} from "./tracks/tracks.component";
 import {ArtistResolver} from "./_resolvers/artist.resolver";
+import {AlbumDetailComponent} from "./albums/album-detail/album-detail.component";
+import {AlbumTrackComponent} from "./tracks/album-track/album-track.component";
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -31,11 +31,11 @@ const routes: Routes = [
       {path: 'member/edit', component: MemberEditComponent, canDeactivate: [PreventUnsavedChangesGuard]},
       {path: 'messages', component: MessagesComponent},
       {path: 'genres', component: GenreComponent},
-      {path: 'albums', component: AlbumsComponent},
       {path: 'artists', component: ArtistListComponent},
       {path: 'artist-detail/:id', component: ArtistDetailComponent, resolve: {artist: ArtistResolver}},
       {path: 'artist-edit/:id', component: ArtistEditComponent},
-      {path: 'tracks', component: TracksComponent}
+      {path: 'albums', component: AlbumDetailComponent},
+      {path: 'album-tracks/:id', component: AlbumTrackComponent}
     ]
   },
   {path: 'errors', component: TestErrorsComponent },

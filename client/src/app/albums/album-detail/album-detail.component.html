@@ -1,0 +1,38 @@
+<app-album-edit *ngIf="showEditForm" [album]="selectedAlbum" (albumUpdated)="updateAlbum($event)" (closeEditForm)="closeEditForm()"></app-album-edit>
+<table class="table table-hover" style="width: 100%;" *ngIf="albums.length > 0">
+  <thead>
+  <tr>
+    <th style="text-align: center">Name</th>
+    <th style="text-align: center">Artist</th>
+    <th style="text-align: center">Year</th>
+    <th style="text-align: center">Length</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+  </thead>
+  <tbody class="table-success">
+  <tr *ngFor="let x of albums">
+    <td class="float" style="text-align: center">{{ x.albumName }}</td>
+    <td class="float" style="text-align: center">{{ x.artistName }}</td>
+    <td class="float" style="text-align: center">{{ x.year }}</td>
+    <td class="float" style="text-align: center">{{ x.totalLength }}</td>
+    <td>
+      <button class="btn btn-secondary float-end" [routerLink]="['/album-tracks', x.id]">Tracks</button>
+    </td>
+    <td>
+      <button class="btn btn-secondary float-end" (click)="editAlbum(x)">Edit Album</button>
+    </td>
+    <td>
+      <button class="btn btn-danger float-end" (click)="deleteAlbum(x?.artistId, x.id)">Delete Album</button>
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+<br/><br/>
+
+<button class="btn btn-secondary" (click)="createTemplateAlbum()">Create new template album</button>
+
+
+

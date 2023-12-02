@@ -4,6 +4,8 @@ using API.DTOs.UpdateDTOs;
 using API.Entities;
 using API.Extensions;
 using AutoMapper;
+using AutoMapper.QueryableExtensions;
+
 
 namespace API.Helpers
 {
@@ -32,11 +34,10 @@ namespace API.Helpers
 
             CreateMap<Album, AlbumDto>()
                 .ForMember(dest => dest.ArtistName, opt => opt.MapFrom(src => src.Artist.ArtistName))
-                .ForMember(dest => dest.Tracks, opt => opt.MapFrom(src => src.Tracks));          
+                .ForMember(dest => dest.Tracks, opt => opt.MapFrom(src => src.Tracks));
 
-            CreateMap<AlbumUpsertDto, Album>();
-
-            CreateMap<Track, TrackDto>();
+            CreateMap<AlbumUpsertDto, Album>()
+            .ForAllMembers(opt => opt.Condition((src, dest, srcMember) => srcMember != null));
 
             CreateMap<Track, TrackDto>()
                 .ForMember(dest => dest.AlbumName, opt => opt.MapFrom(src => src.Album.AlbumName))

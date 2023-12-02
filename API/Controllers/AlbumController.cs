@@ -117,11 +117,12 @@ namespace API.Controllers
 
             if (await unitOfWork.Complete())
             {
-                return NoContent();
+                return Ok(mapper.Map<AlbumDto>(albumToUpdate));
             }
 
             return BadRequest("Failed to update album");
         }
+
 
         [HttpDelete("{artistId}/{albumId}")]
         public async Task<ActionResult> DeleteAlbum(int artistId, int albumId)

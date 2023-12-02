@@ -3,6 +3,6 @@
     public class TrackUpsertDto
     {
         public string TrackName { get; set; }
-        public double TrackLenght { get; set; }
+        public double TrackLength { get; set; }
     }
 }

@@ -43,6 +43,20 @@ namespace API.Controllers
             return Ok(mapper.Map<TrackDto>(result));
         }
 
+        [HttpGet("tracksByAlbum/{albumId}")]
+        public async Task<ActionResult<IEnumerable<TrackDto>>> GetTracksByAlbum(int albumId)
+        {
+            var tracks = await unitOfWork.TrackRepository.GetTracksByAlbum(albumId);
+
+            if (tracks == null)
+            {
+                return Ok(new List<TrackDto>());
+            }
+
+            return Ok(tracks);
+        }
+
+
         [HttpPost("{albumId}/tracks")]
         public async Task<ActionResult> AddTrackToAlbum(int albumId, TrackUpsertDto trackDto)
         {
@@ -111,7 +125,7 @@ namespace API.Controllers
 
             if (await unitOfWork.Complete())
             {
-                return Ok("Track deleted successfully");
+                return Ok( new { message = "Track deleted successfully" } );
             }
 
             return BadRequest("Failed to delete the track");

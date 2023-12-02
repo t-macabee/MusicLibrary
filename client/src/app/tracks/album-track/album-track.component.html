@@ -1,0 +1,38 @@
+<app-track-edit *ngIf="showEditForm" [track]="selectedTrack" (trackUpdated)="updateTrack($event)" (closeEditForm)="closeEditForm()"></app-track-edit>
+<div *ngIf="tracks && tracks.length > 0; else noTracks">
+  <h4>Album: {{tracks[0]?.albumName}}</h4><br>
+  <table class="table table-hover" style="width: 100%;">
+    <thead>
+    <tr>
+      <th>#</th>
+      <th style="text-align: center">Name</th>
+      <th style="text-align: center">Length (min.)</th>
+      <th style="text-align: center">Artist</th>
+      <th style="text-align: center">Album</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody class="table-success">
+    <tr *ngFor="let x of tracks">
+      <th>{{x.id}}</th>
+      <td class="float" style="text-align: center">{{x.trackName}}</td>
+      <td class="float" style="text-align: center">{{x.trackLength}}</td>
+      <td class="float" style="text-align: center">{{x.artistName}}</td>
+      <td class="float" style="text-align: center">{{x.albumName}}</td>
+      <td class="float" style="text-align: center"><button (click)="editTrack(x)">Edit track</button></td>
+      <td class="float" style="text-align: center"><button>Add to playlist</button></td>
+      <td class="float" style="text-align: center"><button (click)="deleteTrack(x)">Delete</button></td>
+    </tr>
+    </tbody>
+  </table>
+  <br><button class="btn btn-success" (click)="crateTemplateTrack()">Create new track</button>
+</div>
+
+<ng-template #noTracks>
+  <p *ngIf="!tracks">Loading tracks...</p>
+  <p *ngIf="tracks && tracks.length === 0">There are no tracks on this album</p><br>
+  <button class="btn btn-success" (click)="crateTemplateTrack()">Create new track</button>
+</ng-template>
+

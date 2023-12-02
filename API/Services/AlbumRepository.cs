@@ -42,7 +42,8 @@ namespace API.Services
 
         public async Task<Album> GetAlbumByIdAsync(int albumId)
         {
-            return await context.Albums
+            return await context.Albums             
+            .Include(x => x.Artist)
             .Include(x => x.Tracks)
             .FirstOrDefaultAsync(a => a.Id == albumId);
         }
@@ -50,8 +51,9 @@ namespace API.Services
         public async Task<Album> GetAlbumByNameAsync(string albumName)
         {
             return await context.Albums
+                .Include(x => x.Artist)
                 .Include(x => x.Tracks)
-                .SingleOrDefaultAsync(x => x.AlbumName.ToLower() == albumName.ToLower());
+                .FirstOrDefaultAsync(x => EF.Functions.Like(x.AlbumName, albumName));
         }       
 
         public async Task<IEnumerable<Album>> GetAlbumByArtist(int artistId)

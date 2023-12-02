@@ -1,11 +1,10 @@
-import {Component, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {ActivatedRoute, Router} from "@angular/router";
 import {environment} from "../../../environments/environment";
 import {Artist} from "../../_models/artist";
-import {TabDirective, TabsetComponent} from "ngx-bootstrap/tabs";
+import {TabDirective} from "ngx-bootstrap/tabs";
 import {TabService} from "../../_services/tab.service";
-
 
 @Component({
   selector: 'app-artist-detail',
@@ -14,6 +13,7 @@ import {TabService} from "../../_services/tab.service";
 })
 export class ArtistDetailComponent implements OnInit {
   @Input() artist: Artist;
+  albums: any;
   id: number;
   sub: any;
   baseUrl = environment.apiUrl;
@@ -22,7 +22,8 @@ export class ArtistDetailComponent implements OnInit {
   constructor(private http: HttpClient,
               private router: ActivatedRoute,
               private route: Router,
-              private tabsService: TabService) {}
+              private tabsService: TabService
+              ) {}
 
   ngOnInit() {
     this.sub = this.router.params.subscribe((res:any) => {

@@ -10,6 +10,7 @@ namespace API.Interfaces
         void DeleteTrack(Track track);
 
         Task<IEnumerable<TrackDto>> GetAllTracks();
+        Task<IEnumerable<TrackDto>> GetTracksByAlbum(int id);
         Task<Track> GetTrackByIdAsync(int id);
         Task<TrackDto> GetTrackByNameAsync(string name);
     }

@@ -13,20 +13,20 @@
     </div>
   </div>
 
-<div class="col-8">
-  <tabset class="artist-tabset" #artistTabs>
-    <tab heading="About" (selectTab)="onTabActivated($event)">
-      <br>
-      <p>{{artist?.artistDescription}}</p>
-    </tab>
-    <tab heading="Albums" (selectTab)="onTabActivated($event)">
-      <br>
-      <app-albums [artist]="artist"></app-albums>
-    </tab>
-    <tab heading="Photos" (selectTab)="onTabActivated($event)">
-      <br>
-      images will go here
-    </tab>
-  </tabset>
-</div>
+  <div class="col-8">
+    <tabset class="artist-tabset" #artistTabs>
+      <tab heading="About" (selectTab)="onTabActivated($event)">
+        <br>
+        <p>{{artist?.artistDescription}}</p>
+      </tab>
+      <tab heading="Albums" (selectTab)="onTabActivated($event)">
+        <br>
+        <app-albums [artist]="artist"></app-albums>
+      </tab>
+      <tab heading="Photos" (selectTab)="onTabActivated($event)">
+        <br>
+        images will go here
+      </tab>
+    </tabset>
+  </div>
 </div>

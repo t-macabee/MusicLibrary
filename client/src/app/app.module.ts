@@ -28,13 +28,14 @@ import { MemberMessagesComponent } from './members/member-messages/member-messag
 import { GenreComponent } from './genre/genre.component';
 import { ArtistDetailComponent } from './artists/artist-detail/artist-detail.component';
 import { ArtistEditComponent } from './artists/artist-edit/artist-edit.component';
-import { AlbumsComponent } from './albums/albums.component';
 import { ArtistListComponent } from './artists/artist-list/artist-list.component';
 import { ArtistCardComponent } from './artists/artist-card/artist-card.component';
-import { TracksComponent } from './tracks/tracks.component';
-
-import {TabService} from "./_services/tab.service";
-
+import { AlbumEditComponent } from './albums/album-edit/album-edit.component';
+import { TabService } from "./_services/tab.service";
+import { AlbumDetailComponent } from './albums/album-detail/album-detail.component';
+import { TrackListComponent } from './tracks/track-list/track-list.component';
+import { AlbumTrackComponent } from './tracks/album-track/album-track.component';
+import { TrackEditComponent } from './tracks/track-edit/track-edit.component';
 
 @NgModule({
   declarations: [
@@ -57,10 +58,13 @@ import {TabService} from "./_services/tab.service";
     GenreComponent,
     ArtistDetailComponent,
     ArtistEditComponent,
-    AlbumsComponent,
     ArtistListComponent,
     ArtistCardComponent,
-    TracksComponent
+    AlbumEditComponent,
+    AlbumDetailComponent,
+    TrackListComponent,
+    AlbumTrackComponent,
+    TrackEditComponent
   ],
     imports: [
         BrowserModule,
