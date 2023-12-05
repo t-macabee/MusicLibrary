@@ -6,7 +6,7 @@ import {MessageService} from "../_services/message.service";
 import {AccountService} from "../_services/account.service";
 import {User} from "../_models/user";
 import {take} from "rxjs";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-messages',
@@ -21,7 +21,10 @@ export class MessagesComponent implements OnInit{
   user: User;
   loading = false;
 
-  constructor(private messageService: MessageService, private accountService: AccountService, private router: Router) {
+  constructor(private messageService: MessageService,
+              private accountService: AccountService,
+              private router: Router,
+              private route: ActivatedRoute) {
     this.accountService.currentUser$.pipe(take(1)).subscribe(user => {
       this.user = user;
       this.userParams = new UserParams(user);
@@ -53,5 +56,15 @@ export class MessagesComponent implements OnInit{
       this.userParams.pageNumber = event.Page;
       this.loadMessages();
     }
+  }
+
+  navigateToChat(message: any) {
+    let username: string;
+    if (this.containter === 'Outbox') {
+      username = message.recipientUsername;
+    } else {
+      username = message.senderUsername;
+    }
+    this.router.navigate(['/members', username], { relativeTo: this.route, queryParams: { tab: 'Messages' } });
   }
 }

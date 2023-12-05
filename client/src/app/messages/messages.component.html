@@ -48,7 +48,8 @@
         ? "/Members/" + message.recipientUsername
         : "/Members/" + message.senderUsername}}'
           [queryParams]="{tab: 'Messages'}"
-      >
+          (click)="navigateToChat(message)">
+
       <td>{{message.content}}</td>
       <td>
         <div *ngIf="containter === 'Outbox'">

@@ -90,7 +90,6 @@ namespace API.Controllers
             }                
 
             return BadRequest("Problem adding photo");
-
         }
 
         [HttpPut("set-main-photo/{photoId}")]

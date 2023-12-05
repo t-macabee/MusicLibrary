@@ -26,10 +26,11 @@ export class ArtistDetailComponent implements OnInit {
               ) {}
 
   ngOnInit() {
-    this.sub = this.router.params.subscribe((res:any) => {
+    this.sub = this.router.params.subscribe((res: any) => {
       this.id = +res["id"];
       this.loadArtist();
-    })
+    });
+
   }
 
   loadArtist() {
@@ -37,7 +38,7 @@ export class ArtistDetailComponent implements OnInit {
       this.artist = results;
     }, error => {
       console.log(error);
-    })
+    });
   }
 
   onTabActivated(data: TabDirective) {

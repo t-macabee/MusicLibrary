@@ -36,6 +36,7 @@ namespace API.Services
         public async Task<Artist> GetArtistByIdAsync(int id)
         {
             return await context.Artists
+                .Include(x => x.Photos)
                 .Include(x => x.Genre)
                 .Include(x => x.Albums)
                     .ThenInclude(a => a.Tracks) 
@@ -45,6 +46,7 @@ namespace API.Services
         public async Task<Artist> GetArtistByNameAsync(string name)
         {
             return await context.Artists
+                .Include(x => x.Photos)
                 .Include(x => x.Genre)
                 .Include(x => x.Albums)
                     .ThenInclude(y => y.Tracks)
@@ -54,6 +56,7 @@ namespace API.Services
         public async Task<IEnumerable<Artist>> GetArtistsByGenre(string name)
         {
             return await context.Artists
+                .Include(x => x.Photos)
                 .Include(x => x.Genre) 
                 .Include(x => x.Albums)
                 .ThenInclude(y => y.Tracks)
@@ -64,6 +67,7 @@ namespace API.Services
         public async Task<IEnumerable<Artist>> GetAllArtistsAsync()
         {
             return await context.Artists
+                .Include(x => x.Photos)
                 .Include(x => x.Albums)
                 .ThenInclude(y => y.Tracks)
                 .Include(x => x.Genre)

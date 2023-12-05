@@ -46,7 +46,12 @@ export class ArtistListComponent {
   }
 
   createTemplateArtist() {
-    this.artistService.createTemplateArtist().subscribe(response => {
+    let sending: any = {
+      artistName: "Default name",
+      artistDescription: "Default description",
+      genreId: 1
+    };
+    this.artistService.createTemplateArtist(sending).subscribe(response => {
       if(response) {
         this.toastr.success("New teplate artist added!");
         this.getAllArtists();

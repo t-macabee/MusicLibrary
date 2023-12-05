@@ -49,6 +49,48 @@ namespace API.Data.Migrations
                     b.HasIndex("ArtistId");
 
                     b.ToTable("Albums");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            AlbumName = "Won't He Do It",
+                            ArtistId = 1,
+                            TotalLength = 49.189999999999998,
+                            Year = "2023"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            AlbumName = "Talking Book",
+                            ArtistId = 2,
+                            TotalLength = 43.289999999999999,
+                            Year = "1972"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            AlbumName = "Blue Train",
+                            ArtistId = 3,
+                            TotalLength = 42.140000000000001,
+                            Year = "1958"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            AlbumName = "Hellfire",
+                            ArtistId = 4,
+                            TotalLength = 38.539999999999999,
+                            Year = "2022"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            AlbumName = "Syro",
+                            ArtistId = 5,
+                            TotalLength = 64.310000000000002,
+                            Year = "2014"
+                        });
                 });
 
             modelBuilder.Entity("API.Entities.AppUser", b =>
@@ -120,6 +162,72 @@ namespace API.Data.Migrations
                     b.HasIndex("GenreId");
 
                     b.ToTable("Artists");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ArtistDescription = "Description 1",
+                            ArtistName = "Conway the Machine",
+                            GenreId = 2
+                        },
+                        new
+                        {
+                            Id = 2,
+                            ArtistDescription = "Description 2",
+                            ArtistName = "Stevie Wonder",
+                            GenreId = 3
+                        },
+                        new
+                        {
+                            Id = 3,
+                            ArtistDescription = "Description 3",
+                            ArtistName = "John Coltrane",
+                            GenreId = 4
+                        },
+                        new
+                        {
+                            Id = 4,
+                            ArtistDescription = "Description 4",
+                            ArtistName = "Black Midi",
+                            GenreId = 5
+                        },
+                        new
+                        {
+                            Id = 5,
+                            ArtistDescription = "Description 5",
+                            ArtistName = "Aphex Twin",
+                            GenreId = 6
+                        });
+                });
+
+            modelBuilder.Entity("API.Entities.ArtistPhoto", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("ArtistId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsMain")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("PublicId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Url")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ArtistId");
+
+                    b.ToTable("ArtistPhoto");
                 });
 
             modelBuilder.Entity("API.Entities.Connection", b =>
@@ -156,6 +264,38 @@ namespace API.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Genres");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            GenreName = "Default genre"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            GenreName = "Hip-Hop"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            GenreName = "Soul"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            GenreName = "Jazz"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            GenreName = "Experimental Rock"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            GenreName = "IDM"
+                        });
                 });
 
             modelBuilder.Entity("API.Entities.Group", b =>
@@ -302,7 +442,7 @@ namespace API.Data.Migrations
                     b.Property<int>("AlbumId")
                         .HasColumnType("int");
 
-                    b.Property<double>("TrackLenght")
+                    b.Property<double>("TrackLength")
                         .HasColumnType("float");
 
                     b.Property<string>("TrackName")
@@ -314,6 +454,78 @@ namespace API.Data.Migrations
                     b.HasIndex("AlbumId");
 
                     b.ToTable("Tracks");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            AlbumId = 1,
+                            TrackLength = 2.2799999999999998,
+                            TrackName = "Quarters"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            AlbumId = 1,
+                            TrackLength = 2.25,
+                            TrackName = "Monogram"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            AlbumId = 2,
+                            TrackLength = 3.3500000000000001,
+                            TrackName = "Big Brother"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            AlbumId = 2,
+                            TrackLength = 3.2799999999999998,
+                            TrackName = "Blame It on the Sun"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            AlbumId = 3,
+                            TrackLength = 7.1399999999999997,
+                            TrackName = "Locomotion"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            AlbumId = 3,
+                            TrackLength = 7.0,
+                            TrackName = "Lazy Bird"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            AlbumId = 4,
+                            TrackLength = 1.24,
+                            TrackName = "Hellfire"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            AlbumId = 4,
+                            TrackLength = 5.46,
+                            TrackName = "Still"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            AlbumId = 5,
+                            TrackLength = 3.1099999999999999,
+                            TrackName = "180db_"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            AlbumId = 5,
+                            TrackLength = 5.0300000000000002,
+                            TrackName = "produk 29"
+                        });
                 });
 
             modelBuilder.Entity("API.Entities.Album", b =>
@@ -336,6 +548,17 @@ namespace API.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("Genre");
+                });
+
+            modelBuilder.Entity("API.Entities.ArtistPhoto", b =>
+                {
+                    b.HasOne("API.Entities.Artist", "Artist")
+                        .WithMany("Photos")
+                        .HasForeignKey("ArtistId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Artist");
                 });
 
             modelBuilder.Entity("API.Entities.Connection", b =>
@@ -435,6 +658,8 @@ namespace API.Data.Migrations
             modelBuilder.Entity("API.Entities.Artist", b =>
                 {
                     b.Navigation("Albums");
+
+                    b.Navigation("Photos");
                 });
 
             modelBuilder.Entity("API.Entities.Genre", b =>

@@ -1,17 +1,12 @@
-import {Component, HostListener, OnInit, ViewChild} from '@angular/core';
+import {ChangeDetectorRef, Component, HostListener, OnInit, ViewChild} from '@angular/core';
 import {NgForm} from "@angular/forms";
-import {Member} from "../../_models/member";
-import {User} from "../../_models/user";
-import {AccountService} from "../../_services/account.service";
-import {MembersService} from "../../_services/members.service";
 import {ToastrService} from "ngx-toastr";
-import {map, of, take} from "rxjs";
 import {Artist} from "../../_models/artist";
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../environments/environment";
 import {ActivatedRoute} from "@angular/router";
 import {ArtistService} from "../../_services/artist.service";
-
+import {Genre} from "../../_models/genre";
 
 @Component({
   selector: 'app-artist-edit',
@@ -30,31 +25,54 @@ export class ArtistEditComponent implements OnInit {
   id: number;
   sub: any;
 
-  constructor(private http: HttpClient, private router: ActivatedRoute, private toastr: ToastrService, private artistService: ArtistService) {
+  genres: any;
+  selectedGenreId: number;
+
+  constructor(private http: HttpClient,
+              private router: ActivatedRoute,
+              private toastr: ToastrService,
+              private artistService: ArtistService,
+              private cdr: ChangeDetectorRef) {
 
   }
 
   ngOnInit() {
-    this.sub = this.router.params.subscribe((res:any) => {
+    this.sub = this.router.params.subscribe((res: any) => {
       this.id = +res["id"];
-    })
+    });
+
     this.loadArtist();
   }
 
   loadArtist() {
-    this.artistService.getArtist(this.id).subscribe(response => {
-      this.artist = response;
-    })
+    this.artistService.getGenres().subscribe(genres => {
+      this.genres = genres;
+    });
+
+    this.artistService.getArtist(this.id).subscribe(
+      response => {
+        this.artist = response;
+        this.selectedGenreId = this.artist.genre?.id;
+      },
+      error => {
+        console.error("Error loading artist:", error);
+      }
+    );
   }
 
   updateArtist(artistId: number, artist: Artist) {
+    artist.artistName = this.artist.artistName;
+    artist.artistDescription = this.artist.artistDescription;
+    artist.genreId = this.selectedGenreId;
+
     this.artistService.updateArtist(artistId, artist).subscribe(
       () => {
-        this.toastr.success("Profile updated successfully");
-        this.editForm.reset(this.artist);
+        this.toastr.success('Profile updated successfully');
+        this.loadArtist();
+        this.editForm.resetForm();
       },
       error => {
-        console.error("Error updating artist:", error);
+        console.error('Error updating artist:', error);
         this.toastr.error('Error updating artist');
       }
     );

@@ -2,14 +2,13 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace API.Data
 {
-    public class DataContext : DbContext
+    public partial class DataContext : DbContext
     {
         public DataContext(DbContextOptions options) : base(options)
         {
@@ -28,11 +27,8 @@ namespace API.Data
         public DbSet<Group> Groups { get; set; }
         public DbSet<Connection> Connections { get; set; }
 
-
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<Message>()
                 .HasOne(u => u.Recipient)
@@ -66,7 +62,11 @@ namespace API.Data
                 .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.ApplyUtcDateTimeConverter();
+
+            OnModelCreatingPartial(modelBuilder);
         }
+
+        partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
     }
 
     public static class UtcDateAnnotation

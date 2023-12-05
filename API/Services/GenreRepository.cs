@@ -33,7 +33,8 @@ namespace API.Services
             var result = await context.Genres.ToListAsync();
             return mapper.Map<IEnumerable<GenreDto>>(result);
         }
-        public async Task<Genre> GetGenreAsyncByIdAsync(int id)
+
+        public async Task<Genre> GetGenreByIdAsync(int id)
         {
             return await context.Genres.FindAsync(id);            
         }             

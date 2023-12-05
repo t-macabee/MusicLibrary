@@ -34,7 +34,7 @@ namespace API.Controllers
         [HttpGet("id")]
         public async Task<ActionResult<GenreDto>> GetGenreById(int id)
         {
-            var result = await unitOfWork.GenreRepository.GetGenreAsyncByIdAsync(id);
+            var result = await unitOfWork.GenreRepository.GetGenreByIdAsync(id);
 
             return Ok(result);
         }
@@ -66,7 +66,7 @@ namespace API.Controllers
         [HttpDelete]
         public async Task<ActionResult> DeleteGenre(int id)
         {
-            var genre = await unitOfWork.GenreRepository.GetGenreAsyncByIdAsync(id);
+            var genre = await unitOfWork.GenreRepository.GetGenreByIdAsync(id);
             
             if(genre == null)
                 return BadRequest("Genre doesn't exist");

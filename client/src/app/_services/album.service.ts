@@ -2,8 +2,6 @@ import { Injectable } from '@angular/core';
 import {environment} from "../../environments/environment";
 import {HttpClient} from "@angular/common/http";
 import {Album} from "../_models/album";
-import {BehaviorSubject, catchError, tap} from "rxjs";
-import {AlbumUpdate} from "../_models/albumUpdate";
 
 @Injectable({
   providedIn: 'root'
@@ -38,7 +36,7 @@ export class AlbumService {
     return this.http.delete(this.baseUrl + 'Album/' + artistId + '/' + albumId);
   }
 
-  updateAlbum(artistId: number, albumId: number, update: AlbumUpdate) {
+  updateAlbum(artistId: number, albumId: number, update: Album) {
     return this.http.put(this.baseUrl + 'Album/' + artistId + '/' + albumId, update);
   }
 

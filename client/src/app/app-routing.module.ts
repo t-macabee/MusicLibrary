@@ -18,6 +18,7 @@ import {ArtistListComponent} from "./artists/artist-list/artist-list.component";
 import {ArtistResolver} from "./_resolvers/artist.resolver";
 import {AlbumDetailComponent} from "./albums/album-detail/album-detail.component";
 import {AlbumTrackComponent} from "./tracks/album-track/album-track.component";
+import {TrackListComponent} from "./tracks/track-list/track-list.component";
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -35,10 +36,10 @@ const routes: Routes = [
       {path: 'artist-detail/:id', component: ArtistDetailComponent, resolve: {artist: ArtistResolver}},
       {path: 'artist-edit/:id', component: ArtistEditComponent},
       {path: 'albums', component: AlbumDetailComponent},
-      {path: 'album-tracks/:id', component: AlbumTrackComponent}
+      {path: 'album-tracks/:id', component: AlbumTrackComponent},
+      {path: 'track-list', component: TrackListComponent}
     ]
   },
-  {path: 'errors', component: TestErrorsComponent },
   {path: 'not-found', component: NotFoundComponent },
   {path: 'server-error', component: ServerErrorsComponent},
   {path: '**', component: NotFoundComponent, pathMatch: "full"}

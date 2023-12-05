@@ -20,6 +20,8 @@ namespace API.Helpers
 
             CreateMap<Photo, PhotoDto>();
 
+            CreateMap<ArtistPhoto, PhotoDto>();
+
             CreateMap<MemberUpsertDto, AppUser>();
             CreateMap<RegisterDto, AppUser>();
 
@@ -27,6 +29,8 @@ namespace API.Helpers
             CreateMap<GenreUpsertDto, Genre>();
 
             CreateMap<Artist, ArtistDto>()
+                .ForMember(dest => dest.PhotoUrl, opt => opt.MapFrom(src =>
+                    src.Photos.FirstOrDefault(x => x.IsMain).Url))
                 .ForMember(dest => dest.Albums, opt => opt.MapFrom(src => src.Albums))
                 .ForMember(dest => dest.Genre, opt => opt.MapFrom(src => src.Genre));
 

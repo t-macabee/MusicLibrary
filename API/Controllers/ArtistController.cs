@@ -16,12 +16,14 @@ namespace API.Controllers
         private DataContext context;
         private IMapper mapper;
         private IUnitOfWork unitOfWork;
+        private IPhotoService photoService;
 
-        public ArtistController(DataContext context, IMapper mapper, IUnitOfWork unitOfWork)
+        public ArtistController(DataContext context, IMapper mapper, IUnitOfWork unitOfWork, IPhotoService photoService)
         {
             this.context = context;
             this.mapper = mapper;
             this.unitOfWork = unitOfWork;
+            this.photoService = photoService;
         }
 
         [HttpGet]
@@ -31,7 +33,7 @@ namespace API.Controllers
             return Ok(mapper.Map<IEnumerable<ArtistDto>>(result));
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id}", Name = "GetArtist")]
         public async Task<ActionResult<ArtistDto>> GetArtistById(int id)
         {
             var result = await unitOfWork.ArtistRepository.GetArtistByIdAsync(id);
@@ -82,6 +84,8 @@ namespace API.Controllers
 
             mapper.Map(update, artist);
 
+            artist.GenreId = update.GenreId;
+
             unitOfWork.ArtistRepository.UpdateArtist(artist);
 
             if (await unitOfWork.Complete())
@@ -89,6 +93,7 @@ namespace API.Controllers
 
             return BadRequest("Failed to update artist");
         }
+
 
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteArtist(int id)
@@ -110,6 +115,103 @@ namespace API.Controllers
         {
             return await context.Artists.AnyAsync(x => x.ArtistName.ToLower() == artist.ToLower());
         }
-      
+
+        //-----------------------------------------------------------------------------------------
+
+        [HttpPost("{artistId}/photos")]
+        public async Task<ActionResult<PhotoDto>> AddPhoto(int artistId, IFormFile file)
+        {
+            var artist = await unitOfWork.ArtistRepository.GetArtistByIdAsync(artistId);
+
+            if (artist == null)
+                return NotFound("Artist not found");
+
+            var result = await photoService.AddPhotoAsync(file);
+
+            if (result.Error != null)
+                return BadRequest(result.Error.Message);
+
+            var photo = new ArtistPhoto
+            {
+                Url = result.SecureUrl.AbsoluteUri,
+                PublicId = result.PublicId
+            };
+
+            if (artist.Photos == null || artist.Photos.Count == 0)
+            {
+                photo.IsMain = true;
+            }
+
+            artist.Photos ??= new List<ArtistPhoto>();
+            artist.Photos.Add(photo);
+
+            if (await unitOfWork.Complete())
+            {
+                return CreatedAtRoute("GetArtist", new { id = artist.Id }, mapper.Map<PhotoDto>(photo));
+            }
+
+            return BadRequest("Problem adding photo");
+        }
+
+
+        [HttpPut("{artistId}/photos/set-main/{photoId}")]
+        public async Task<ActionResult> SetMainPhoto(int artistId, int photoId)
+        {
+            var artist = await unitOfWork.ArtistRepository.GetArtistByIdAsync(artistId);
+
+            if (artist == null)
+                return NotFound("Artist not found");
+
+            var photo = artist.Photos.FirstOrDefault(x => x.Id == photoId);
+
+            if (photo == null)
+                return NotFound("Photo not found");
+
+            if (photo.IsMain)
+                return BadRequest("This is already the main photo");
+
+            var currentMain = artist.Photos.FirstOrDefault(x => x.IsMain);
+
+            if (currentMain != null)
+                currentMain.IsMain = false;
+
+            photo.IsMain = true;
+
+            if (await unitOfWork.Complete())
+                return NoContent();
+
+            return BadRequest("Failed to set main photo");
+        }
+
+        [HttpDelete("{artistId}/photos/{photoId}")]
+        public async Task<ActionResult> DeletePhoto(int artistId, int photoId)
+        {
+            var artist = await unitOfWork.ArtistRepository.GetArtistByIdAsync(artistId);
+
+            if (artist == null)
+                return NotFound("Artist not found");
+
+            var photo = artist.Photos.FirstOrDefault(x => x.Id == photoId);
+
+            if (photo == null)
+                return NotFound("Photo not found");
+
+            if (photo.IsMain)
+                return BadRequest("You cannot delete the main photo");
+
+            if (photo.PublicId != null)
+            {
+                var result = await photoService.DeletePhotoAsync(photo.PublicId);
+                if (result.Error != null)
+                    return BadRequest(result.Error.Message);
+            }
+
+            artist.Photos.Remove(photo);
+
+            if (await unitOfWork.Complete())
+                return Ok();
+
+            return BadRequest("Failed to delete the photo");
+        }
     }
 }

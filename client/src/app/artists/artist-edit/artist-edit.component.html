@@ -26,26 +26,36 @@
   <div class="col-8">
     <tabset class="member-tabset">
       <tab heading="About {{artist.artistName}}">
-        <form #editForm="ngForm" id="editForm" (ngSubmit)="updateArtist(artist.id ,artist)">
+        <form #editForm="ngForm" id="editForm" (ngSubmit)="updateArtist(artist.id, artist)">
           <input type="hidden" name="artistID" [(ngModel)]="artist.id">
-          <br>
-          <h4><strong>Artist name</strong></h4><br>
-          <textarea
-            class="form-control"
-            [(ngModel)]="artist.artistName"
-            name="artistName"
-            ></textarea>
+          <div class="row">
+            <div class="col-md-6 h-100">
+              <h4><strong>Artist name</strong></h4>
+              <textarea
+                class="form-control h-100"
+                [(ngModel)]="artist.artistName"
+                name="artistName"
+              ></textarea>
+            </div>
+            <div class="col-md-6 h-100">
+              <h4><strong>Genre</strong></h4>
+              <select class="form-control h-100" [(ngModel)]="selectedGenreId" name="genreId">
+                <option *ngFor="let genre of genres" [value]="genre.id">{{ genre.genreName }}</option>
+              </select>
+            </div>
+          </div>
           <br><br>
           <h4><strong>About artist</strong></h4><br>
           <textarea
             class="form-control"
             [(ngModel)]="artist.artistDescription"
             name="artistDescription"
-            rows="7"></textarea>
+            rows="7"
+          ></textarea>
         </form>
       </tab>
       <tab heading="Edit photos">
-        edit photos will go here
+        <app-artist-photo-editor *ngIf="artist" [artist]="artist"></app-artist-photo-editor>
       </tab>
     </tabset>
   </div>

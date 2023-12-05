@@ -10,5 +10,6 @@
         public Genre Genre { get; set; }
 
         public ICollection<Album> Albums { get; set; }
+        public ICollection<ArtistPhoto> Photos { get; set; }
     }
 }
