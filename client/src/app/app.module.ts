@@ -37,6 +37,7 @@ import { TrackListComponent } from './tracks/track-list/track-list.component';
 import { AlbumTrackComponent } from './tracks/album-track/album-track.component';
 import { TrackEditComponent } from './tracks/track-edit/track-edit.component';
 import { ArtistPhotoEditorComponent } from './artists/artist-photo-editor/artist-photo-editor.component';
+import { BackgroundComponent } from './background/background.component';
 
 @NgModule({
   declarations: [
@@ -66,7 +67,8 @@ import { ArtistPhotoEditorComponent } from './artists/artist-photo-editor/artist
     TrackListComponent,
     AlbumTrackComponent,
     TrackEditComponent,
-    ArtistPhotoEditorComponent
+    ArtistPhotoEditorComponent,
+    BackgroundComponent
   ],
     imports: [
         BrowserModule,

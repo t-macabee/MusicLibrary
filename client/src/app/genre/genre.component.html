@@ -1,4 +1,4 @@
-<table class="table table-hover" style="width: 50%;">
+<table class="table table-hover mt-3" style="width: 50%;">
   <thead>
   <tr>
     <th>#</th>
@@ -6,7 +6,7 @@
     <th></th>
   </tr>
   </thead>
-  <tbody class="table-success">
+  <tbody class="table-secondary">
   <tr *ngFor="let x of genres">
     <th>{{x.id}}</th>
     <td class="float" style="text-align: center">{{x.genreName}}</td>
@@ -17,3 +17,5 @@
 
 <input [(ngModel)]="txtGenre" type="text" style="width: 30%; border: 3px solid black" class="me-5">
 <button (click)="createNewGenre()" class="btn btn-success">Create new genre</button>
+
+
