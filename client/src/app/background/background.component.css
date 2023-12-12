@@ -7,9 +7,9 @@
 body {
   font-family: 'Dosis', sans-serif;
   font-weight: 400;
-  color: #fcf7f7;
+  color: #114363;
   overflow-x: hidden;
-  background-color: #154a6d;
+  background-color: #114363;
 }
 
 .background {
@@ -21,10 +21,10 @@ body {
   z-index: -1;
 }
 
-.common {
-  padding: 130px 0;
-  min-height: 100vh;
+.background-shapes {
   position: relative;
+  height: 100vh;
+  overflow: hidden;
 }
 
 .shape img {

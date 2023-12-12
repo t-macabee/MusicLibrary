@@ -1,36 +1,23 @@
 <app-album-edit *ngIf="showEditForm" [album]="selectedAlbum" (albumUpdated)="updateAlbum($event)" (closeEditForm)="closeEditForm()"></app-album-edit>
-<table class="table table-hover" style="width: 100%;" *ngIf="albums.length > 0">
-  <thead>
-  <tr>
-    <th style="text-align: center">Name</th>
-    <th style="text-align: center">Artist</th>
-    <th style="text-align: center">Year</th>
-    <th style="text-align: center">Length</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-  </thead>
-  <tbody class="table-success">
-  <tr *ngFor="let x of albums">
-    <td class="float" style="text-align: center">{{ x.albumName }}</td>
-    <td class="float" style="text-align: center">{{ x.artistName }}</td>
-    <td class="float" style="text-align: center">{{ x.year }}</td>
-    <td class="float" style="text-align: center">{{ x.totalLength }}</td>
-    <td>
-      <button class="btn btn-secondary float-end" [routerLink]="['/album-tracks', x.id]">Tracks</button>
-    </td>
-    <td>
-      <button class="btn btn-secondary float-end" (click)="editAlbum(x)">Edit Album</button>
-    </td>
-    <td>
-      <button class="btn btn-danger float-end" (click)="deleteAlbum(x?.artistId, x.id)">Delete Album</button>
-    </td>
-  </tr>
-  </tbody>
-</table>
-<br>
-<button class="btn btn-secondary" (click)="createTemplateAlbum()">Create new template album</button>
+<div class="container text-center" *ngIf="albums.length > 0">
+  <div class="track-list">
+    <div class="track-header d-flex justify-content-between">
+      <div class="align-items-center">Name</div>
+      <div class="align-items-center">Year</div>
+      <div class="align-items-center">Length (min.)</div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
 
-
-
+    <div *ngFor="let x of albums" class="track-item d-flex justify-content-between">
+      <div class="align-items-center">{{x.albumName}}</div>
+      <div class="align-items-center">{{x.year}}</div>
+      <div class="align-items-center">{{x.totalLength}}</div>
+      <div class="align-items-center"><button class="btn" [routerLink]="['/album-tracks', x.id]"><i class="fa fa-music" aria-hidden="true"></i></button></div>
+      <div class="align-items-center"><button class="btn" (click)="editAlbum(x)"><i class="fa fa-pencil" aria-hidden="true"></i></button></div>
+      <div class="align-items-center"><button class="btn" (click)="deleteAlbum(x?.artistId, x.id)"><i class="fa fa-trash" aria-hidden="true"></i></button></div>
+    </div>
+  </div>
+</div><br>
+<button class="btn btn-secondary" (click)="createTemplateAlbum()">Create new album</button>

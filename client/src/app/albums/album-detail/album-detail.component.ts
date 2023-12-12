@@ -121,18 +121,14 @@ export class AlbumDetailComponent implements OnInit {
         if (index !== -1) {
           this.albums[index] = response;
         }
-
         if (this.artist.id === response.artistId) {
           this.artist.artistName = response.artistName;
         }
-
         this.toastr.success("Album updated!");
-
         this.showEditForm = false;
       },
       (error) => {
         console.log('Error updating an album: ', error);
-
         this.toastr.error("Error updating album");
       }
     );

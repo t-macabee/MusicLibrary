@@ -8,3 +8,21 @@ img {
   display: inline;
 }
 
+a.nav-link {
+  color: #ffffff;
+}
+
+a.navbar-brand.me-5 {
+  color: #ffffff;
+}
+
+.btn{
+  font-size: 18px;
+  color: #fff;
+  text-decoration: none;
+  padding: 5px 10px;
+  border:  1px solid #ffffff40;
+}
+.btn:hover{
+  background-color: #ffffff40;
+}

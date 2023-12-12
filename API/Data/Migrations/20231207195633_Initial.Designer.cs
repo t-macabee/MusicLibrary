@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20231205111719_Initial")]
+    [Migration("20231207195633_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -298,6 +298,51 @@ namespace API.Data.Migrations
                         {
                             Id = 6,
                             GenreName = "IDM"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            GenreName = "Pop"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            GenreName = "Country"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            GenreName = "Blues"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            GenreName = "Reggae"
+                        },
+                        new
+                        {
+                            Id = 11,
+                            GenreName = "Metal"
+                        },
+                        new
+                        {
+                            Id = 12,
+                            GenreName = "Funk"
+                        },
+                        new
+                        {
+                            Id = 13,
+                            GenreName = "Indie Rock"
+                        },
+                        new
+                        {
+                            Id = 14,
+                            GenreName = "Techno"
+                        },
+                        new
+                        {
+                            Id = 15,
+                            GenreName = "Gospel"
                         });
                 });
 
@@ -399,9 +444,6 @@ namespace API.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<DateTime>("DateCreated")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("DateModified")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("PlaylistDescription")

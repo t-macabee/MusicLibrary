@@ -1,0 +1,48 @@
+h4 {
+  color: #ffffff;
+}
+
+.btn{
+  font-size: 15px;
+  color: #fff;
+  text-decoration: none;
+  padding: 10px 15px;
+  border:  1px solid #ffffff40;
+}
+.btn:hover{
+  background-color: #ffffff40;
+}
+
+.container {
+  background-color: rgba(9, 50, 79, 0.8);
+  color: #fff;
+  padding: 0;
+}
+
+.track-list {
+  margin-top: 20px;
+}
+
+.track-header {
+  border-bottom: 2px solid #ffffff;
+}
+
+.track-header, .track-item {
+  display: flex;
+  justify-content: space-between;
+  background-color: rgba(9, 50, 79, 0.8);
+  color: #fff;
+  padding: 10px;
+  margin-bottom: 5px;
+  border-radius: 5px;
+}
+
+.track-header > div, .track-item > div {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.track-item:hover {
+  background-color: #ffffff40;
+}

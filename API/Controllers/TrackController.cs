@@ -32,14 +32,14 @@ namespace API.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<TrackDto>> GetTrackById(int id)
         {
-            var result = await unitOfWork.TrackRepository.GetTrackByIdAsync(id);
+            var result = await unitOfWork.TrackRepository.GetTrackById(id);
             return Ok(mapper.Map<TrackDto>(result));
         }
 
         [HttpGet("trackName")]
         public async Task<ActionResult<TrackDto>> GetTrackByName(string name)
         {
-            var result = await unitOfWork.TrackRepository.GetTrackByNameAsync(name);
+            var result = await unitOfWork.TrackRepository.GetTrackByName(name);
             return Ok(mapper.Map<TrackDto>(result));
         }
 
@@ -60,7 +60,7 @@ namespace API.Controllers
         [HttpPost("{albumId}/tracks")]
         public async Task<ActionResult> AddTrackToAlbum(int albumId, TrackUpsertDto trackDto)
         {
-            var album = await unitOfWork.AlbumRepository.GetAlbumByIdAsync(albumId);
+            var album = await unitOfWork.AlbumRepository.GetAlbumById(albumId);
 
             if (album == null)
             {
@@ -92,7 +92,7 @@ namespace API.Controllers
         [HttpPut("tracks/{trackId}")]
         public async Task<ActionResult> UpdateTrack(int trackId, TrackUpsertDto updatedTrackDto)
         {
-            var track = await unitOfWork.TrackRepository.GetTrackByIdAsync(trackId);
+            var track = await unitOfWork.TrackRepository.GetTrackById(trackId);
 
             if (track == null)
             {
@@ -114,7 +114,7 @@ namespace API.Controllers
         [HttpDelete("tracks/{trackId}")]
         public async Task<ActionResult> DeleteTrack(int trackId)
         {
-            var track = await unitOfWork.TrackRepository.GetTrackByIdAsync(trackId);
+            var track = await unitOfWork.TrackRepository.GetTrackById(trackId);
 
             if (track == null)
             {

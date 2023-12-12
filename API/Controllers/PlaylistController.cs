@@ -37,23 +37,39 @@ namespace API.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<PlaylistDto>> GetPlaylistByIdAsync(int id)
+        public async Task<ActionResult<PlaylistDto>> GetPlaylistById(int id)
         {
-            var playlist = await unitOfWork.PlaylistRepository.GetPlaylistByIdAsync(id);
+            var playlist = await unitOfWork.PlaylistRepository.GetPlaylistById(id);
             return Ok(mapper.Map<PlaylistDto>(playlist));
         }
 
         [HttpGet("playlistName")]
         public async Task<ActionResult<PlaylistDto>> GetPlaylistByNameAsync(string name)
         {
-            var result = await unitOfWork.PlaylistRepository.GetPlaylistByNameAsync(name);
+            var result = await unitOfWork.PlaylistRepository.GetPlaylistByName(name);
             return Ok(mapper.Map<PlaylistDto>(result));
+        }
+
+        [HttpGet("{userId}/playlists")]
+        public async Task<ActionResult<IEnumerable<PlaylistDto>>> GetPlaylistsByUser(int userId)
+        {
+            var user = await unitOfWork.UserRepository.GetUserById(userId);
+
+            if (user == null)
+            {
+                return NotFound("User not found");
+            }
+
+            var playlists = await unitOfWork.PlaylistRepository.GetAllPlaylistsByUser(userId);
+            var playlistDtos = mapper.Map<IEnumerable<PlaylistDto>>(playlists);
+
+            return Ok(playlistDtos);
         }
 
         [HttpPost]
         public async Task<ActionResult> CreateNewPlaylist(int userId, PlaylistUpsertDto playlistDto)
         {
-            var user = await unitOfWork.UserRepository.GetUserByIdAsync(userId);
+            var user = await unitOfWork.UserRepository.GetUserById(userId);
 
             if (user == null)
                 return BadRequest("User does not exist!");
@@ -80,33 +96,29 @@ namespace API.Controllers
         [HttpPut("{playlistId}")]
         public async Task<ActionResult> UpdatePlaylist(int playlistId, PlaylistUpsertDto playlistDto)
         {
-            var playlist = await unitOfWork.PlaylistRepository.GetPlaylistByIdAsync(playlistId);
+            var playlist = await unitOfWork.PlaylistRepository.GetPlaylistById(playlistId);
 
             if (playlist == null)
             {
                 return NotFound("Playlist not found");
             }
-           
-            playlist.PlaylistName = playlistDto.PlaylistName;
-            playlist.PlaylistDescription = playlistDto.PlaylistDescription;
 
-            if (playlistDto.DateModified.HasValue)
-            {
-                playlist.DateModified = playlistDto.DateModified.Value;
-            }
+            mapper.Map(playlistDto, playlist);
+
+            unitOfWork.PlaylistRepository.UpdatePlaylist(playlist);
             
             if (await unitOfWork.Complete())
             {
-                return Ok("Playlist updated successfully");
+                return Ok(mapper.Map<PlaylistDto>(playlist));
             }
 
             return BadRequest("Failed to update the playlist");
         }
 
         [HttpDelete("{userId}/playlists/{playlistId}")]
-        public async Task<ActionResult> RemovePlaylistFromUser(int userId, int playlistId)
+        public async Task<ActionResult> DeletePlaylist(int userId, int playlistId)
         {
-            var user = await unitOfWork.UserRepository.GetUserByIdAsync(userId);
+            var user = await unitOfWork.UserRepository.GetUserById(userId);
 
             if (user == null)
             {
@@ -124,7 +136,7 @@ namespace API.Controllers
 
             if (await unitOfWork.Complete())
             {
-                return Ok("Playlist removed from the user.");
+                return Ok(new { message = "Playlist removed from the user." });
             }
 
             return BadRequest("Failed to remove playlist from the user.");
@@ -133,8 +145,8 @@ namespace API.Controllers
         [HttpPost("{playlistId}/tracks/{trackId}")]
         public async Task<ActionResult> AddTrackToPlaylist(int playlistId, int trackId)
         {
-            var playlist = await unitOfWork.PlaylistRepository.GetPlaylistByIdAsync(playlistId);
-            var track = await unitOfWork.TrackRepository.GetTrackByIdAsync(trackId);
+            var playlist = await unitOfWork.PlaylistRepository.GetPlaylistById(playlistId);
+            var track = await unitOfWork.TrackRepository.GetTrackById(trackId);
 
             if (playlist == null || track == null)
             {
@@ -164,8 +176,8 @@ namespace API.Controllers
         [HttpDelete("{playlistId}/tracks/{trackId}")]
         public async Task<ActionResult> RemoveTrackFromPlaylist(int playlistId, int trackId)
         {
-            var playlist = await unitOfWork.PlaylistRepository.GetPlaylistByIdAsync(playlistId);
-            var track = await unitOfWork.TrackRepository.GetTrackByIdAsync(trackId);
+            var playlist = await unitOfWork.PlaylistRepository.GetPlaylistById(playlistId);
+            var track = await unitOfWork.TrackRepository.GetTrackById(trackId);
 
             if (playlist == null || track == null)
             {

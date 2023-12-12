@@ -1,0 +1,69 @@
+.container {
+  display: flex;
+  background-color: rgba(9, 50, 79, 0.6);
+  color: #fff;
+  padding: 20px;
+}
+
+.left-column {
+  flex: 1;
+  padding: 10px;
+  border-right: 1px solid #ccc;
+  max-width: 300px;
+}
+
+.right-column {
+  flex: 3;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.playlist-item, .track-item {
+  padding: 8px;
+  cursor: pointer;
+  background-color: rgba(9, 50, 79, 0.6);
+  color: #fff;
+  margin-bottom: 5px;
+  border-radius: 5px;
+}
+
+.playlist-item:hover, .track-item:hover {
+  background-color: #ffffff40;
+}
+
+p {
+  color: white;
+  font-size: large;
+}
+
+div.playlist-item {
+  color: #ffffff;
+}
+
+.playlist-details {
+  margin-bottom: 40px;
+}
+
+.track-list {
+  margin-top: 20px;
+}
+
+.track-header, .track-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px;
+  background-color: rgba(9, 50, 79, 0.6);
+  color: #fff;
+  margin-bottom: 5px;
+  border-radius: 5px;
+}
+
+.track-header {
+  border-bottom: 2px solid #ffffff;
+}
+
+.track-header > div, .track-item > div {
+  flex: 1;
+  margin-right: 10px;
+}

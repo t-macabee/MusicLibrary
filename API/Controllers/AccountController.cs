@@ -73,6 +73,7 @@ namespace API.Controllers
 
             return new UserDto
             {
+                Id = user.Id,
                 Username = user.UserName,
                 Token = tokenService.CreateToken(user),
                 PhotoUrl = user.Photos.FirstOrDefault(x => x.IsMain)?.Url,

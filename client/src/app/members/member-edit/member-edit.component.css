@@ -14,6 +14,14 @@
   border-top: none;
 }
 
+div.card {
+  background-color: rgba(130, 130, 130, 0.4);
+}
+
+div.card-footer {
+  background-color: rgba(130, 130, 130, 0.4);
+}
+
 input {
   width: 35%;
   border-top: 2px black;
@@ -23,4 +31,60 @@ input {
 textarea {
   border-top: 2px black;
   border-left: 2px black;
+}
+
+h1 {
+  color: #ffffff;
+}
+
+strong, p {
+  color: #ffffff;
+}
+
+.btn{
+  font-size: 18px;
+  color: #fff;
+  text-decoration: none;
+  padding: 5px 10px;
+  border:  1px solid #ffffff40;
+}
+.btn:hover{
+  background-color: #ffffff40;
+}
+
+:host ::ng-deep span {
+  color: #ffffff;
+}
+
+:host ::ng-deep .member-tabset .nav-link.active span{
+  color: gray;
+}
+
+:host ::ng-deep h4 {
+  color: #ffffff;
+}
+
+:host ::ng-deep div.tab-content {
+  background-color: rgba(9, 50, 79, 0.4);
+}
+
+strong, p {
+  color: #ffffff;
+}
+
+:host ::ng-deep a.nav-link {
+  border: 1px solid white;
+}
+
+label {
+  color: #ffffff;
+}
+
+.col-8 .alert.alert-info {
+  background-color: rgba(9, 50, 79, 0.4);
+  color: #ffffff;
+}
+
+.col-8 .alert.alert-info strong {
+  color: #ffffff;
 }

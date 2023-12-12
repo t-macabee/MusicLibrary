@@ -29,21 +29,21 @@ namespace API.Controllers
         [HttpGet]
         public async Task<ActionResult<ArtistDto>> GetAllArtists()
         {
-            var result = await unitOfWork.ArtistRepository.GetAllArtistsAsync();
+            var result = await unitOfWork.ArtistRepository.GetAllArtists();
             return Ok(mapper.Map<IEnumerable<ArtistDto>>(result));
         }
 
         [HttpGet("{id}", Name = "GetArtist")]
         public async Task<ActionResult<ArtistDto>> GetArtistById(int id)
         {
-            var result = await unitOfWork.ArtistRepository.GetArtistByIdAsync(id);
+            var result = await unitOfWork.ArtistRepository.GetArtistById(id);
             return Ok(mapper.Map<ArtistDto>(result));
         }
 
         [HttpGet("name/artistName")]
         public async Task<ActionResult<ArtistDto>> GetArtistByName(string name)
         {
-            var result = await unitOfWork.ArtistRepository.GetArtistByNameAsync(name);
+            var result = await unitOfWork.ArtistRepository.GetArtistByName(name);
             return Ok(mapper.Map<ArtistDto>(result));
         }
 
@@ -75,7 +75,7 @@ namespace API.Controllers
         [HttpPut("{artistID}")]
         public async Task<ActionResult> UpdateArtist(int artistID, ArtistUpsertDto update)
         {
-            var artist = await unitOfWork.ArtistRepository.GetArtistByIdAsync(artistID);
+            var artist = await unitOfWork.ArtistRepository.GetArtistById(artistID);
 
             if (artist == null)
             {
@@ -98,7 +98,7 @@ namespace API.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteArtist(int id)
         {
-            var artist = await unitOfWork.ArtistRepository.GetArtistByIdAsync(id);            
+            var artist = await unitOfWork.ArtistRepository.GetArtistById(id);            
 
             if (artist == null)
                 return BadRequest("Artist doesn't exist");
@@ -121,12 +121,12 @@ namespace API.Controllers
         [HttpPost("{artistId}/photos")]
         public async Task<ActionResult<PhotoDto>> AddPhoto(int artistId, IFormFile file)
         {
-            var artist = await unitOfWork.ArtistRepository.GetArtistByIdAsync(artistId);
+            var artist = await unitOfWork.ArtistRepository.GetArtistById(artistId);
 
             if (artist == null)
                 return NotFound("Artist not found");
 
-            var result = await photoService.AddPhotoAsync(file);
+            var result = await photoService.AddPhoto(file);
 
             if (result.Error != null)
                 return BadRequest(result.Error.Message);
@@ -157,7 +157,7 @@ namespace API.Controllers
         [HttpPut("{artistId}/photos/set-main/{photoId}")]
         public async Task<ActionResult> SetMainPhoto(int artistId, int photoId)
         {
-            var artist = await unitOfWork.ArtistRepository.GetArtistByIdAsync(artistId);
+            var artist = await unitOfWork.ArtistRepository.GetArtistById(artistId);
 
             if (artist == null)
                 return NotFound("Artist not found");
@@ -186,7 +186,7 @@ namespace API.Controllers
         [HttpDelete("{artistId}/photos/{photoId}")]
         public async Task<ActionResult> DeletePhoto(int artistId, int photoId)
         {
-            var artist = await unitOfWork.ArtistRepository.GetArtistByIdAsync(artistId);
+            var artist = await unitOfWork.ArtistRepository.GetArtistById(artistId);
 
             if (artist == null)
                 return NotFound("Artist not found");
@@ -201,7 +201,7 @@ namespace API.Controllers
 
             if (photo.PublicId != null)
             {
-                var result = await photoService.DeletePhotoAsync(photo.PublicId);
+                var result = await photoService.DeletePhoto(photo.PublicId);
                 if (result.Error != null)
                     return BadRequest(result.Error.Message);
             }

@@ -2,18 +2,18 @@
   <div *ngIf="album" class="edit-form">
     <form>
       <div class="form-group">
-        <label for="albumName">Album name:</label>
+        <label for="albumName"><strong>Album name:</strong></label>
         <input type="text" class="form-control" id="albumName" [(ngModel)]="album.albumName" name="albumName">
       </div>
       <div class="form-group">
-        <label for="year">Year:</label>
+        <label for="year"><strong>Year:</strong></label>
         <input type="text" class="form-control" id="year" [(ngModel)]="album.year" name="year">
       </div>
       <div class="form-group">
-        <label for="totalLength">Total length:</label>
+        <label for="totalLength"><strong>Total length:</strong></label>
         <input type="number" class="form-control" id="totalLength" [(ngModel)]="album.totalLength" name="totalLength">
       </div>
-      <button type="button" class="btn btn-primary" (click)="updateAlbum()">Update Album</button>
+      <button type="button" class="btn btn-primary" (click)="updateAlbum()">Update album</button>
       <button type="button" class="btn btn-danger" (click)="closeForm()">Close</button>
     </form>
   </div>

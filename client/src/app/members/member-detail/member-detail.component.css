@@ -1,0 +1,58 @@
+.img-thumbnail {
+  margin: 25px;
+  width: 85%;
+  height: 85%;
+}
+
+.card-body {
+  padding: 0 25px;
+}
+
+.card-footer {
+  padding: 10px 15px;
+  background-color: #fff;
+  border-top: none;
+}
+
+div.card {
+  background-color: rgba(130, 130, 130, 0.4);
+}
+
+div.card-footer {
+  background-color: rgba(130, 130, 130, 0.4);
+}
+
+.btn{
+  font-size: 18px;
+  color: #fff;
+  text-decoration: none;
+  padding: 15px 20px;
+  border:  1px solid #ffffff40;
+}
+.btn:hover{
+  background-color: #ffffff40;
+}
+
+:host ::ng-deep span {
+  color: #ffffff;
+}
+
+:host ::ng-deep .member-tabset .nav-link.active span{
+  color: gray;
+}
+
+:host ::ng-deep h4 {
+  color: #ffffff;
+}
+
+:host ::ng-deep div.tab-content {
+  background-color: rgba(9, 50, 79, 0.4);
+}
+
+strong, p {
+  color: #ffffff;
+}
+
+:host ::ng-deep a.nav-link {
+  border: 1px solid white;
+}

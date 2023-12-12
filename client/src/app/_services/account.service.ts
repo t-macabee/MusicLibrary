@@ -23,11 +23,10 @@ export class AccountService {
 
   login(model: any) {
     return this.http.post(this.baseUrl + 'Account/login', model).pipe(
-      map((x: User) => {
-        const user = x;
+      map((response: User) => {
+        const user = response;
         if(user) {
           this.setCurrentUser(user);
-
         }
       })
     );

@@ -22,3 +22,27 @@
 ul {
   list-style: none;
 }
+
+.fa, span, p {
+  color: white;
+}
+
+.btn{
+  font-size: 18px;
+  color: #fff;
+  text-decoration: none;
+  padding: 10px 15px;
+  border:  2px solid white;
+}
+.btn:hover{
+  background-color: #ffffff40;
+}
+
+div.card-footer {
+  background-color: rgba(87,101,114);
+  border: 1px solid white;
+}
+
+div.card-body {
+  background-color: rgba(87,101,114);
+}

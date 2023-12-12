@@ -13,8 +13,18 @@ namespace API.Data
                 new Genre { Id = 3, GenreName = "Soul" },
                 new Genre { Id = 4, GenreName = "Jazz" },
                 new Genre { Id = 5, GenreName = "Experimental Rock" },
-                new Genre { Id = 6, GenreName = "IDM" }
+                new Genre { Id = 6, GenreName = "IDM" },
+                new Genre { Id = 7, GenreName = "Pop" },
+                new Genre { Id = 8, GenreName = "Country" },
+                new Genre { Id = 9, GenreName = "Blues" },
+                new Genre { Id = 10, GenreName = "Reggae" },
+                new Genre { Id = 11, GenreName = "Metal" },
+                new Genre { Id = 12, GenreName = "Funk" },
+                new Genre { Id = 13, GenreName = "Indie Rock" },
+                new Genre { Id = 14, GenreName = "Techno" },
+                new Genre { Id = 15, GenreName = "Gospel" }
             );
+
 
             modelBuilder.Entity<Artist>().HasData(
                 new Artist { Id = 1, ArtistName = "Conway the Machine", ArtistDescription = "Description 1", GenreId = 2 },

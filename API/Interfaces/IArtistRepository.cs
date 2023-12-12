@@ -9,9 +9,9 @@ namespace API.Interfaces
         void UpdateArtist(Artist artist);
         void DeleteArtist(Artist artist);
 
-        Task<IEnumerable<Artist>> GetAllArtistsAsync();
+        Task<IEnumerable<Artist>> GetAllArtists();
         Task<IEnumerable<Artist>>GetArtistsByGenre(string name);
-        Task<Artist> GetArtistByIdAsync(int id);
-        Task<Artist> GetArtistByNameAsync(string name);
+        Task<Artist> GetArtistById(int id);
+        Task<Artist> GetArtistByName(string name);
     }
 }

@@ -161,7 +161,6 @@ namespace API.Data.Migrations
                     PlaylistName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PlaylistDescription = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DateModified = table.Column<DateTime>(type: "datetime2", nullable: true),
                     AppUserId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -274,7 +273,16 @@ namespace API.Data.Migrations
                     { 3, "Soul" },
                     { 4, "Jazz" },
                     { 5, "Experimental Rock" },
-                    { 6, "IDM" }
+                    { 6, "IDM" },
+                    { 7, "Pop" },
+                    { 8, "Country" },
+                    { 9, "Blues" },
+                    { 10, "Reggae" },
+                    { 11, "Metal" },
+                    { 12, "Funk" },
+                    { 13, "Indie Rock" },
+                    { 14, "Techno" },
+                    { 15, "Gospel" }
                 });
 
             migrationBuilder.InsertData(

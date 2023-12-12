@@ -2,3 +2,57 @@
   max-height: 50px;
 }
 
+.message-buttons {
+  display: flex;
+  justify-content: space-between;
+  background-color: rgba(9, 50, 79, 0.8);
+  color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.message-buttons:not(:last-child) {
+  margin-bottom: 5px;
+  border-bottom: 2px solid #fff;
+}
+
+.message-item {
+  display: flex;
+  justify-content: space-between;
+  background-color: rgba(130, 130, 130, 0.9);
+  color: #fff;
+  padding: 10px;
+  margin-bottom: 5px;
+  border-radius: 5px;
+}
+
+.message-item:hover {
+  background-color: #ffffff40;
+}
+
+.message-content {
+  width: 40%;
+}
+
+.message-from-to {
+  width: 25%;
+}
+
+.message-sent-received {
+  width: 25%;
+}
+
+.message-delete {
+  width: 10%;
+}
+
+.btn{
+  font-size: 18px;
+  color: #fff;
+  text-decoration: none;
+  padding: 5px 10px;
+  border:  1px solid #ffffff40;
+}
+.btn:hover{
+  background-color: #ffffff40;
+}

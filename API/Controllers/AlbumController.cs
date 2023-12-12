@@ -34,14 +34,14 @@ namespace API.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<AlbumDto>> GetAlbumById(int id)
         {
-            var result = await unitOfWork.AlbumRepository.GetAlbumByIdAsync(id);
+            var result = await unitOfWork.AlbumRepository.GetAlbumById(id);
             return Ok(mapper.Map<AlbumDto>(result));
         }
 
         [HttpGet("albumName")]
         public async Task<ActionResult<AlbumDto>> GetAlbumByName(string name)
         {
-            var result = await unitOfWork.AlbumRepository.GetAlbumByNameAsync(name);
+            var result = await unitOfWork.AlbumRepository.GetAlbumByName(name);
             return Ok(mapper.Map<AlbumDto>(result));
         }
 
@@ -61,7 +61,7 @@ namespace API.Controllers
         [HttpPost("create/{artistId}")]
         public async Task<ActionResult> CreateAlbumForArtist(int artistId, AlbumUpsertDto album)
         {
-            var artist = await unitOfWork.ArtistRepository.GetArtistByIdAsync(artistId);
+            var artist = await unitOfWork.ArtistRepository.GetArtistById(artistId);
 
             if (artist == null)
             {
@@ -90,14 +90,14 @@ namespace API.Controllers
         [HttpPut("{artistId}/{albumId}")]
         public async Task<ActionResult> UpdateAlbum(int artistId, int albumId, AlbumUpsertDto update)
         {
-            var artist = await unitOfWork.ArtistRepository.GetArtistByIdAsync(artistId);
+            var artist = await unitOfWork.ArtistRepository.GetArtistById(artistId);
 
             if (artist == null)
             {
                 return NotFound("Artist not found");
             }
 
-            var albumToUpdate = await unitOfWork.AlbumRepository.GetAlbumByIdAsync(albumId);
+            var albumToUpdate = await unitOfWork.AlbumRepository.GetAlbumById(albumId);
 
             if (albumToUpdate == null)
             {
@@ -127,7 +127,7 @@ namespace API.Controllers
         [HttpDelete("{artistId}/{albumId}")]
         public async Task<ActionResult> DeleteAlbum(int artistId, int albumId)
         {
-            var artist = await unitOfWork.ArtistRepository.GetArtistByIdAsync(artistId);
+            var artist = await unitOfWork.ArtistRepository.GetArtistById(artistId);
 
             if (artist == null)
             {

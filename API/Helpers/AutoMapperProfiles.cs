@@ -26,7 +26,6 @@ namespace API.Helpers
             CreateMap<RegisterDto, AppUser>();
 
             CreateMap<Genre, GenreDto>();
-            CreateMap<GenreUpsertDto, Genre>();
 
             CreateMap<Artist, ArtistDto>()
                 .ForMember(dest => dest.PhotoUrl, opt => opt.MapFrom(src =>

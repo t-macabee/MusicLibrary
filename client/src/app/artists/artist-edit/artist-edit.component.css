@@ -23,4 +23,57 @@ input {
 textarea {
   border-top: 2px black;
   border-left: 2px black;
+  background-color: rgba(130, 130, 130, 0.4);
+}
+
+select, div.card ,div.card-footer {
+  background-color: rgba(130, 130, 130, 0.4);
+}
+
+h1 {
+  color: #ffffff;
+}
+
+.btn{
+  font-size: 18px;
+  color: #fff;
+  text-decoration: none;
+  padding: 5px 10px;
+  border:  1px solid #ffffff40;
+}
+.btn:hover{
+  background-color: #ffffff40;
+}
+
+:host ::ng-deep div.tab-content {
+  background-color: rgba(9, 50, 79, 0.4);
+}
+
+strong, p {
+  color: #ffffff;
+}
+
+:host ::ng-deep a.nav-link {
+  border: 1px solid white;
+}
+
+:host ::ng-deep span {
+  color: #ffffff;
+}
+
+:host ::ng-deep .member-tabset .nav-link.active span{
+  color: gray;
+}
+
+textarea, select{
+  background-color: #ffffff;
+}
+
+.col-8 .alert.alert-info {
+  background-color: rgba(9, 50, 79, 0.4);
+  color: #ffffff;
+}
+
+.col-8 .alert.alert-info strong {
+  color: #ffffff;
 }

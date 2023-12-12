@@ -1,29 +1,27 @@
-<div class="row">
-  <div class="col-4">
-    <div class="card">
-      <img src="{{artist?.photoUrl  || './assets/user.png'}}" alt="{{artist?.artistName}}" class="card-img-top img-thumbnail">
-      <div class="card-footer">
-        <div class="btn-group d-flex">
-          <button (click)="editArtist(artist)" class="btn btn-success">Edit artist</button>
+  <div class="row">
+    <div class="col-4">
+      <div class="card">
+        <img src="{{artist?.photoUrl  || './assets/user.png'}}" alt="{{artist?.artistName}}" class="card-img-top img-thumbnail">
+        <div class="card-footer">
+          <div class="btn-group d-flex">
+            <button (click)="editArtist(artist)" class="btn">Edit artist</button>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <div class="col-8">
-    <tabset class="artist-tabset" #artistTabs>
-      <tab heading="About" (selectTab)="onTabActivated($event)">
-        <div>
+    <div class="col-8">
+      <tabset class="artist-tabset" #artistTabs>
+        <tab heading="About" (selectTab)="onTabActivated($event)">
           <br><strong>Genre:</strong>
           <p>{{artist?.genre.genreName}}</p>
-        </div>
-        <br><strong>About:</strong>
-        <p>{{artist?.artistDescription}}</p>
-      </tab>
-      <tab heading="Albums" (selectTab)="onTabActivated($event)">
-        <br>
-        <app-albums [artist]="artist"></app-albums>
-      </tab>
-    </tabset>
+          <br><strong>About:</strong>
+          <p>{{artist?.artistDescription}}</p>
+        </tab>
+        <tab heading="Albums" (selectTab)="onTabActivated($event)">
+          <br>
+          <app-albums [artist]="artist"></app-albums>
+        </tab>
+      </tabset>
+    </div>
   </div>
-</div>

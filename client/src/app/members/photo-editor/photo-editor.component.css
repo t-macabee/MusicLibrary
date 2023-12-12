@@ -11,3 +11,20 @@ img.img-thumbnail {
 input[type=file] {
   color: transparent;
 }
+
+.btn{
+  font-size: 18px;
+  color: #fff;
+  text-decoration: none;
+  padding: 5px 10px;
+  border:  1px solid #ffffff40;
+}
+.btn:hover{
+  background-color: #ffffff40;
+}
+
+h3, p {
+  color: white;
+}
+
+

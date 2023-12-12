@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, HostListener, OnInit, ViewChild} from '@angular/core';
+import {ChangeDetectorRef, Component, HostListener, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import {NgForm} from "@angular/forms";
 import {ToastrService} from "ngx-toastr";
 import {Artist} from "../../_models/artist";
@@ -6,7 +6,6 @@ import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../environments/environment";
 import {ActivatedRoute} from "@angular/router";
 import {ArtistService} from "../../_services/artist.service";
-import {Genre} from "../../_models/genre";
 
 @Component({
   selector: 'app-artist-edit',
@@ -31,8 +30,7 @@ export class ArtistEditComponent implements OnInit {
   constructor(private http: HttpClient,
               private router: ActivatedRoute,
               private toastr: ToastrService,
-              private artistService: ArtistService,
-              private cdr: ChangeDetectorRef) {
+              private artistService: ArtistService) {
 
   }
 

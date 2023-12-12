@@ -13,3 +13,46 @@
   background-color: #fff;
   border-top: none;
 }
+
+div.card {
+  background-color: rgba(130, 130, 130, 0.4);
+}
+
+div.card-footer {
+  background-color: rgba(130, 130, 130, 0.4);
+}
+
+.btn{
+  font-size: 18px;
+  color: #fff;
+  text-decoration: none;
+  padding: 15px 20px;
+  border:  1px solid #ffffff40;
+}
+.btn:hover{
+  background-color: #ffffff40;
+}
+
+strong, p {
+  color: #ffffff;
+}
+
+:host ::ng-deep span {
+  color: #ffffff;
+}
+
+:host ::ng-deep .artist-tabset .nav-link {
+  border: 1px solid #ffffff;
+}
+
+:host ::ng-deep .artist-tabset .nav-link.active span{
+  color: gray;
+}
+
+:host ::ng-deep tab.active-tab-pane {
+  color: rgb(130, 130, 130);
+}
+
+:host ::ng-deep tab-content {
+  background-color: rgb(130, 130, 130);
+}

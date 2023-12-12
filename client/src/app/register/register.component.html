@@ -1,5 +1,5 @@
 <form [formGroup]='registerForm' (ngSubmit)="registerForm.valid && register()" autocomplete="off">
-  <h2 class="text-center text-primary">Sign up</h2>
+  <h2 class="text text-center">Sign up</h2>
   <hr>
 
   <br>
@@ -37,8 +37,8 @@
   </div>
 
   <div class="form-group text-center mb-5">
-    <button [disabled]="!registerForm.valid" class="btn btn-success me-2" type="submit">Register</button>
-    <button class="btn btn-default mr-2" (click)="cancel()" type="button">Cancel</button>
+    <button [disabled]="!registerForm.valid" class="btn me-2" type="submit">Register</button>
+    <button class="btn mr-2" (click)="cancel()" type="button">Cancel</button>
   </div>
 </form>
 

@@ -1,7 +1,29 @@
-div {
-  font-size: medium;
+* {
+  margin: 0;
+  box-sizing: border-box;
+  outline: none;
 }
 
-button {
-  width: 20%;
+body {
+  font-family: 'Dosis', sans-serif;
+  font-weight: 400;
+  color: #fcf7f7;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  background-color: #154a6d;
+}
+
+.btn{
+  font-size: 18px;
+  color: #fff;
+  text-decoration: none;
+  padding: 5px 10px;
+  border:  1px solid #ffffff40;
+}
+.btn:hover{
+  background-color: #ffffff40;
+}
+
+h3, h5 {
+  color: #ffffff;
 }

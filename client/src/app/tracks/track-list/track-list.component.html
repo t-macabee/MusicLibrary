@@ -1,27 +1,25 @@
 <div *ngIf="tracks && tracks.length > 0; else noTracks">
-  <table class="table table-hover mt-3" style="width: 100%;">
-    <thead>
-    <tr>
-      <th>#</th>
-      <th style="text-align: center">Name</th>
-      <th style="text-align: center">Length (min.)</th>
-      <th style="text-align: center">Artist</th>
-      <th style="text-align: center">Album</th>
-      <th></th>
-    </tr>
-    </thead>
-    <tbody class="table-success">
-    <tr *ngFor="let x of tracks">
-      <th>{{x.id}}</th>
-      <td class="float" style="text-align: center">{{x.trackName}}</td>
-      <td class="float" style="text-align: center">{{x.trackLength}}</td>
-      <td class="float" style="text-align: center">{{x.artistName}}</td>
-      <td class="float" style="text-align: center">{{x.albumName}}</td>
-      <td class="float" style="text-align: center"><button class="btn btn-outline-primary">Add to playlist</button></td>
-    </tr>
-    </tbody>
-  </table>
+  <div class="container text-center">
+    <div class="track-list">
+      <div class="track-header d-flex justify-content-between">
+        <div class="align-items-center">Name</div>
+        <div class="align-items-center">Length (min.)</div>
+        <div class="align-items-center">Artist</div>
+        <div class="align-items-center">Album</div>
+        <div></div>
+      </div>
+
+      <div *ngFor="let x of tracks" class="track-item d-flex justify-content-between">
+        <div class="align-items-center">{{x.trackName}}</div>
+        <div class="align-items-center">{{x.trackLength}}</div>
+        <div class="align-items-center">{{x.artistName}}</div>
+        <div class="align-items-center">{{x.albumName}}</div>
+        <div class="align-items-center"><button class="btn"><i class="fa fa-plus" aria-hidden="true"></i></button></div>
+      </div>
+    </div>
+  </div>
 </div>
+
 
 <ng-template #noTracks>
   <p *ngIf="!tracks">Loading tracks...</p>

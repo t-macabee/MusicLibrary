@@ -36,32 +36,40 @@ namespace API.Services
         {
             return await context.Playlists
                 .Include(x => x.PlaylistTracks)
-                .ThenInclude(y => y.Track)
+                .ThenInclude(x => x.Track)
+                .ThenInclude(x => x.Album)
+                .ThenInclude(x => x.Artist)                
                 .ToListAsync();
         }
 
-        public async Task<IEnumerable<Playlist>> GetAllPlaylistsByUserAsync(int userId)
+        public async Task<IEnumerable<Playlist>> GetAllPlaylistsByUser(int userId)
         {
             return await context.Playlists
                 .Where(x => x.AppUserId == userId)
                 .Include(x => x.PlaylistTracks)
-                .ThenInclude(y => y.Track)
+                .ThenInclude(x => x.Track)
+                .ThenInclude(x => x.Album)
+                .ThenInclude(x => x.Artist)
                 .ToListAsync();
         }
 
-        public async Task<Playlist> GetPlaylistByIdAsync(int id)
+        public async Task<Playlist> GetPlaylistById(int userId)
         {
             return await context.Playlists
                 .Include(x => x.PlaylistTracks)
-                .ThenInclude(y => y.Track)
-                .FirstOrDefaultAsync(x => x.Id == id);
+                .ThenInclude(x => x.Track)
+                .ThenInclude(x => x.Album)
+                .ThenInclude(x => x.Artist)
+                .FirstOrDefaultAsync(x => x.Id == userId);
         }
 
-        public async Task<Playlist> GetPlaylistByNameAsync(string name)
+        public async Task<Playlist> GetPlaylistByName(string name)
         {
             return await context.Playlists
                 .Include(x => x.PlaylistTracks)
-                .ThenInclude(y => y.Track)
+                .ThenInclude(x => x.Track)
+                .ThenInclude(x => x.Album)
+                .ThenInclude(x => x.Artist)
                 .SingleOrDefaultAsync(x => x.PlaylistName.ToLower() == name.ToLower());
         }
 

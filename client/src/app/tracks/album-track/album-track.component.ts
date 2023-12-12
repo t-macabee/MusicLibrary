@@ -99,11 +99,9 @@ export class AlbumTrackComponent {
         if (index !== -1) {
           this.tracks[index] = response;
         }
-
         this.toastr.success('Track updated!');
       },
       (error) => {
-        console.log('Error updating a track: ', error);
         this.toastr.error('Error updating track');
       }
     );

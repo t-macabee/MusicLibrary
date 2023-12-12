@@ -1,6 +1,6 @@
 <div class="row" *ngIf="member">
   <div class="col-4">
-    <h1>Your profile</h1>
+    <h1>Your profile</h1><br>
   </div>
   <div class="col-8">
     <div class="alert alert-info pb-0" *ngIf="editForm.dirty">
@@ -21,7 +21,7 @@
           <button [disabled]="!editForm.dirty"
                   form="editForm"
                   type="submit"
-                  class="btn btn-success col-12"
+                  class="btn col-12"
                   style="width: 100%;">Save Changes</button>
       </div>
     </div>
@@ -38,16 +38,16 @@
           name="interests"
           rows="6"></textarea>
           <br>
-        <h4 class="mt-3">Location</h4><br>
+        <h4 class="mt-3">Country</h4>
         <div class="d-flex flex-row align-items-center">
-          <label class="mt-3 me-3" for="country">Country: </label>
-          <input [(ngModel)]="member.country" type="text" name="country" class="form-control mx-2">
+          <input [(ngModel)]="member.country" type="text" name="country" class="form-control">
         </div>
         </form>
       </tab>
-      <tab heading="Edit photos">
+      <tab heading="Photos">
         <app-photo-editor [member]="member"></app-photo-editor>
       </tab>
     </tabset>
   </div>
+
 </div>

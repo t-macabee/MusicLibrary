@@ -28,9 +28,9 @@ namespace API.Controllers
             if (username == createMessageDto.RecipientUsername.ToLower())
                 return BadRequest("You cannot send messages to yourself!");
 
-            var sender = await unitOfWork.UserRepository.GetUserByUsernameAsync(username);
+            var sender = await unitOfWork.UserRepository.GetUserByUsername(username);
 
-            var recipient = await unitOfWork.UserRepository.GetUserByUsernameAsync(createMessageDto.RecipientUsername);
+            var recipient = await unitOfWork.UserRepository.GetUserByUsername(createMessageDto.RecipientUsername);
 
             if (recipient == null)
                 return NotFound();
@@ -55,7 +55,7 @@ namespace API.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<MessageDto>>> GetMessagesForUser([FromQuery]MessageParams messageParams)
         {
-            var user = await unitOfWork.UserRepository.GetUserByUsernameAsync(User.GetUsername());
+            var user = await unitOfWork.UserRepository.GetUserByUsername(User.GetUsername());
 
             messageParams.Username = user.UserName;
 
@@ -69,7 +69,7 @@ namespace API.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteMessage(int id)
         {
-            var user = await unitOfWork.UserRepository.GetUserByUsernameAsync(User.GetUsername());
+            var user = await unitOfWork.UserRepository.GetUserByUsername(User.GetUsername());
 
             var message = await unitOfWork.MessageRepository.GetMessage(id);
 

@@ -1,36 +1,26 @@
-<div class="container mt-7">
-  <div *ngIf="!registerMode" style="text-align: center">
-
-    <h3>Welcome to .musicLibrary, where the magic of music comes to life!</h3> <br>
-
-    <h5>Are you ready to embark on a journey through the world of melodies, rhythms, and harmonies? </h5>
-
-    <h5>Look no further, because our music library has everything you need to feed your musical soul. </h5>
-
-    <h5>Whether you're a die-hard music enthusiast, a casual listener, or a musician seeking inspiration, our web application is designed just for you. </h5>
-
-    <h5>Discover an extensive collection of songs spanning across genres, artists, and eras, all neatly organized and easily accessible.</h5>
-
-    <h5>With user-friendly features and a sleek interface, finding your favorite tunes or exploring new ones has never been more enjoyable.</h5>
-
-    <h5>But that's not all – .MusicLibrary is more than just a library. It's a place where you can create playlists, share your music preferences, and connect with fellow music lovers. </h5>
-
-    <h5>Your journey through the realms of rhythm and melody begins here! </h5>
-
-    <br><hr><br>
-
-    <h3>Create a new profile or log in to an existing one!</h3><br>
-
-    <div class="text-center">
-      <button (click)="registerToggle()" class="btn btn-primary btn-large">Register</button>
+<div class="container text-center d-flex flex-column justify-content-center align-items-center">
+    <div *ngIf="!registerMode">
+      <h3>Welcome to .musicLibrary, where the magic of music comes to life!</h3><br>
+      <h5>
+        Are you ready to embark on a journey through the world of melodies, rhythms, and harmonies?<br>
+        Look no further, because our music library has everything you need to feed your musical soul.<br>
+        Whether you're a die-hard music enthusiast, a casual listener, or a musician seeking inspiration, our web application is designed just for you.<br>
+        Discover an extensive collection of songs spanning across genres, artists, and eras, all neatly organized and easily accessible.<br>
+        With user-friendly features and a sleek interface, finding your favorite tunes or exploring new ones has never been more enjoyable.<br>
+        But that's not all – .MusicLibrary is more than just a library. It's a place where you can create playlists, share your music preferences, and connect with fellow music lovers.<br>
+        Your journey through the realms of rhythm and melody begins here!
+      </h5>
+      <hr class="my-5">
+      <h3>Create a new profile or log in to an existing one!</h3>
+    <button (click)="registerToggle()" class="btn mt-3">Register</button>
     </div>
-  </div>
 
-  <div *ngIf="registerMode" class="container">
-    <div class="row justify-content-center">
-      <div class="col-4">
-        <app-register (cancelRegister)="cancelRegisterMode($event)"></app-register>
+    <div *ngIf="registerMode" class="container">
+      <div class="row justify-content-center">
+        <div class="col-4">
+          <app-register (cancelRegister)="cancelRegisterMode($event)"></app-register>
+        </div>
       </div>
     </div>
   </div>
-</div>
+

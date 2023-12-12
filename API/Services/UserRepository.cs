@@ -20,28 +20,28 @@ namespace API.Services
             this.mapper = mapper;
         }        
 
-        public async Task<AppUser> GetUserByIdAsync(int id)
+        public async Task<AppUser> GetUserById(int id)
         {
             return await context.Users
                 .Include(x => x.Playlists)
                 .SingleOrDefaultAsync(x => x.Id == id);
         }
 
-        public async Task<AppUser> GetUserByUsernameAsync(string username)
+        public async Task<AppUser> GetUserByUsername(string username)
         {
             return await context.Users
                 .Include(x => x.Photos)
                 .SingleOrDefaultAsync(x => x.UserName == username);
         }
 
-        public async Task<IEnumerable<AppUser>> GetUsersAsync()
+        public async Task<IEnumerable<AppUser>> GetUsers()
         {
             return await context.Users
                 .Include(x => x.Photos)
                 .ToListAsync();
         }
        
-        public async Task<PagedList<MemberDto>> GetMembersAsync(UserParams userParams)
+        public async Task<PagedList<MemberDto>> GetMembers(UserParams userParams)
         {
             var query = context.Users.AsQueryable();
                 
@@ -56,7 +56,7 @@ namespace API.Services
                 userParams.PageSize);
         }
 
-        public async Task<MemberDto> GetMemberAsync(string username)
+        public async Task<MemberDto> GetMember(string username)
         {
             return await context.Users
                 .Where(x => x.UserName == username)

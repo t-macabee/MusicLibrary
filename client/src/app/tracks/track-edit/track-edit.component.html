@@ -2,15 +2,15 @@
   <div class="edit-form">
     <form [formGroup]="editForm">
       <div class="form-group">
-        <label for="trackName">Track name:</label>
+        <label for="trackName"><strong>Track name:</strong></label>
         <input type="text" class="form-control" id="trackName" formControlName="trackName">
       </div>
       <div class="form-group">
-        <label for="trackLength">Track length:</label>
+        <label for="trackLength"><strong>Track length:</strong></label>
         <input type="text" class="form-control" id="trackLength" formControlName="trackLength">
       </div>
-      <button type="button" class="btn btn-primary" (click)="updateTrack()">Update Track</button>
-      <button type="button" class="btn btn-danger" (click)="closeForm()">Close</button>
+      <button type="button" class="btn" (click)="updateTrack()">Update track</button>
+      <button type="button" class="btn" (click)="closeForm()">Close</button>
     </form>
   </div>
 </div>

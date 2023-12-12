@@ -1,0 +1,37 @@
+<button class="btn" (click)="CreateNewPlaylist()">Create new playlist</button>
+<hr style="color: #ffffff;">
+<div *ngIf="playlists && playlists.length > 0; else noLists">
+<div class="container">
+  <div class="left-column">
+    <div *ngFor="let playlist of playlists" class="playlist-item" (click)="selectPlaylist(playlist)">
+      {{ playlist.playlistName }}
+      <button (click)="deletePlaylist(playlist)" class="btn-del float-end" style="margin-left: 15px;"><i class="fa fa-trash" aria-hidden="true"></i></button>
+    </div>
+  </div>
+  <div class="right-column">
+    <div *ngIf="selectedPlaylist">
+      <div class="playlist-details">
+        <h3>{{selectedPlaylist?.playlistName}}</h3>
+      </div>
+      <div class="track-list">
+        <div class="track-header d-flex justify-content-between">
+          <div>Name</div>
+          <div>Length (min.)</div>
+          <div>Artist</div>
+          <div>Album</div>
+        </div>
+        <div *ngFor="let track of selectedPlaylist.tracks" class="track-item d-flex justify-content-between">
+          <div>{{track.trackName}}</div>
+          <div>{{track.trackLength}}</div>
+          <div>{{track.artistName}}</div>
+          <div>{{track.albumName}}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<ng-template #noLists>
+  <p *ngIf="playlists && playlists.length === 0" style="color: white">No playlists available</p><br>
+</ng-template>

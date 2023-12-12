@@ -44,3 +44,15 @@
   animation: fa-blink 1.5s linear infinite;
   color: rgb(1, 189, 42);
 }
+
+.btn{
+  font-size: 18px;
+  color: #fff;
+  background-color: #09324E;
+  text-decoration: none;
+  padding: 5px 10px;
+  border:  1px solid #ffffff40;
+}
+.btn:hover{
+  background-color: #ffffff40;
+}

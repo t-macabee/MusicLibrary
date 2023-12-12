@@ -49,7 +49,7 @@ namespace API.Services
                 .ToListAsync();
         }
 
-        public async Task<Track> GetTrackByIdAsync(int id)
+        public async Task<Track> GetTrackById(int id)
         {            
             return await context.Tracks
             .Include(x => x.Album)
@@ -57,7 +57,7 @@ namespace API.Services
             .FirstOrDefaultAsync(a => a.Id == id);            
         }
 
-        public async Task<TrackDto> GetTrackByNameAsync(string name)
+        public async Task<TrackDto> GetTrackByName(string name)
         {
             return await context.Tracks
                 .Include(x => x.Album)

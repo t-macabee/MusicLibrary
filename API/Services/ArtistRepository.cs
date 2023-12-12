@@ -33,7 +33,7 @@ namespace API.Services
             context.Artists.Remove(artist);
         }
 
-        public async Task<Artist> GetArtistByIdAsync(int id)
+        public async Task<Artist> GetArtistById(int id)
         {
             return await context.Artists
                 .Include(x => x.Photos)
@@ -43,7 +43,7 @@ namespace API.Services
                 .SingleOrDefaultAsync(x => x.Id == id);
         }
 
-        public async Task<Artist> GetArtistByNameAsync(string name)
+        public async Task<Artist> GetArtistByName(string name)
         {
             return await context.Artists
                 .Include(x => x.Photos)
@@ -64,7 +64,7 @@ namespace API.Services
                 .ToListAsync();
         }
 
-        public async Task<IEnumerable<Artist>> GetAllArtistsAsync()
+        public async Task<IEnumerable<Artist>> GetAllArtists()
         {
             return await context.Artists
                 .Include(x => x.Photos)

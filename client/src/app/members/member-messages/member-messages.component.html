@@ -4,7 +4,7 @@
        style="overflow: scroll; height: 535px; overflow-x: hidden !important;"
        [scrollTop]="scrollMee.scrollHeight"
   >
-    <div *ngIf="(messageService.messageThread$ | async)?.length === 0">
+    <div *ngIf="(messageService.messageThread$ | async)?.length === 0" style="color: white">
       No messages yet... send one by using message box below
     </div>
 
@@ -20,7 +20,7 @@
           <div class="chat-body">
             <div class="header">
               <small class="text-muted">
-                <span class="fa fa-clock-o">{{message.messageSent | timeago}}</span>
+                <span class="fa fa-clock-o m-lg-2">{{message.messageSent | timeago}}</span>
                 <span class="text-danger"
                       *ngIf="!message.dateRead
                       && message.senderUsername !== username">(unread)</span>
@@ -29,6 +29,7 @@
                       && message.senderUsername !== username">(read {{message.dateRead | timeago}})</span>
               </small>
             </div>
+            <br>
             <p>{{message.content}}</p>
           </div>
         </div>
@@ -46,7 +47,7 @@
           class="form-control input-sm"
           placeholder="Send a private message">
         <div class="input-group-append">
-          <button [disabled]="!messageForm.valid" class="btn btn-primary" type="submit">Send</button>
+          <button [disabled]="!messageForm.valid" class="btn" type="submit">Send</button>
         </div>
       </div>
     </form>

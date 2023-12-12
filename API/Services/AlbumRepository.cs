@@ -40,7 +40,7 @@ namespace API.Services
               .ToListAsync();
         }
 
-        public async Task<Album> GetAlbumByIdAsync(int albumId)
+        public async Task<Album> GetAlbumById(int albumId)
         {
             return await context.Albums             
             .Include(x => x.Artist)
@@ -48,7 +48,7 @@ namespace API.Services
             .FirstOrDefaultAsync(a => a.Id == albumId);
         }
 
-        public async Task<Album> GetAlbumByNameAsync(string albumName)
+        public async Task<Album> GetAlbumByName(string albumName)
         {
             return await context.Albums
                 .Include(x => x.Artist)

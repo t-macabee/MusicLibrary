@@ -4,10 +4,10 @@
     <ul class="list-inline member-icons animate text-center">
       <p style="color: white">{{artist.artistName}}</p>
       <li class="list-inline-item">
-        <button routerLink="/artist-detail/{{artist.id}}" class="btn btn-primary">about</button>
+        <button routerLink="/artist-detail/{{artist.id}}" class="btn"><i class="fa fa-user"></i></button>
       </li>
       <li class="list-inline-item">
-        <button (click)="deleteArtist(artist.id)" class="btn btn-danger">delete</button>
+        <button (click)="deleteArtist(artist.id)" class="btn"><i class="fa fa-times" aria-hidden="true"></i></button>
       </li>
     </ul>
   </div>

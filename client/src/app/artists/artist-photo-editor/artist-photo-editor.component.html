@@ -5,13 +5,13 @@
       <button
         [disabled]="photo.isMain"
         (click)="setMainPhoto(photo)"
-        [ngClass]='photo.isMain ? "btn-success active" : "btn-outline-success"'
-        class="btn btn-sm flex-grow-1"
+        [ngClass]='photo.isMain ? "btn-secondary active" : "btn-outline-secondary"'
+        class="btn flex-grow-1"
       >Main</button>
       <button
         [disabled]="photo.isMain"
         (click)="deletePhoto(photo.id)"
-        class="btn btn-sm btn-danger flex-grow-1"
+        class="btn flex-grow-1"
       ><i class="fa fa-trash"></i></button>
     </div>
   </div>
@@ -26,12 +26,11 @@
          [uploader]="uploader"
          class="card bg-faded p-3 text-center mb-3 my-drop-zone">
       <i class="fa fa-upload fa-3x"></i>
-      Drop photos here
     </div>
-    Single
+    <p>Single</p>
     <input type="file" ng2FileSelect [uploader]="uploader" />
     <br><br>
-    Multiple
+    <p>Multiple</p>
     <input type="file" ng2FileSelect [uploader]="uploader" multiple  /><br/>
   </div>
   <div class="col-md-9" style="margin-bottom: 40px" *ngIf="uploader?.queue?.length">
@@ -58,15 +57,15 @@
           <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': uploader.progress + '%' }"></div>
         </div>
       </div>
-      <button type="button" class="btn btn-success btn-s"
+      <button type="button" class="btn"
               (click)="uploader?.uploadAll()" [disabled]="!uploader.getNotUploadedItems().length">
         <span class="fa fa-upload"></span> Upload all
       </button>
-      <button type="button" class="btn btn-warning btn-s"
+      <button type="button" class="btn"
               (click)="uploader?.cancelAll()" [disabled]="!uploader.isUploading">
         <span class="fa fa-ban"></span> Cancel all
       </button>
-      <button type="button" class="btn btn-danger btn-s"
+      <button type="button" class="btn"
               (click)="uploader?.clearQueue()" [disabled]="!uploader.queue.length">
         <span class="fa fa-trash"></span> Remove all
       </button>

@@ -25,3 +25,23 @@
 .edit-form button {
   margin-right: 10px;
 }
+
+.btn {
+  font-size: 18px;
+  color: #09324f;
+  background-color: #ffffff;
+  text-decoration: none;
+  padding: 5px 10px;
+  border: 1px solid #09324f;
+  cursor: pointer;
+}
+.btn:hover {
+  background-color: #09324f;
+  color: white;
+}
+
+input {
+  color: #09324f;
+  background-color: #ffffff;
+  border: 1px solid #09324f;
+}

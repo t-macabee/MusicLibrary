@@ -25,7 +25,6 @@ import { TextInputComponent } from './_forms/text-input/text-input.component';
 import { DateInputComponent } from './_forms/date-input/date-input.component';
 import { ButtonsModule } from "ngx-bootstrap/buttons";
 import { MemberMessagesComponent } from './members/member-messages/member-messages.component';
-import { GenreComponent } from './genre/genre.component';
 import { ArtistDetailComponent } from './artists/artist-detail/artist-detail.component';
 import { ArtistEditComponent } from './artists/artist-edit/artist-edit.component';
 import { ArtistListComponent } from './artists/artist-list/artist-list.component';
@@ -38,6 +37,10 @@ import { AlbumTrackComponent } from './tracks/album-track/album-track.component'
 import { TrackEditComponent } from './tracks/track-edit/track-edit.component';
 import { ArtistPhotoEditorComponent } from './artists/artist-photo-editor/artist-photo-editor.component';
 import { BackgroundComponent } from './background/background.component';
+import { MemberPlaylistComponent } from './members/member-playlist/member-playlist.component';
+import { UserPlaylistComponent } from './playlists/user-playlist/user-playlist.component';
+import { PlaylistDialogComponent } from './playlists/playlist-dialog/playlist-dialog.component';
+
 
 @NgModule({
   declarations: [
@@ -57,7 +60,6 @@ import { BackgroundComponent } from './background/background.component';
     TextInputComponent,
     DateInputComponent,
     MemberMessagesComponent,
-    GenreComponent,
     ArtistDetailComponent,
     ArtistEditComponent,
     ArtistListComponent,
@@ -68,7 +70,10 @@ import { BackgroundComponent } from './background/background.component';
     AlbumTrackComponent,
     TrackEditComponent,
     ArtistPhotoEditorComponent,
-    BackgroundComponent
+    BackgroundComponent,
+    MemberPlaylistComponent,
+    UserPlaylistComponent,
+    PlaylistDialogComponent
   ],
     imports: [
         BrowserModule,
