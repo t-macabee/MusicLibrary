@@ -6,6 +6,7 @@ namespace API.Entities
     {
         public int Id { get; set; }       
         public string PlaylistName { get; set; } 
+        public string PlaylistDescription { get; set; } 
 
         public int AppUserId { get; set; }
         public AppUser AppUser { get; set; }

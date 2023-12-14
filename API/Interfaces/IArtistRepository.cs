@@ -10,8 +10,6 @@ namespace API.Interfaces
         void DeleteArtist(Artist artist);
 
         Task<IEnumerable<Artist>> GetAllArtists();
-        Task<IEnumerable<Artist>>GetArtistsByGenre(string name);
         Task<Artist> GetArtistById(int id);
-        Task<Artist> GetArtistByName(string name);
     }
 }

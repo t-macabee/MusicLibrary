@@ -12,3 +12,7 @@
 .btn:hover{
   background-color: #ffffff40;
 }
+
+.row justify-content-center{
+  margin-top: 10%;
+}

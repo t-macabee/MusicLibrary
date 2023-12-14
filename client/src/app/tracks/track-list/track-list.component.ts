@@ -1,6 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {TrackService} from "../../_services/track.service";
 import {Track} from "../../_models/track";
+import {MatDialog} from "@angular/material/dialog";
+import {UserPlaylistDialogComponent} from "../../playlists/user-playlist-dialog/user-playlist-dialog.component";
+
 
 @Component({
   selector: 'app-track-list',
@@ -9,8 +12,11 @@ import {Track} from "../../_models/track";
 })
 export class TrackListComponent implements OnInit {
   tracks: Track[] = [];
+  searchTerm = '';
 
-  constructor(private trackService: TrackService) {
+  constructor(private trackService: TrackService,
+              private dialog: MatDialog,
+              private cdr: ChangeDetectorRef) {
   }
 
   ngOnInit() {
@@ -21,5 +27,24 @@ export class TrackListComponent implements OnInit {
     this.trackService.getAllTracks().subscribe(response => {
       this.tracks = response;
     })
+  }
+
+  openPlaylistDialog(track: Track) {
+    const dialogRef = this.dialog.open(UserPlaylistDialogComponent, {
+      height: '350px',
+      width: '350px',
+      disableClose: true,
+      data: { track: track }
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      this.cdr.detectChanges();
+    });
+  }
+
+  get filteredTracks() {
+    return this.tracks.filter((track) =>
+      track.trackName.toLowerCase().includes(this.searchTerm.toLowerCase())
+    );
   }
 }

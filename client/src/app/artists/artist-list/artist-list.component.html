@@ -1,7 +1,10 @@
-<button (click)="createTemplateArtist()" class="btn">Create template artist</button>
+<div>
+  <input style="width: 25%; border: 3px solid #ffffff" type="text" [(ngModel)]="searchTerm" placeholder="Search by artist name" />
+  <button (click)="createTemplateArtist()" class="btn float-end">Create template artist</button>
+</div>
 <br><br>
 <div class="row">
-  <div *ngFor="let artist of artists" class="col-2">
+  <div *ngFor="let artist of filteredArtists" class="col-2">
     <app-artist-card [artist]="artist" (artistDeleted)="handleArtistDeleted($event)"></app-artist-card>
   </div>
 </div>

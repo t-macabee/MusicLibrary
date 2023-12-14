@@ -20,34 +20,13 @@ namespace API.Controllers
             this.context = context;
             this.mapper = mapper;
             this.unitOfWork = unitOfWork;
-        }
-
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<PlaylistDto>>> GetAllPlaylists()
-        {
-            var playlists = await unitOfWork.PlaylistRepository.GetAllPlaylists();
-            var playlistDtos = mapper.Map<IEnumerable<PlaylistDto>>(playlists);
-
-            foreach (var playlistDto in playlistDtos)
-            {
-                playlistDto.Tracks = playlistDto.Tracks.Select(track => mapper.Map<TrackDto>(track));
-            }
-
-            return Ok(playlistDtos);
-        }
+        }       
 
         [HttpGet("{id}")]
         public async Task<ActionResult<PlaylistDto>> GetPlaylistById(int id)
         {
             var playlist = await unitOfWork.PlaylistRepository.GetPlaylistById(id);
             return Ok(mapper.Map<PlaylistDto>(playlist));
-        }
-
-        [HttpGet("playlistName")]
-        public async Task<ActionResult<PlaylistDto>> GetPlaylistByNameAsync(string name)
-        {
-            var result = await unitOfWork.PlaylistRepository.GetPlaylistByName(name);
-            return Ok(mapper.Map<PlaylistDto>(result));
         }
 
         [HttpGet("{userId}/playlists")]
@@ -167,7 +146,7 @@ namespace API.Controllers
 
             if (await unitOfWork.Complete())
             {
-                return Ok("Track added to the playlist");
+                return Ok(new { message = "Track added to the playlist" });
             }
 
             return BadRequest("Failed to add track to the playlist");
@@ -197,7 +176,7 @@ namespace API.Controllers
 
                 if (await unitOfWork.Complete())
                 {
-                    return Ok("Track removed from the playlist");
+                    return Ok(new { message = "Track removed from the playlist" });
                 }
 
                 return BadRequest("Failed to remove track from the playlist");

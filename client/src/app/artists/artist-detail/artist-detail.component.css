@@ -26,8 +26,8 @@ div.card-footer {
   font-size: 18px;
   color: #fff;
   text-decoration: none;
-  padding: 15px 20px;
-  border:  1px solid #ffffff40;
+  padding: 10px 15px;
+  border:  2px solid #ffffff40;
 }
 .btn:hover{
   background-color: #ffffff40;

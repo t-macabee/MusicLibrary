@@ -1,0 +1,16 @@
+<div *ngIf="playlist" class="modal-overlay">
+  <div class="edit-form">
+    <form [formGroup]="editForm">
+      <div class="form-group">
+        <label for="playlistName"><strong>Playlist name:</strong></label>
+        <input type="text" class="form-control" id="playlistName" formControlName="playlistName">
+      </div>
+      <div class="form-group">
+        <label for="playlistDescription"><strong>Playlist description:</strong></label>
+        <input type="text" class="form-control" id="playlistDescription" formControlName="playlistDescription">
+      </div>
+      <button type="button" class="btn" (click)="updatePlaylist()">Update playlist</button>
+      <button type="button" class="btn" (click)="closeForm()">Close</button>
+    </form>
+  </div>
+</div>

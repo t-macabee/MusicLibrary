@@ -55,23 +55,7 @@ namespace API.Services
             .Include(x => x.Album)
                 .ThenInclude(x => x.Artist)
             .FirstOrDefaultAsync(a => a.Id == id);            
-        }
-
-        public async Task<TrackDto> GetTrackByName(string name)
-        {
-            return await context.Tracks
-                .Include(x => x.Album)
-                    .ThenInclude(x => x.Artist)
-                .Select(track => new TrackDto
-                {
-                    Id = track.Id,
-                    TrackName = track.TrackName,
-                    TrackLength = track.TrackLength,
-                    AlbumName = track.Album.AlbumName,
-                    ArtistName = track.Album.Artist.ArtistName
-                })
-                .SingleOrDefaultAsync(x => x.TrackName.ToLower() == name.ToLower());
-        }
+        }       
 
         public async Task<IEnumerable<TrackDto>> GetTracksByAlbum(int albumId)
         {

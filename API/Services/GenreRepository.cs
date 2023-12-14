@@ -22,17 +22,6 @@ namespace API.Services
         {
             var result = await context.Genres.ToListAsync();
             return mapper.Map<IEnumerable<GenreDto>>(result);
-        }
-
-        public async Task<Genre> GetGenreById(int id)
-        {
-            return await context.Genres.FindAsync(id);            
-        }             
-
-        public async Task<GenreDto> GetGenreByName(string name)
-        {
-            var result = await context.Genres.SingleOrDefaultAsync(x => x.GenreName.ToLower() == name.ToLower());
-            return mapper.Map<GenreDto>(result);
-        }       
+        }        
     }
 }

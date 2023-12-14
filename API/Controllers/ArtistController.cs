@@ -2,9 +2,7 @@
 using API.DTOs;
 using API.DTOs.UpdateDTOs;
 using API.Entities;
-using API.Extensions;
 using API.Interfaces;
-using API.Services;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -38,20 +36,6 @@ namespace API.Controllers
         {
             var result = await unitOfWork.ArtistRepository.GetArtistById(id);
             return Ok(mapper.Map<ArtistDto>(result));
-        }
-
-        [HttpGet("name/artistName")]
-        public async Task<ActionResult<ArtistDto>> GetArtistByName(string name)
-        {
-            var result = await unitOfWork.ArtistRepository.GetArtistByName(name);
-            return Ok(mapper.Map<ArtistDto>(result));
-        }
-
-        [HttpGet("genre/genreName")]
-        public async Task<ActionResult<ArtistDto>> GetArtistByGenre(string genreName)
-        {
-            var result = await unitOfWork.ArtistRepository.GetArtistsByGenre(genreName);
-            return Ok(mapper.Map<IEnumerable<ArtistDto>>(result));
         }
 
         [HttpPost]

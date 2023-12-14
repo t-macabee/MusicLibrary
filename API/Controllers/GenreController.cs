@@ -12,14 +12,10 @@ namespace API.Controllers
 {
     public class GenreController : BaseAPIController
     {
-        private DataContext context;
-        private IMapper mapper;
         private IUnitOfWork unitOfWork;
 
-        public GenreController(DataContext context, IMapper mapper, IUnitOfWork unitOfWork)
+        public GenreController(IUnitOfWork unitOfWork)
         {
-            this.context = context;            
-            this.mapper = mapper;
             this.unitOfWork = unitOfWork;
         }
 

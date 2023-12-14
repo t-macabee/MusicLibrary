@@ -34,7 +34,7 @@
 <br>
 
 <div class="row" *ngIf="messages && messages?.length > 0">
-  <div class="message-item" *ngFor="let message of messages">
+  <div class="message-item" *ngFor="let message of messages" (click)="navigateToChat(message)">
     <div class="message-content mt-2">{{ message.content }}</div>
     <div class="message-from-to">
       <div *ngIf="containter === 'Outbox'">

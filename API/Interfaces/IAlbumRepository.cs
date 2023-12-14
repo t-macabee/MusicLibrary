@@ -8,9 +8,7 @@ namespace API.Interfaces
         void UpdateAlbum(Album album);
         void DeleteAlbum(Album album);
 
-        Task<IEnumerable<Album>> GetAllAlbums();
         Task<Album> GetAlbumById(int albumId);
-        Task<Album> GetAlbumByName(string albumName);
         Task<IEnumerable<Album>> GetAlbumByArtist(int artistId);
     }
 }

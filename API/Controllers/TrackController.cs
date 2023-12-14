@@ -29,20 +29,6 @@ namespace API.Controllers
             return Ok(mapper.Map<IEnumerable<TrackDto>>(track));
         }
 
-        [HttpGet("{id}")]
-        public async Task<ActionResult<TrackDto>> GetTrackById(int id)
-        {
-            var result = await unitOfWork.TrackRepository.GetTrackById(id);
-            return Ok(mapper.Map<TrackDto>(result));
-        }
-
-        [HttpGet("trackName")]
-        public async Task<ActionResult<TrackDto>> GetTrackByName(string name)
-        {
-            var result = await unitOfWork.TrackRepository.GetTrackByName(name);
-            return Ok(mapper.Map<TrackDto>(result));
-        }
-
         [HttpGet("tracksByAlbum/{albumId}")]
         public async Task<ActionResult<IEnumerable<TrackDto>>> GetTracksByAlbum(int albumId)
         {

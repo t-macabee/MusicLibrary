@@ -14,6 +14,7 @@ import {HttpClient} from "@angular/common/http";
 export class ArtistListComponent {
   baseUrl = environment.apiUrl;
   artists: Artist[] = [];
+  searchTerm = '';
 
   constructor(private http: HttpClient, private toastr: ToastrService, private router: Router, private artistService: ArtistService) {
   }
@@ -68,5 +69,11 @@ export class ArtistListComponent {
   handleArtistDeleted(id: number) {
     this.artists = this.artists.filter((artist) => artist.id !== id);
     this.toastr.success('Artist deleted!');
+  }
+
+  get filteredArtists() {
+    return this.artists.filter((artist) =>
+      artist.artistName.toLowerCase().includes(this.searchTerm.toLowerCase())
+    );
   }
 }

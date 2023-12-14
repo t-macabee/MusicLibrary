@@ -1,3 +1,6 @@
+<div>
+  <input type="text" style="width: 25%; border: 2px solid #ffffff;" [(ngModel)]="searchTerm" placeholder="Search by track name" />
+</div><br>
 <div *ngIf="tracks && tracks.length > 0; else noTracks">
   <div class="container text-center">
     <div class="track-list">
@@ -9,19 +12,21 @@
         <div></div>
       </div>
 
-      <div *ngFor="let x of tracks" class="track-item d-flex justify-content-between">
+      <div *ngFor="let x of filteredTracks" class="track-item d-flex justify-content-between">
         <div class="align-items-center">{{x.trackName}}</div>
         <div class="align-items-center">{{x.trackLength}}</div>
         <div class="align-items-center">{{x.artistName}}</div>
         <div class="align-items-center">{{x.albumName}}</div>
-        <div class="align-items-center"><button class="btn"><i class="fa fa-plus" aria-hidden="true"></i></button></div>
+        <div class="align-items-center">
+          <button class="btn" (click)="openPlaylistDialog(x)">
+            <i class="fa fa-arrow-right" style="margin-right: 5px" aria-hidden="true"></i>to Playlist
+          </button>
+        </div>
       </div>
     </div>
   </div>
 </div>
 
-
 <ng-template #noTracks>
-  <p *ngIf="!tracks">Loading tracks...</p>
   <p *ngIf="tracks && tracks.length === 0">There are no tracks available</p><br>
 </ng-template>

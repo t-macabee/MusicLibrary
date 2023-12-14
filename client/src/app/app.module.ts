@@ -39,8 +39,9 @@ import { ArtistPhotoEditorComponent } from './artists/artist-photo-editor/artist
 import { BackgroundComponent } from './background/background.component';
 import { MemberPlaylistComponent } from './members/member-playlist/member-playlist.component';
 import { UserPlaylistComponent } from './playlists/user-playlist/user-playlist.component';
-import { PlaylistDialogComponent } from './playlists/playlist-dialog/playlist-dialog.component';
-
+import { MatDialogModule } from "@angular/material/dialog";
+import { UserPlaylistDialogComponent } from './playlists/user-playlist-dialog/user-playlist-dialog.component';
+import { UserPlaylistEditComponent } from './playlists/user-playlist-edit/user-playlist-edit.component';
 
 @NgModule({
   declarations: [
@@ -73,7 +74,8 @@ import { PlaylistDialogComponent } from './playlists/playlist-dialog/playlist-di
     BackgroundComponent,
     MemberPlaylistComponent,
     UserPlaylistComponent,
-    PlaylistDialogComponent
+    UserPlaylistDialogComponent,
+    UserPlaylistEditComponent
   ],
     imports: [
         BrowserModule,
@@ -83,7 +85,8 @@ import { PlaylistDialogComponent } from './playlists/playlist-dialog/playlist-di
         FormsModule,
         ReactiveFormsModule,
         SharedModule,
-        ButtonsModule
+        ButtonsModule,
+        MatDialogModule
     ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},

@@ -42,6 +42,7 @@ namespace API.Data
 
             modelBuilder.Entity<PlaylistTrack>()
                 .HasKey(pt => new { pt.PlaylistId, pt.TrackId });
+
             modelBuilder.Entity<PlaylistTrack>()
                 .HasOne(pt => pt.Playlist)
                 .WithMany(p => p.PlaylistTracks)
@@ -59,7 +60,7 @@ namespace API.Data
             modelBuilder.Entity<Album>()
                 .HasMany(album => album.Tracks)
                 .WithOne(track => track.Album)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.Cascade);           
 
             modelBuilder.ApplyUtcDateTimeConverter();
 

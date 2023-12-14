@@ -9,12 +9,7 @@ import {Album} from "../_models/album";
 export class AlbumService {
   baseUrl = environment.apiUrl;
 
-
   constructor(private http: HttpClient) { }
-
-  getAllAlbums() {
-    return this.http.get(this.baseUrl + 'Album');
-  }
 
   getAlbumsByArtist(id: number) {
     return this.http.get<Album[]>(this.baseUrl + 'Album/albumsByArtist/' + id);
@@ -22,10 +17,6 @@ export class AlbumService {
 
   getAlbum(id: number)  {
     return this.http.get(this.baseUrl + 'Album/' + id);
-  }
-
-  getAlbumByName(name: string) {
-    return this.http.get(this.baseUrl + 'Album/albumName?name=' + name);
   }
 
   createAlbumByArtist(id: number, album: any) {

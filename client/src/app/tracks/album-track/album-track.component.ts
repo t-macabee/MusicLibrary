@@ -4,6 +4,8 @@ import {ActivatedRoute} from "@angular/router";
 import {TrackService} from "../../_services/track.service";
 import {ToastrService} from "ngx-toastr";
 import {AlbumService} from "../../_services/album.service";
+import {MatDialog} from "@angular/material/dialog";
+import {UserPlaylistDialogComponent} from "../../playlists/user-playlist-dialog/user-playlist-dialog.component";
 
 @Component({
   selector: 'app-album-track',
@@ -24,6 +26,7 @@ export class AlbumTrackComponent {
               private trackService: TrackService,
               private toastr: ToastrService,
               private cdr: ChangeDetectorRef,
+              private dialog: MatDialog,
               private albumService: AlbumService) {
   }
 
@@ -114,5 +117,19 @@ export class AlbumTrackComponent {
 
   closeEditForm() {
     this.showEditForm = false;
+  }
+
+  openPlaylistDialog(track: Track) {
+    const dialogRef = this.dialog.open(UserPlaylistDialogComponent, {
+      height: '350px',
+      width: '350px',
+      disableClose: true,
+      data: { track: track }
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log('The dialog was closed', result);
+      this.cdr.detectChanges();
+    });
   }
 }

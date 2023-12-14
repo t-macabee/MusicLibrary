@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20231207195633_Initial")]
+    [Migration("20231214094817_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -442,9 +442,6 @@ namespace API.Data.Migrations
 
                     b.Property<int>("AppUserId")
                         .HasColumnType("int");
-
-                    b.Property<DateTime>("DateCreated")
-                        .HasColumnType("datetime2");
 
                     b.Property<string>("PlaylistDescription")
                         .IsRequired()

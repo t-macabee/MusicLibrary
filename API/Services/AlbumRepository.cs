@@ -32,29 +32,13 @@ namespace API.Services
             context.Entry(album).State = EntityState.Modified;
         }
 
-        public async Task<IEnumerable<Album>> GetAllAlbums()
-        {
-            return await context.Albums          
-              .Include(x => x.Artist)
-              .Include(x => x.Tracks)
-              .ToListAsync();
-        }
-
         public async Task<Album> GetAlbumById(int albumId)
         {
             return await context.Albums             
             .Include(x => x.Artist)
             .Include(x => x.Tracks)
             .FirstOrDefaultAsync(a => a.Id == albumId);
-        }
-
-        public async Task<Album> GetAlbumByName(string albumName)
-        {
-            return await context.Albums
-                .Include(x => x.Artist)
-                .Include(x => x.Tracks)
-                .FirstOrDefaultAsync(x => EF.Functions.Like(x.AlbumName, albumName));
-        }       
+        }           
 
         public async Task<IEnumerable<Album>> GetAlbumByArtist(int artistId)
         {

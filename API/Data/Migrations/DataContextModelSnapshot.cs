@@ -440,9 +440,6 @@ namespace API.Data.Migrations
                     b.Property<int>("AppUserId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("DateCreated")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("PlaylistDescription")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");

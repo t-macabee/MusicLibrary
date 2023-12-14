@@ -11,18 +11,6 @@ export class PlaylistService {
 
   constructor(private http: HttpClient) {}
 
-  getAllPlaylists() {
-    return this.http.get(this.baseUrl + 'Playlist');
-  }
-
-  getPlaylist(id: number) {
-    return this.http.get(this.baseUrl + 'Playlist?userId=' + id);
-  }
-
-  getPlaylistByName(name: string) {
-    return this.http.get(this.baseUrl + 'Playlist/playlistName?name=' + name);
-  }
-
   getPlaylistsByUser(memberId: number) {
     return this.http.get<Playlist[]>(this.baseUrl + 'Playlist/' + memberId + '/playlists');
   }

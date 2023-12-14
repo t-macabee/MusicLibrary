@@ -13,19 +13,16 @@ namespace API.Helpers
     {
         public AutoMapperProfiles()
         {
+            CreateMap<RegisterDto, AppUser>();
+
+            CreateMap<MemberUpsertDto, AppUser>();
+
             CreateMap<AppUser, MemberDto>()
                 .ForMember(dest => dest.PhotoUrl, opt => opt.MapFrom(src =>
                     src.Photos.FirstOrDefault(x => x.IsMain).Url))
                 .ForMember(dest => dest.Age, opt => opt.MapFrom(src => src.DateOfBirth.CalculateAge()));
 
-            CreateMap<Photo, PhotoDto>();
-
-            CreateMap<ArtistPhoto, PhotoDto>();
-
-            CreateMap<MemberUpsertDto, AppUser>();
-            CreateMap<RegisterDto, AppUser>();
-
-            CreateMap<Genre, GenreDto>();
+            CreateMap<AppUser, LikeDto>();
 
             CreateMap<Artist, ArtistDto>()
                 .ForMember(dest => dest.PhotoUrl, opt => opt.MapFrom(src =>
@@ -35,6 +32,11 @@ namespace API.Helpers
 
             CreateMap<ArtistUpsertDto, Artist>();
 
+            CreateMap<Photo, PhotoDto>();
+            CreateMap<ArtistPhoto, PhotoDto>();
+                        
+            CreateMap<Genre, GenreDto>();
+                        
             CreateMap<Album, AlbumDto>()
                 .ForMember(dest => dest.ArtistName, opt => opt.MapFrom(src => src.Artist.ArtistName))
                 .ForMember(dest => dest.Tracks, opt => opt.MapFrom(src => src.Tracks));

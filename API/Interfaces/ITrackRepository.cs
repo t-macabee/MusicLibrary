@@ -12,6 +12,5 @@ namespace API.Interfaces
         Task<IEnumerable<TrackDto>> GetAllTracks();
         Task<IEnumerable<TrackDto>> GetTracksByAlbum(int id);
         Task<Track> GetTrackById(int id);
-        Task<TrackDto> GetTrackByName(string name);
     }
 }

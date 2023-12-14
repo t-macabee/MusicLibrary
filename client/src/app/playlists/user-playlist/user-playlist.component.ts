@@ -1,8 +1,9 @@
-import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {PlaylistService} from "../../_services/playlist.service";
 import {Playlist} from "../../_models/playlist";
 import {AccountService} from "../../_services/account.service";
 import {ToastrService} from "ngx-toastr";
+import {Track} from "../../_models/track";
 
 @Component({
   selector: 'app-user-playlist',
@@ -13,20 +14,20 @@ export class UserPlaylistComponent implements OnInit{
   playlists: Playlist[] = [];
   selectedPlaylist: Playlist | null;
   memberId: number;
+  showEditForm: boolean = false;
 
   constructor(private playlistService: PlaylistService,
               private accountService: AccountService,
-              private toastr: ToastrService,
-              ) {
+              private toastr: ToastrService) {
   }
 
   ngOnInit() {
     this.accountService.currentUser$.subscribe(user => {
       if (user) {
         this.memberId = user.id;
+        this.GetPlaylists();
       }
     });
-    this.GetPlaylists();
   }
 
   GetPlaylists() {
@@ -64,6 +65,9 @@ export class UserPlaylistComponent implements OnInit{
         });
 
         this.playlists = [...updatedPlaylists];
+        if (this.selectedPlaylist && this.selectedPlaylist.id === updatedPlaylist.id) {
+          this.selectedPlaylist = { ...this.selectedPlaylist, ...response };
+        }
         this.toastr.success('Playlist updated!');
       },
       (error) => {
@@ -72,16 +76,26 @@ export class UserPlaylistComponent implements OnInit{
     );
   }
 
-  deletePlaylist(selectedPlaylist: Playlist) {
-    this.playlistService.deletePlaylist(this.memberId, selectedPlaylist.id).subscribe(
-      () => {
-        this.toastr.success('Playlist deleted!');
-        this.playlists = this.playlists.filter(playlist => playlist.id !== selectedPlaylist.id);
-        this.selectedPlaylist = null;
-      },
-      (error) => {
-        console.error('Error deleting playlist:', error);
-      }
-    );
+  removeFromPlaylist(track: Track, selectedPlaylist: Playlist): void {
+    this.playlistService.removeTrackFromPlaylist(selectedPlaylist.id, track.id)
+      .subscribe(
+        () => {
+          selectedPlaylist.tracks = selectedPlaylist.tracks.filter(t => t.id !== track.id);
+          this.toastr.success('Track removed from the playlist!');
+        },
+        (error) => {
+          console.error('Error deleting track from playlist:', error);
+          this.toastr.error('Error deleting track from playlist. Please try again.');
+        }
+      );
+  }
+
+  editPlaylist(playlist: Playlist) {
+    this.selectedPlaylist = { ...playlist };
+    this.showEditForm = true;
+  }
+
+  closeEditForm() {
+    this.showEditForm = false;
   }
 }

@@ -32,16 +32,6 @@ namespace API.Services
             context.Entry(playlist).State = EntityState.Modified;
         }
 
-        public async Task<IEnumerable<Playlist>> GetAllPlaylists()
-        {
-            return await context.Playlists
-                .Include(x => x.PlaylistTracks)
-                .ThenInclude(x => x.Track)
-                .ThenInclude(x => x.Album)
-                .ThenInclude(x => x.Artist)                
-                .ToListAsync();
-        }
-
         public async Task<IEnumerable<Playlist>> GetAllPlaylistsByUser(int userId)
         {
             return await context.Playlists
@@ -62,17 +52,7 @@ namespace API.Services
                 .ThenInclude(x => x.Artist)
                 .FirstOrDefaultAsync(x => x.Id == userId);
         }
-
-        public async Task<Playlist> GetPlaylistByName(string name)
-        {
-            return await context.Playlists
-                .Include(x => x.PlaylistTracks)
-                .ThenInclude(x => x.Track)
-                .ThenInclude(x => x.Album)
-                .ThenInclude(x => x.Artist)
-                .SingleOrDefaultAsync(x => x.PlaylistName.ToLower() == name.ToLower());
-        }
-
+       
         public async Task AddTrackToPlaylist(int playlistId, int trackId)
         {
             var playlistTrack = new PlaylistTrack

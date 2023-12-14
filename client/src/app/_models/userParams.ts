@@ -7,5 +7,4 @@ export class UserParams {
   constructor(user: User) {
 
   }
-
 }

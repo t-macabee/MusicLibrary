@@ -1,0 +1,47 @@
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.edit-form {
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+.edit-form .form-group {
+  margin-bottom: 20px;
+}
+
+.edit-form button {
+  margin-right: 10px;
+}
+
+.btn {
+  font-size: 18px;
+  color: #09324f;
+  background-color: #ffffff;
+  text-decoration: none;
+  padding: 5px 10px;
+  border: 1px solid #09324f;
+  cursor: pointer;
+}
+.btn:hover {
+  background-color: #09324f;
+  color: white;
+}
+
+input {
+  color: #09324f;
+  background-color: #ffffff;
+  border: 1px solid #09324f;
+}

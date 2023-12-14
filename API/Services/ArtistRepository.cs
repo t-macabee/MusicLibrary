@@ -10,12 +10,10 @@ namespace API.Services
     public class ArtistRepository : IArtistRepository
     {
         private DataContext context;
-        private IMapper mapper;
 
         public ArtistRepository(DataContext context, IMapper mapper)
         {
             this.context = context;
-            this.mapper = mapper;
         }
 
         public void CreateArtist(Artist artist)
@@ -41,28 +39,7 @@ namespace API.Services
                 .Include(x => x.Albums)
                     .ThenInclude(a => a.Tracks) 
                 .SingleOrDefaultAsync(x => x.Id == id);
-        }
-
-        public async Task<Artist> GetArtistByName(string name)
-        {
-            return await context.Artists
-                .Include(x => x.Photos)
-                .Include(x => x.Genre)
-                .Include(x => x.Albums)
-                    .ThenInclude(y => y.Tracks)
-                .SingleOrDefaultAsync(x => x.ArtistName.ToLower() == name.ToLower());           
-        }
-
-        public async Task<IEnumerable<Artist>> GetArtistsByGenre(string name)
-        {
-            return await context.Artists
-                .Include(x => x.Photos)
-                .Include(x => x.Genre) 
-                .Include(x => x.Albums)
-                .ThenInclude(y => y.Tracks)
-                .Where(x => x.Genre.GenreName.ToLower() == name.ToLower())                
-                .ToListAsync();
-        }
+        }        
 
         public async Task<IEnumerable<Artist>> GetAllArtists()
         {

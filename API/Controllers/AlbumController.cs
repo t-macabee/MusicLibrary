@@ -21,27 +21,12 @@ namespace API.Controllers
             this.context = context;
             this.mapper = mapper;
             this.unitOfWork = unitOfWork;
-        }
-
-
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<AlbumDto>>> GetAllAlbums()
-        {
-            var albums = await unitOfWork.AlbumRepository.GetAllAlbums();
-            return Ok(mapper.Map<IEnumerable<AlbumDto>>(albums));
-        }
+        }       
 
         [HttpGet("{id}")]
         public async Task<ActionResult<AlbumDto>> GetAlbumById(int id)
         {
             var result = await unitOfWork.AlbumRepository.GetAlbumById(id);
-            return Ok(mapper.Map<AlbumDto>(result));
-        }
-
-        [HttpGet("albumName")]
-        public async Task<ActionResult<AlbumDto>> GetAlbumByName(string name)
-        {
-            var result = await unitOfWork.AlbumRepository.GetAlbumByName(name);
             return Ok(mapper.Map<AlbumDto>(result));
         }
 
