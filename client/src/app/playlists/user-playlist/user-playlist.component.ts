@@ -4,6 +4,8 @@ import {Playlist} from "../../_models/playlist";
 import {AccountService} from "../../_services/account.service";
 import {ToastrService} from "ngx-toastr";
 import {Track} from "../../_models/track";
+import {first, switchMap} from "rxjs";
+import {User} from "../../_models/user";
 
 @Component({
   selector: 'app-user-playlist',
@@ -22,22 +24,27 @@ export class UserPlaylistComponent implements OnInit{
   }
 
   ngOnInit() {
-    this.accountService.currentUser$.subscribe(user => {
-      if (user) {
+    this.accountService.currentUser$.subscribe(async (user) => {
+      if (user && user.id !== 0) {
         this.memberId = user.id;
-        this.GetPlaylists();
+        await this.GetPlaylists();
       }
     });
   }
 
-  GetPlaylists() {
-    this.playlistService.getPlaylistsByUser(this.memberId).subscribe(response => {
-      if(response) {
+  async GetPlaylists() {
+    try {
+      if (this.memberId === 0) {
+        this.toastr.error('Invalid member ID. Cannot fetch playlists.');
+        return;
+      }
+      const response = await this.playlistService.getPlaylistsByUser(this.memberId).toPromise();
+      if (response) {
         this.playlists = response;
       }
-    }, error => {
-      console.log(error);
-    })
+    } catch (error) {
+      this.toastr.error('Error fetching playlists:', error);
+    }
   }
 
   selectPlaylist(playlist: Playlist) {
@@ -55,6 +62,18 @@ export class UserPlaylistComponent implements OnInit{
         this.GetPlaylists();
       }
     })
+  }
+
+  deletePlaylist(memberId: number, playlistId: number) {
+    this.playlistService.deletePlaylist(memberId, playlistId).subscribe(
+      () => {
+        this.toastr.success('Playlist deleted!');
+        this.GetPlaylists();
+      },
+      (error) => {
+        this.toastr.error('Error deleting playlist!');
+      }
+    );
   }
 
   updatePlaylist(updatedPlaylist: Playlist) {

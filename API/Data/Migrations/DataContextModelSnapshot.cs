@@ -61,22 +61,6 @@ namespace API.Data.Migrations
                         },
                         new
                         {
-                            Id = 2,
-                            AlbumName = "Talking Book",
-                            ArtistId = 2,
-                            TotalLength = 43.289999999999999,
-                            Year = "1972"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            AlbumName = "Blue Train",
-                            ArtistId = 3,
-                            TotalLength = 42.140000000000001,
-                            Year = "1958"
-                        },
-                        new
-                        {
                             Id = 4,
                             AlbumName = "Hellfire",
                             ArtistId = 4,
@@ -167,35 +151,21 @@ namespace API.Data.Migrations
                         new
                         {
                             Id = 1,
-                            ArtistDescription = "Description 1",
+                            ArtistDescription = "Buffalo-based rapper known for his gritty authenticity, raw lyricism, and involvement in the Griselda Records collective. Conway navigates tales of street life and personal struggles, carving a niche in contemporary hip-hop.",
                             ArtistName = "Conway the Machine",
                             GenreId = 2
                         },
                         new
                         {
-                            Id = 2,
-                            ArtistDescription = "Description 2",
-                            ArtistName = "Stevie Wonder",
-                            GenreId = 3
-                        },
-                        new
-                        {
-                            Id = 3,
-                            ArtistDescription = "Description 3",
-                            ArtistName = "John Coltrane",
-                            GenreId = 4
-                        },
-                        new
-                        {
                             Id = 4,
-                            ArtistDescription = "Description 4",
+                            ArtistDescription = "British experimental rock band challenging conventional notions of genre and structure. Characterized by intricate rhythms, dissonant melodies, and unpredictable song structures, Black Midi pushes the boundaries of rock music.",
                             ArtistName = "Black Midi",
                             GenreId = 5
                         },
                         new
                         {
                             Id = 5,
-                            ArtistDescription = "Description 5",
+                            ArtistDescription = "Electronic musician Richard D. James, known as Aphex Twin, is a pioneer in ambient and electronic music. His innovative sound design and intricate compositions have played a pivotal role in shaping the landscape of electronic music.",
                             ArtistName = "Aphex Twin",
                             GenreId = 6
                         });
@@ -508,34 +478,6 @@ namespace API.Data.Migrations
                             AlbumId = 1,
                             TrackLength = 2.25,
                             TrackName = "Monogram"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            AlbumId = 2,
-                            TrackLength = 3.3500000000000001,
-                            TrackName = "Big Brother"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            AlbumId = 2,
-                            TrackLength = 3.2799999999999998,
-                            TrackName = "Blame It on the Sun"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            AlbumId = 3,
-                            TrackLength = 7.1399999999999997,
-                            TrackName = "Locomotion"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            AlbumId = 3,
-                            TrackLength = 7.0,
-                            TrackName = "Lazy Bird"
                         },
                         new
                         {

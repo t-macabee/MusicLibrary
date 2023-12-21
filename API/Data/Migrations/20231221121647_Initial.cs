@@ -289,11 +289,9 @@ namespace API.Data.Migrations
                 columns: new[] { "Id", "ArtistDescription", "ArtistName", "GenreId" },
                 values: new object[,]
                 {
-                    { 1, "Description 1", "Conway the Machine", 2 },
-                    { 2, "Description 2", "Stevie Wonder", 3 },
-                    { 3, "Description 3", "John Coltrane", 4 },
-                    { 4, "Description 4", "Black Midi", 5 },
-                    { 5, "Description 5", "Aphex Twin", 6 }
+                    { 1, "Buffalo-based rapper known for his gritty authenticity, raw lyricism, and involvement in the Griselda Records collective. Conway navigates tales of street life and personal struggles, carving a niche in contemporary hip-hop.", "Conway the Machine", 2 },
+                    { 4, "British experimental rock band challenging conventional notions of genre and structure. Characterized by intricate rhythms, dissonant melodies, and unpredictable song structures, Black Midi pushes the boundaries of rock music.", "Black Midi", 5 },
+                    { 5, "Electronic musician Richard D. James, known as Aphex Twin, is a pioneer in ambient and electronic music. His innovative sound design and intricate compositions have played a pivotal role in shaping the landscape of electronic music.", "Aphex Twin", 6 }
                 });
 
             migrationBuilder.InsertData(
@@ -302,8 +300,6 @@ namespace API.Data.Migrations
                 values: new object[,]
                 {
                     { 1, "Won't He Do It", 1, 49.189999999999998, "2023" },
-                    { 2, "Talking Book", 2, 43.289999999999999, "1972" },
-                    { 3, "Blue Train", 3, 42.140000000000001, "1958" },
                     { 4, "Hellfire", 4, 38.539999999999999, "2022" },
                     { 5, "Syro", 5, 64.310000000000002, "2014" }
                 });
@@ -315,10 +311,6 @@ namespace API.Data.Migrations
                 {
                     { 1, 1, 2.2799999999999998, "Quarters" },
                     { 2, 1, 2.25, "Monogram" },
-                    { 3, 2, 3.3500000000000001, "Big Brother" },
-                    { 4, 2, 3.2799999999999998, "Blame It on the Sun" },
-                    { 5, 3, 7.1399999999999997, "Locomotion" },
-                    { 6, 3, 7.0, "Lazy Bird" },
                     { 7, 4, 1.24, "Hellfire" },
                     { 8, 4, 5.46, "Still" },
                     { 9, 5, 3.1099999999999999, "180db_" },

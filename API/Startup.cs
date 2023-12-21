@@ -1,26 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using API.Data;
-using API.Interfaces;
-using API.Services;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
-using Microsoft.IdentityModel.Tokens;
-using System.Text;
 using API.Extensions;
 using API.Middleware;
 using API.SignalR;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace API
 {
@@ -45,7 +27,13 @@ namespace API
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebAPIv5", Version = "v1" });
             });
-            services.AddCors();
+            services.AddCors(options => {
+                options.AddPolicy("AllowOrigin", builder => builder
+                    .WithOrigins("https://localhost:4200")
+                    .AllowAnyHeader()
+                    .AllowAnyMethod()
+                    .AllowCredentials());
+            });
             services.AddIdentityServices(config);
             services.AddSignalR();                          
         }
@@ -60,11 +48,16 @@ namespace API
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "WebAPIv5 v1"));
             }
+
+            app.UseDefaultFiles();
+               
+            app.UseStaticFiles();
+
             app.UseHttpsRedirection();
 
-            app.UseRouting();
+            app.UseCors("AllowOrigin");
 
-            app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().AllowCredentials().WithOrigins("https://localhost:4200"));
+            app.UseRouting();
 
             app.UseAuthentication();
 

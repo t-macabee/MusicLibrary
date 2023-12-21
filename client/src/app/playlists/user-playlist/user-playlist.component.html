@@ -6,7 +6,7 @@
   <div class="left-column">
     <div *ngFor="let playlist of playlists" class="playlist-item" (click)="selectPlaylist(playlist)">
       {{ playlist.playlistName }}
-      <button (click)="deletePlaylist(playlist)" class="btn-del float-end" style="margin-left: 15px;"><i class="fa fa-trash"></i></button>
+      <button (click)="deletePlaylist(memberId, playlist.id)" class="btn-del float-end" style="margin-left: 15px;"><i class="fa fa-trash"></i></button>
     </div>
   </div>
   <div class="right-column">
@@ -38,5 +38,5 @@
 </div>
 
 <ng-template #noLists>
-  <p *ngIf="playlists && playlists.length === 0" style="color: white">No playlists available</p><br>
+  <p *ngIf="playlists && playlists.length === 0" style="color: white">Create your first playlist!</p><br>
 </ng-template>

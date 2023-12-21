@@ -63,7 +63,7 @@ export class AlbumTrackComponent {
     );
   }
 
-  crateTemplateTrack() {
+  createTemplateTrack() {
     const newTrack: Track = {
       id: 0,
       trackName: 'New Track',
