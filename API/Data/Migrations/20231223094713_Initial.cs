@@ -203,7 +203,7 @@ namespace API.Data.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Url = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     IsMain = table.Column<bool>(type: "bit", nullable: false),
-                    PublicId = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PublicId = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ArtistId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -271,17 +271,16 @@ namespace API.Data.Migrations
                     { 2, "Hip-Hop" },
                     { 3, "Soul" },
                     { 4, "Jazz" },
-                    { 5, "Experimental Rock" },
-                    { 6, "IDM" },
-                    { 7, "Pop" },
-                    { 8, "Country" },
-                    { 9, "Blues" },
-                    { 10, "Reggae" },
-                    { 11, "Metal" },
-                    { 12, "Funk" },
-                    { 13, "Indie Rock" },
-                    { 14, "Techno" },
-                    { 15, "Gospel" }
+                    { 5, "Electronic" },
+                    { 6, "Pop" },
+                    { 7, "Country" },
+                    { 8, "Blues" },
+                    { 9, "Reggae" },
+                    { 10, "Metal" },
+                    { 11, "Funk" },
+                    { 12, "Rock" },
+                    { 13, "Techno" },
+                    { 14, "Gospel" }
                 });
 
             migrationBuilder.InsertData(
@@ -290,8 +289,8 @@ namespace API.Data.Migrations
                 values: new object[,]
                 {
                     { 1, "Buffalo-based rapper known for his gritty authenticity, raw lyricism, and involvement in the Griselda Records collective. Conway navigates tales of street life and personal struggles, carving a niche in contemporary hip-hop.", "Conway the Machine", 2 },
-                    { 4, "British experimental rock band challenging conventional notions of genre and structure. Characterized by intricate rhythms, dissonant melodies, and unpredictable song structures, Black Midi pushes the boundaries of rock music.", "Black Midi", 5 },
-                    { 5, "Electronic musician Richard D. James, known as Aphex Twin, is a pioneer in ambient and electronic music. His innovative sound design and intricate compositions have played a pivotal role in shaping the landscape of electronic music.", "Aphex Twin", 6 }
+                    { 2, "British experimental rock band challenging conventional notions of genre and structure. Characterized by intricate rhythms, dissonant melodies, and unpredictable song structures, Black Midi pushes the boundaries of rock music.", "Black Midi", 5 },
+                    { 3, "Electronic musician Richard D. James, known as Aphex Twin, is a pioneer in ambient and electronic music. His innovative sound design and intricate compositions have played a pivotal role in shaping the landscape of electronic music.", "Aphex Twin", 6 }
                 });
 
             migrationBuilder.InsertData(
@@ -300,8 +299,18 @@ namespace API.Data.Migrations
                 values: new object[,]
                 {
                     { 1, "Won't He Do It", 1, 49.189999999999998, "2023" },
-                    { 4, "Hellfire", 4, 38.539999999999999, "2022" },
-                    { 5, "Syro", 5, 64.310000000000002, "2014" }
+                    { 2, "Hellfire", 2, 38.539999999999999, "2022" },
+                    { 3, "Syro", 3, 64.310000000000002, "2014" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "ArtistPhoto",
+                columns: new[] { "Id", "ArtistId", "IsMain", "PublicId", "Url" },
+                values: new object[,]
+                {
+                    { 1, 1, true, null, "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcRDII-r7EXoUFaBaDk0RdiqbtUf6RCG_uE-J4XJULl6OEvObd97" },
+                    { 2, 2, true, null, "https://static.standard.co.uk/2021/05/28/08/newFile-2.jpg?width=1200&height=1200&fit=crop" },
+                    { 3, 3, true, null, "https://lh3.googleusercontent.com/tAUxtg31jon8v0FpumXcKUbbvRfpVHNczCnIVGzEuyA9qJLC8JjgU2fsE5X54J6slECNG5sfb0IBzOli=w544-h544-p-l90-rj" }
                 });
 
             migrationBuilder.InsertData(
@@ -311,10 +320,10 @@ namespace API.Data.Migrations
                 {
                     { 1, 1, 2.2799999999999998, "Quarters" },
                     { 2, 1, 2.25, "Monogram" },
-                    { 7, 4, 1.24, "Hellfire" },
-                    { 8, 4, 5.46, "Still" },
-                    { 9, 5, 3.1099999999999999, "180db_" },
-                    { 10, 5, 5.0300000000000002, "produk 29" }
+                    { 7, 2, 1.24, "Hellfire" },
+                    { 8, 2, 5.46, "Still" },
+                    { 9, 3, 3.1099999999999999, "180db_" },
+                    { 10, 3, 5.0300000000000002, "produk 29" }
                 });
 
             migrationBuilder.CreateIndex(

@@ -1,18 +1,11 @@
-﻿using API.Data;
-using API.DTOs;
+﻿using API.DTOs;
 using API.DTOs.UpdateDTOs;
 using API.Entities;
 using API.Extensions;
 using API.Helpers;
 using API.Interfaces;
-using API.Services;
 using AutoMapper;
-using Azure.Identity;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using System.Security.Claims;
-using System.Security.Cryptography.Xml;
 
 namespace API.Controllers
 {
@@ -60,6 +53,8 @@ namespace API.Controllers
 
             return BadRequest("Failed to update user");
         }
+
+        //-------------------------------------------------------------------
 
         [HttpPost("add-photo")]
         public async Task<ActionResult<PhotoDto>> AddPhoto(IFormFile file)

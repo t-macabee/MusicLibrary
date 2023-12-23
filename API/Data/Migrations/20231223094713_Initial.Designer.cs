@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20231221121647_Initial")]
+    [Migration("20231223094713_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -64,17 +64,17 @@ namespace API.Data.Migrations
                         },
                         new
                         {
-                            Id = 4,
+                            Id = 2,
                             AlbumName = "Hellfire",
-                            ArtistId = 4,
+                            ArtistId = 2,
                             TotalLength = 38.539999999999999,
                             Year = "2022"
                         },
                         new
                         {
-                            Id = 5,
+                            Id = 3,
                             AlbumName = "Syro",
-                            ArtistId = 5,
+                            ArtistId = 3,
                             TotalLength = 64.310000000000002,
                             Year = "2014"
                         });
@@ -160,14 +160,14 @@ namespace API.Data.Migrations
                         },
                         new
                         {
-                            Id = 4,
+                            Id = 2,
                             ArtistDescription = "British experimental rock band challenging conventional notions of genre and structure. Characterized by intricate rhythms, dissonant melodies, and unpredictable song structures, Black Midi pushes the boundaries of rock music.",
                             ArtistName = "Black Midi",
                             GenreId = 5
                         },
                         new
                         {
-                            Id = 5,
+                            Id = 3,
                             ArtistDescription = "Electronic musician Richard D. James, known as Aphex Twin, is a pioneer in ambient and electronic music. His innovative sound design and intricate compositions have played a pivotal role in shaping the landscape of electronic music.",
                             ArtistName = "Aphex Twin",
                             GenreId = 6
@@ -189,7 +189,6 @@ namespace API.Data.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("PublicId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Url")
@@ -201,6 +200,29 @@ namespace API.Data.Migrations
                     b.HasIndex("ArtistId");
 
                     b.ToTable("ArtistPhoto");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ArtistId = 1,
+                            IsMain = true,
+                            Url = "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcRDII-r7EXoUFaBaDk0RdiqbtUf6RCG_uE-J4XJULl6OEvObd97"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            ArtistId = 2,
+                            IsMain = true,
+                            Url = "https://static.standard.co.uk/2021/05/28/08/newFile-2.jpg?width=1200&height=1200&fit=crop"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            ArtistId = 3,
+                            IsMain = true,
+                            Url = "https://lh3.googleusercontent.com/tAUxtg31jon8v0FpumXcKUbbvRfpVHNczCnIVGzEuyA9qJLC8JjgU2fsE5X54J6slECNG5sfb0IBzOli=w544-h544-p-l90-rj"
+                        });
                 });
 
             modelBuilder.Entity("API.Entities.Connection", b =>
@@ -262,56 +284,51 @@ namespace API.Data.Migrations
                         new
                         {
                             Id = 5,
-                            GenreName = "Experimental Rock"
+                            GenreName = "Electronic"
                         },
                         new
                         {
                             Id = 6,
-                            GenreName = "IDM"
-                        },
-                        new
-                        {
-                            Id = 7,
                             GenreName = "Pop"
                         },
                         new
                         {
-                            Id = 8,
+                            Id = 7,
                             GenreName = "Country"
                         },
                         new
                         {
-                            Id = 9,
+                            Id = 8,
                             GenreName = "Blues"
                         },
                         new
                         {
-                            Id = 10,
+                            Id = 9,
                             GenreName = "Reggae"
                         },
                         new
                         {
-                            Id = 11,
+                            Id = 10,
                             GenreName = "Metal"
                         },
                         new
                         {
-                            Id = 12,
+                            Id = 11,
                             GenreName = "Funk"
                         },
                         new
                         {
-                            Id = 13,
-                            GenreName = "Indie Rock"
+                            Id = 12,
+                            GenreName = "Rock"
                         },
                         new
                         {
-                            Id = 14,
+                            Id = 13,
                             GenreName = "Techno"
                         },
                         new
                         {
-                            Id = 15,
+                            Id = 14,
                             GenreName = "Gospel"
                         });
                 });
@@ -485,28 +502,28 @@ namespace API.Data.Migrations
                         new
                         {
                             Id = 7,
-                            AlbumId = 4,
+                            AlbumId = 2,
                             TrackLength = 1.24,
                             TrackName = "Hellfire"
                         },
                         new
                         {
                             Id = 8,
-                            AlbumId = 4,
+                            AlbumId = 2,
                             TrackLength = 5.46,
                             TrackName = "Still"
                         },
                         new
                         {
                             Id = 9,
-                            AlbumId = 5,
+                            AlbumId = 3,
                             TrackLength = 3.1099999999999999,
                             TrackName = "180db_"
                         },
                         new
                         {
                             Id = 10,
-                            AlbumId = 5,
+                            AlbumId = 3,
                             TrackLength = 5.0300000000000002,
                             TrackName = "produk 29"
                         });

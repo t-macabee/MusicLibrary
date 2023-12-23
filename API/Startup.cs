@@ -30,6 +30,7 @@ namespace API
             services.AddCors(options => {
                 options.AddPolicy("AllowOrigin", builder => builder
                     .WithOrigins("https://localhost:4200")
+                    //.WithOrigins("https://musiclibraryweb.p2122.app.fit.ba")
                     .AllowAnyHeader()
                     .AllowAnyMethod()
                     .AllowCredentials());
@@ -43,11 +44,11 @@ namespace API
         {
             app.UseMiddleware<ExceptionMiddleware>();
 
-            if(env.IsDevelopment())
-            { 
+            //if(env.IsDevelopment())
+            //{ 
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "WebAPIv5 v1"));
-            }
+            //}
 
             app.UseDefaultFiles();
                

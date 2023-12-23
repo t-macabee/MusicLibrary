@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
-import {map, ReplaySubject} from "rxjs";
+import {catchError, map, Observable, of, ReplaySubject, switchMap, tap, throwError} from "rxjs";
 import {User} from "../_models/user";
 import {environment} from "../../environments/environment";
 import {PresenceService} from "./presence.service";

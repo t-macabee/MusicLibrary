@@ -4,7 +4,7 @@ import {Playlist} from "../../_models/playlist";
 import {AccountService} from "../../_services/account.service";
 import {ToastrService} from "ngx-toastr";
 import {Track} from "../../_models/track";
-import {first, switchMap} from "rxjs";
+import {first, switchMap, take} from "rxjs";
 import {User} from "../../_models/user";
 
 @Component({
