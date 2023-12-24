@@ -3,6 +3,7 @@ using API.Extensions;
 using API.Middleware;
 using API.SignalR;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileProviders;
 
 namespace API
 {
@@ -29,8 +30,7 @@ namespace API
             });
             services.AddCors(options => {
                 options.AddPolicy("AllowOrigin", builder => builder
-                    .WithOrigins("https://localhost:4200")
-                    //.WithOrigins("https://musiclibraryweb.p2122.app.fit.ba")
+                    .WithOrigins("https://localhost:4200")                    
                     .AllowAnyHeader()
                     .AllowAnyMethod()
                     .AllowCredentials());
@@ -46,12 +46,12 @@ namespace API
 
             //if(env.IsDevelopment())
             //{ 
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "WebAPIv5 v1"));
+            //    app.UseSwagger();
+            //    app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "WebAPIv5 v1"));
             //}
 
             app.UseDefaultFiles();
-               
+
             app.UseStaticFiles();
 
             app.UseHttpsRedirection();
@@ -69,6 +69,7 @@ namespace API
                 endpoints.MapControllers();
                 endpoints.MapHub<PresenceHub>("hubs/presence");
                 endpoints.MapHub<MessageHub>("hubs/message");
+                endpoints.MapFallbackToController("Index", "Fallback");
             });
         }
     }
