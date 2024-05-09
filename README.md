@@ -5,8 +5,8 @@ Music Library is a web application that allows users to create and manage playli
 Feel free to check it out! 
 
 https://musiclibraryweb.p2122.app.fit.ba
-Username: test1
-Password: pwd123
+username: test1
+password: pwd123
 
 ## Features
 
